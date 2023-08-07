@@ -2,3 +2,8 @@
 
 zeroth
 first
+
+## Instructions for setting up frontend
+
+- cd frontend
+- npm i
