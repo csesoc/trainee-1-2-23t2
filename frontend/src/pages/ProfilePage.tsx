@@ -62,12 +62,22 @@ const ButtonContainer = styled('div')`
 const ProfilePictureContainer = styled('div')`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 35vh;
 `;
 
 const UpdatePhotoButton = styled('button')``;
 
 const ReviewButton = styled('button')``;
+
+const FavoritesContainer = styled('div')``;
+
+const FavoritesHeader = styled('div')``;
+
+const FavoritesList = styled('div')`
+  background-color: gray;
+  height: 40vh;
+  width: 40vh;
+`;
 
 const ProfilePage = () => {
   return (
@@ -90,6 +100,10 @@ const ProfilePage = () => {
           </ButtonContainer>
         </DescriptionButtonContainer>
       </ProfileContainer>
+      <FavoritesContainer>
+        <FavoritesHeader>Favorites</FavoritesHeader>
+        <FavoritesList></FavoritesList>
+      </FavoritesContainer>
     </ProfileBackground>
   );
 };
