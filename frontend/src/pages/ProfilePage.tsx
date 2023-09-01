@@ -21,11 +21,41 @@ background-color: gray;
 height: 20vh;
 `
 
+const ProfileName = styled('div')`
+font-size: 20px;
+`
+
+const ProfileContainer = styled('div')`
+display: flex;
+`
+
+const EditButton = styled('button')`
+display: flex;
+height: 30px;
+width: 50px;
+align-items: center;
+justify-content: center;
+`
+
+const SaveButton = styled('button')`
+display: flex;
+height: 30px;
+width: 50px;
+align-items: center;
+justify-content: center;
+`
+
+
 const ProfilePage = () => {
 return (
   <ProfileBackground>
     <Banner></Banner>
-    <ProfilePicture></ProfilePicture>
+    <ProfileContainer>
+      <ProfilePicture></ProfilePicture>
+      <ProfileName>Name</ProfileName>
+      <EditButton>Edit</EditButton>
+      <SaveButton>Save</SaveButton>
+    </ProfileContainer>
   </ProfileBackground>
 )
 }
