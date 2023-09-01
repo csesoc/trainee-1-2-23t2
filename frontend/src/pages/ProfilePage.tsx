@@ -10,6 +10,7 @@ const ProfilePicture = styled('img')`
 
 const ProfileBackground = styled('div')`
   height: 100vh;
+  overflow: hidden;
 `;
 
 const Banner = styled('div')`
@@ -42,7 +43,7 @@ const SaveButton = styled('button')`
 `;
 
 const NameBioContainer = styled('div')`
-  margin-left: 30px;
+  margin-left: 12.5vh;
 `;
 
 const Bio = styled('div')`
@@ -65,9 +66,18 @@ const ProfilePictureContainer = styled('div')`
   height: 35vh;
 `;
 
-const UpdatePhotoButton = styled('button')``;
+const UpdatePhotoButton = styled('button')`
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  text-decoration: underline;
+  font-weight: bold;
+`;
 
-const ReviewButton = styled('button')``;
+const ReviewButton = styled('button')`
+  margin-top: 20px;
+`;
 
 const FavoritesContainer = styled('div')``;
 
