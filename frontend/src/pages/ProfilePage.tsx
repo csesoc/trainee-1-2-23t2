@@ -62,9 +62,12 @@ const ButtonContainer = styled('div')`
 const ProfilePictureContainer = styled('div')`
   display: flex;
   flex-direction: column;
+  height: 100vh;
 `;
 
 const UpdatePhotoButton = styled('button')``;
+
+const ReviewButton = styled('button')``;
 
 const ProfilePage = () => {
   return (
@@ -74,6 +77,7 @@ const ProfilePage = () => {
         <ProfilePictureContainer>
           <ProfilePicture></ProfilePicture>
           <UpdatePhotoButton>Update Photo</UpdatePhotoButton>
+          <ReviewButton>3 Reviews</ReviewButton>
         </ProfilePictureContainer>
         <DescriptionButtonContainer>
           <NameBioContainer>
