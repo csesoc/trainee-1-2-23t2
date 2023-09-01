@@ -20,26 +20,37 @@ const Banner = styled('div')`
 
 const ProfileName = styled('div')`
   font-size: 20px;
+  font-weight: bold;
 `;
 
 const ProfileContainer = styled('div')`
   display: flex;
+  margin-top: 12.5px;
 `;
 
 const EditButton = styled('button')`
   display: flex;
   height: 30px;
-  width: 50px;
+  width: 100px;
   align-items: center;
   justify-content: center;
+  background-color: #a18276;
+  color: white;
+  border: none;
+  border-radius: 10px;
 `;
 
 const SaveButton = styled('button')`
   display: flex;
   height: 30px;
-  width: 50px;
+  width: 100px;
   align-items: center;
   justify-content: center;
+  background-color: #dadada;
+  color: #a18276;
+  border: none;
+  margin-left: 5vh;
+  border-radius: 10px;
 `;
 
 const NameBioContainer = styled('div')`
