@@ -1,12 +1,7 @@
-import './App.css'
+import "./App.css";
 
 function App() {
-
-  return (
-    <>
-      goodshit
-    </>
-  )
+  return <>goodshit, deez nutz</>;
 }
 
-export default App
+export default App;
