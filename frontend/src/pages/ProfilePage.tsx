@@ -59,12 +59,22 @@ const ButtonContainer = styled('div')`
   display: flex;
 `;
 
+const ProfilePictureContainer = styled('div')`
+  display: flex;
+  flex-direction: column;
+`;
+
+const UpdatePhotoButton = styled('button')``;
+
 const ProfilePage = () => {
   return (
     <ProfileBackground>
       <Banner></Banner>
       <ProfileContainer>
-        <ProfilePicture></ProfilePicture>
+        <ProfilePictureContainer>
+          <ProfilePicture></ProfilePicture>
+          <UpdatePhotoButton>Update Photo</UpdatePhotoButton>
+        </ProfilePictureContainer>
         <DescriptionButtonContainer>
           <NameBioContainer>
             <ProfileName>Name</ProfileName>
