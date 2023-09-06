@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const URI = process.env.MONGO_URI || '';
-const JWT_SECRET = 'Iliketrainsandplanes';
+const JWT_SECRET = process.env.JWT_SECRET || '';
 
 /* -------------------------------------------------------------------------- */
 /*                                MongoDB                                     */
