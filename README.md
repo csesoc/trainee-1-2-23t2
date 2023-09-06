@@ -32,9 +32,9 @@ $ cd backend && npm i && cd ../frontend && npm i && cd ..
 
 NPM install in both the backend and frontend directories.
 
-### Running the Project
+### Running the Front-end
 
-Run to run the project run
+To run the frontend run navigate to the `/frontend` directory and run `npm run dev` - i.e.
 
 ```shell
 $ cd frontend && npm run dev
@@ -46,4 +46,27 @@ from root or
 $ npm run dev
 ```
 
-from the `frontend` directory.
+from the `/frontend` directory.
+
+### Running the Back-end
+
+Run to run the backend:
+
+1. Navigate to the `/backend` directory:
+
+```shell
+$ cd backend
+```
+
+2. Create a `.env` file in the root of the project containing:
+
+```js
+MONGO_URI = [YOUR_MONGO_URI];
+JWT_SECRET = [YOUR_JWT_SECRET];
+```
+
+3. To start the server, run:
+
+```shell
+$ npm start
+```
