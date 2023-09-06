@@ -12,4 +12,4 @@ class AccessError extends Error {
   }
 }
 
-module.exports = { InputError, AccessError };
+export { InputError, AccessError };

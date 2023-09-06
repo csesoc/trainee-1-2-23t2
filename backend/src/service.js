@@ -1,9 +1,11 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { MongoClient } = require('mongodb');
-require('dotenv').config();
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { MongoClient } from 'mongodb';
 
-const { InputError } = require('./error');
+import { InputError } from './error.js';
+
+import dotenv from 'dotenv';
+dotenv.config();
 
 const URI = process.env.MONGO_URI || '';
 const JWT_SECRET = 'Iliketrainsandplanes';
@@ -52,4 +54,4 @@ const getUserDetails = async () => {
   return;
 };
 
-module.exports = { authRegister, authLogin };
+export { authLogin, authRegister };

@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 
-const { InputError, AccessError } = require('./error');
-const { authRegister, authLogin } = require('./service');
+import { InputError, AccessError } from './error.js';
+import { authRegister, authLogin } from './service.js';
 
 const PORT = 3000;
 
