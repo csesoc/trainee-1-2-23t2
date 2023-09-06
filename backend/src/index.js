@@ -3,7 +3,7 @@ import express from 'express';
 import { InputError, AccessError } from './error.js';
 import { authRegister, authLogin } from './service.js';
 
-const PORT = 3000;
+const PORT = 6969;
 
 const app = express();
 app.use(express.json());
@@ -24,21 +24,17 @@ const errorHandler = (fn) => async (req, res) => {
 };
 
 app.get('/', (req, res) => {
-  res.send('sus');
+  res.send('algorizzisms!');
 });
 
-app.post(
-  '/auth/register',
-  errorHandler(async (req, res) => {
+app.post('/auth/register', errorHandler(async (req, res) => {
     const { email, password, name } = req.body;
     const token = await authRegister(email, password, name);
     res.json({ token });
   })
 );
 
-app.post(
-  '/auth/login',
-  errorHandler(async (req, res) => {
+app.post('/auth/login', errorHandler(async (req, res) => {
     const { email, password } = req.body;
     const token = await authLogin(email, password);
     res.json({ token });

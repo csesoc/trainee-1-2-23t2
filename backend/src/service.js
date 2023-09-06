@@ -22,7 +22,7 @@ const usersDb = mongoClient.db('db').collection('users');
 /*                               Auth Functions                               */
 /* -------------------------------------------------------------------------- */
 
-// TODO: Error checking lol
+// TODO: Error checking
 const authRegister = async (email, password, name) => {
   const passwordHash = bcrypt.hashSync(password, 10);
   const user = { email, password: passwordHash, name };
