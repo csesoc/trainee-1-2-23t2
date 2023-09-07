@@ -38,6 +38,7 @@ const EditButton = styled('button')`
   color: white;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 const SaveButton = styled('button')`
@@ -51,6 +52,7 @@ const SaveButton = styled('button')`
   border: none;
   margin-left: 5vh;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 const NameBioContainer = styled('div')`
