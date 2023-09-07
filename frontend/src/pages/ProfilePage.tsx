@@ -170,6 +170,11 @@ const EditSaveButton = styled('div')`
 
 const ProfilePage = () => {
   const [showEditProfile, setShowEditProfile] = useState(false);
+  const [name, setName] = useState('Name');
+  const [bio, setBio] = useState('Bio something something');
+
+  const [editName, setEditName] = useState(name);
+  const [editBio, setEditBio] = useState(bio);
 
   const openClick = () => {
     setShowEditProfile(true);
@@ -178,6 +183,15 @@ const ProfilePage = () => {
 
   const closeEdit = () => {
     setShowEditProfile(false);
+  };
+
+  const saveEdit = () => {
+    closeEdit();
+    setName(editName);
+  };
+
+  const onChangeEditName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEditName(event.target.value);
   };
 
   return (
@@ -189,10 +203,13 @@ const ProfilePage = () => {
             <div>Edit Profile</div>
           </EditProfileTextContainer>
           <div>Name</div>
-          <EditNameForm></EditNameForm>
+          <EditNameForm
+            value={editName}
+            onChange={onChangeEditName}
+          ></EditNameForm>
           <div>Bio</div>
-          <EditBioForm></EditBioForm>
-          <EditSaveButton>Save</EditSaveButton>
+          <EditBioForm value={bio}></EditBioForm>
+          <EditSaveButton onClick={saveEdit}>Save</EditSaveButton>
         </EditPopUp>
       )}
       <Banner src={banner}></Banner>
@@ -204,8 +221,8 @@ const ProfilePage = () => {
         </ProfilePictureContainer>
         <DescriptionButtonContainer>
           <NameBioContainer>
-            <ProfileName>Name</ProfileName>
-            <Bio>Bio Something Something</Bio>
+            <ProfileName>{name}</ProfileName>
+            <Bio>{bio}</Bio>
           </NameBioContainer>
           <ButtonContainer>
             <EditButton onClick={openClick}>Edit</EditButton>
