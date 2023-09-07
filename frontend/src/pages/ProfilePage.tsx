@@ -30,6 +30,7 @@ const ProfileName = styled('div')`
 const ProfileContainer = styled('div')`
   display: flex;
   margin-top: 12.5px;
+  filter: ${({ isBlurred }) => (isBlurred ? 'blur(5px)' : 'none')};
 `;
 
 const EditButton = styled('button')`
@@ -41,20 +42,6 @@ const EditButton = styled('button')`
   background-color: #a18276;
   color: white;
   border: none;
-  border-radius: 10px;
-  cursor: pointer;
-`;
-
-const SaveButton = styled('button')`
-  display: flex;
-  height: 30px;
-  width: 100px;
-  align-items: center;
-  justify-content: center;
-  background-color: #dadada;
-  color: #a18276;
-  border: none;
-  margin-left: 5vh;
   border-radius: 10px;
   cursor: pointer;
 `;
@@ -96,7 +83,9 @@ const ReviewButton = styled('button')`
   margin-top: 20px;
 `;
 
-const FavoritesContainer = styled('div')``;
+const FavoritesContainer = styled('div')`
+  filter: ${({ isBlurred }) => (isBlurred ? 'blur(5px)' : 'none')};
+`;
 
 const FavoritesHeader = styled('h1')`
   margin: 0;
@@ -178,7 +167,6 @@ const ProfilePage = () => {
 
   const openClick = () => {
     setShowEditProfile(true);
-    console.log('hello');
   };
 
   const closeEdit = () => {
@@ -201,6 +189,27 @@ const ProfilePage = () => {
 
   return (
     <ProfileBackground>
+      <Banner src={banner}></Banner>
+      <ProfileContainer isBlurred={showEditProfile}>
+        <ProfilePictureContainer>
+          <ProfilePicture src={pfp}></ProfilePicture>
+          <UpdatePhotoButton>Update Photo</UpdatePhotoButton>
+          <ReviewButton>3 Reviews</ReviewButton>
+        </ProfilePictureContainer>
+        <DescriptionButtonContainer>
+          <NameBioContainer>
+            <ProfileName>{name}</ProfileName>
+            <Bio>{bio}</Bio>
+          </NameBioContainer>
+          <ButtonContainer>
+            <EditButton onClick={openClick}>Edit Profile</EditButton>
+          </ButtonContainer>
+        </DescriptionButtonContainer>
+      </ProfileContainer>
+      <FavoritesContainer isBlurred={showEditProfile}>
+        <FavoritesHeader>Favorites</FavoritesHeader>
+        <FavoritesList></FavoritesList>
+      </FavoritesContainer>
       {showEditProfile && (
         <EditPopUp>
           <CloseEditPopUp onClick={closeEdit}>X</CloseEditPopUp>
@@ -217,28 +226,6 @@ const ProfilePage = () => {
           <EditSaveButton onClick={saveEdit}>Save</EditSaveButton>
         </EditPopUp>
       )}
-      <Banner src={banner}></Banner>
-      <ProfileContainer>
-        <ProfilePictureContainer>
-          <ProfilePicture src={pfp}></ProfilePicture>
-          <UpdatePhotoButton>Update Photo</UpdatePhotoButton>
-          <ReviewButton>3 Reviews</ReviewButton>
-        </ProfilePictureContainer>
-        <DescriptionButtonContainer>
-          <NameBioContainer>
-            <ProfileName>{name}</ProfileName>
-            <Bio>{bio}</Bio>
-          </NameBioContainer>
-          <ButtonContainer>
-            <EditButton onClick={openClick}>Edit</EditButton>
-            <SaveButton>Save</SaveButton>
-          </ButtonContainer>
-        </DescriptionButtonContainer>
-      </ProfileContainer>
-      <FavoritesContainer>
-        <FavoritesHeader>Favorites</FavoritesHeader>
-        <FavoritesList></FavoritesList>
-      </FavoritesContainer>
     </ProfileBackground>
   );
 };
