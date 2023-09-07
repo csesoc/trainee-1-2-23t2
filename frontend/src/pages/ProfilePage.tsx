@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import pfp from '../images/poop-emoji.jpg';
+import banner from '../images/banner.jpg';
 
 const ProfilePicture = styled('img')`
   background-color: black;
@@ -110,7 +112,7 @@ const ProfilePage = () => {
       <Banner></Banner>
       <ProfileContainer>
         <ProfilePictureContainer>
-          <ProfilePicture></ProfilePicture>
+          <ProfilePicture src={pfp}></ProfilePicture>
           <UpdatePhotoButton>Update Photo</UpdatePhotoButton>
           <ReviewButton>3 Reviews</ReviewButton>
         </ProfilePictureContainer>
