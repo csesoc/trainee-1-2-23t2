@@ -30,6 +30,9 @@ const ProfileName = styled('div')`
 const ProfileContainer = styled('div')`
   display: flex;
   margin-top: 12.5px;
+`;
+
+const ProfileBannerContainer = styled('div')`
   filter: ${({ isBlurred }) => (isBlurred ? 'blur(5px)' : 'none')};
 `;
 
@@ -83,9 +86,7 @@ const ReviewButton = styled('button')`
   margin-top: 20px;
 `;
 
-const FavoritesContainer = styled('div')`
-  filter: ${({ isBlurred }) => (isBlurred ? 'blur(5px)' : 'none')};
-`;
+const FavoritesContainer = styled('div')``;
 
 const FavoritesHeader = styled('h1')`
   margin: 0;
@@ -189,27 +190,29 @@ const ProfilePage = () => {
 
   return (
     <ProfileBackground>
-      <Banner src={banner}></Banner>
-      <ProfileContainer isBlurred={showEditProfile}>
-        <ProfilePictureContainer>
-          <ProfilePicture src={pfp}></ProfilePicture>
-          <UpdatePhotoButton>Update Photo</UpdatePhotoButton>
-          <ReviewButton>3 Reviews</ReviewButton>
-        </ProfilePictureContainer>
-        <DescriptionButtonContainer>
-          <NameBioContainer>
-            <ProfileName>{name}</ProfileName>
-            <Bio>{bio}</Bio>
-          </NameBioContainer>
-          <ButtonContainer>
-            <EditButton onClick={openClick}>Edit Profile</EditButton>
-          </ButtonContainer>
-        </DescriptionButtonContainer>
-      </ProfileContainer>
-      <FavoritesContainer isBlurred={showEditProfile}>
-        <FavoritesHeader>Favorites</FavoritesHeader>
-        <FavoritesList></FavoritesList>
-      </FavoritesContainer>
+      <ProfileBannerContainer isBlurred={showEditProfile}>
+        <Banner src={banner}></Banner>
+        <ProfileContainer isBlurred={showEditProfile}>
+          <ProfilePictureContainer>
+            <ProfilePicture src={pfp}></ProfilePicture>
+            <UpdatePhotoButton>Update Photo</UpdatePhotoButton>
+            <ReviewButton>3 Reviews</ReviewButton>
+          </ProfilePictureContainer>
+          <DescriptionButtonContainer>
+            <NameBioContainer>
+              <ProfileName>{name}</ProfileName>
+              <Bio>{bio}</Bio>
+            </NameBioContainer>
+            <ButtonContainer>
+              <EditButton onClick={openClick}>Edit Profile</EditButton>
+            </ButtonContainer>
+          </DescriptionButtonContainer>
+        </ProfileContainer>
+        <FavoritesContainer isBlurred={showEditProfile}>
+          <FavoritesHeader>Favorites</FavoritesHeader>
+          <FavoritesList></FavoritesList>
+        </FavoritesContainer>
+      </ProfileBannerContainer>
       {showEditProfile && (
         <EditPopUp>
           <CloseEditPopUp onClick={closeEdit}>X</CloseEditPopUp>
