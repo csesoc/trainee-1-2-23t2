@@ -188,10 +188,15 @@ const ProfilePage = () => {
   const saveEdit = () => {
     closeEdit();
     setName(editName);
+    setBio(editBio);
   };
 
   const onChangeEditName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEditName(event.target.value);
+  };
+
+  const onChangeEditBio = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEditBio(event.target.value);
   };
 
   return (
@@ -208,7 +213,7 @@ const ProfilePage = () => {
             onChange={onChangeEditName}
           ></EditNameForm>
           <div>Bio</div>
-          <EditBioForm value={bio}></EditBioForm>
+          <EditBioForm value={editBio} onChange={onChangeEditBio}></EditBioForm>
           <EditSaveButton onClick={saveEdit}>Save</EditSaveButton>
         </EditPopUp>
       )}
