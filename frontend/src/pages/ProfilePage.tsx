@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import pfp from '../images/poop-emoji.jpg';
 import banner from '../images/banner.jpg';
+import { useState } from 'react';
 
 const ProfilePicture = styled('img')`
   background-color: black;
@@ -107,9 +108,29 @@ const FavoritesList = styled('div')`
   width: 40vh;
 `;
 
+const EditPopUp = styled('div')`
+  background-color: gray;
+  position: fixed;
+  height: 80vh;
+  width: 60vh;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  margin-top: -40vh;
+  margin-left: -30vh;
+`;
+
 const ProfilePage = () => {
+  const [showEditProfile, setShowEditProfile] = useState(false);
+
+  const editClick = () => {
+    setShowEditProfile(true);
+    console.log('hello');
+  };
+
   return (
     <ProfileBackground>
+      {showEditProfile && <EditPopUp></EditPopUp>}
       <Banner src={banner}></Banner>
       <ProfileContainer>
         <ProfilePictureContainer>
@@ -123,7 +144,7 @@ const ProfilePage = () => {
             <Bio>Bio Something Something</Bio>
           </NameBioContainer>
           <ButtonContainer>
-            <EditButton>Edit</EditButton>
+            <EditButton onClick={editClick}>Edit</EditButton>
             <SaveButton>Save</SaveButton>
           </ButtonContainer>
         </DescriptionButtonContainer>
