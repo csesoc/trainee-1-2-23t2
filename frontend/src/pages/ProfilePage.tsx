@@ -15,9 +15,10 @@ const ProfileBackground = styled('div')`
   overflow: hidden;
 `;
 
-const Banner = styled('div')`
+const Banner = styled('img')`
   background-color: gray;
   height: 20vh;
+  width: 100%;
 `;
 
 const ProfileName = styled('div')`
@@ -109,7 +110,7 @@ const FavoritesList = styled('div')`
 const ProfilePage = () => {
   return (
     <ProfileBackground>
-      <Banner></Banner>
+      <Banner src={banner}></Banner>
       <ProfileContainer>
         <ProfilePictureContainer>
           <ProfilePicture src={pfp}></ProfilePicture>
