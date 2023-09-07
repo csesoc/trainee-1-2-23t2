@@ -109,7 +109,7 @@ const FavoritesList = styled('div')`
 `;
 
 const EditPopUp = styled('div')`
-  background-color: gray;
+  background-color: white;
   position: fixed;
   height: 80vh;
   width: 80vh;
@@ -120,6 +120,8 @@ const EditPopUp = styled('div')`
   margin-top: -40vh;
   margin-left: -40vh;
   padding: 10px;
+  border: 2px solid;
+  border-radius: 1%;
 `;
 
 const CloseEditPopUp = styled('div')`
@@ -127,7 +129,7 @@ const CloseEditPopUp = styled('div')`
   right: 0px;
   position: absolute;
   cursor: pointer;
-  background-color: red;
+  background-color: gray;
   border-radius: 50%;
   padding: 10px;
   width: 10px;
@@ -149,6 +151,21 @@ const EditBioForm = styled('textarea')`
 const EditProfileTextContainer = styled('div')`
   text-align: center;
   width: 100%;
+`;
+
+const EditSaveButton = styled('div')`
+  display: flex;
+  height: 30px;
+  width: 100px;
+  align-items: center;
+  justify-content: center;
+  background-color: #a18276;
+  color: white;
+  border: none;
+  cursor: pointer;
+  bottom: 0px;
+  right: 0px;
+  position: absolute;
 `;
 
 const ProfilePage = () => {
@@ -175,6 +192,7 @@ const ProfilePage = () => {
           <EditNameForm></EditNameForm>
           <div>Bio</div>
           <EditBioForm></EditBioForm>
+          <EditSaveButton>Save</EditSaveButton>
         </EditPopUp>
       )}
       <Banner src={banner}></Banner>
