@@ -92,7 +92,9 @@ const ReviewButton = styled('button')`
 
 const FavoritesContainer = styled('div')``;
 
-const FavoritesHeader = styled('div')``;
+const FavoritesHeader = styled('h1')`
+  margin: 0;
+`;
 
 const FavoritesList = styled('div')`
   background-color: gray;
