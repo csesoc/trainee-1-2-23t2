@@ -33,7 +33,7 @@ const ProfileContainer = styled('div')`
 `;
 
 const ProfileBannerContainer = styled('div')`
-  filter: ${({ isBlurred }) => (isBlurred ? 'blur(5px)' : 'none')};
+  opacity: ${({ isBlurred }) => (isBlurred ? '0.2' : '1')};
 `;
 
 const EditButton = styled('button')`
