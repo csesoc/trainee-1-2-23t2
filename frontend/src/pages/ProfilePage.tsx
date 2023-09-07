@@ -111,39 +111,69 @@ const FavoritesList = styled('div')`
 const EditPopUp = styled('div')`
   background-color: gray;
   position: fixed;
-  height: 100vh;
+  height: 80vh;
   width: 80vh;
   display: flex;
   flex-direction: column;
   top: 50%;
   left: 50%;
-  margin-top: -50vh;
+  margin-top: -40vh;
   margin-left: -40vh;
+  padding: 10px;
 `;
 
-const EditNameText = styled('div')``;
+const CloseEditPopUp = styled('div')`
+  top: 0px;
+  right: 0px;
+  position: absolute;
+  cursor: pointer;
+  background-color: red;
+  border-radius: 50%;
+  padding: 10px;
+  width: 10px;
+  height: 10px;
+  border: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
-const EditNameForm = styled('input')``;
+const EditNameForm = styled('input')`
+  height: 3vh;
+`;
 
-const EditBioText = styled('div')``;
+const EditBioForm = styled('textarea')`
+  height: 15vh;
+`;
 
-const EditBioForm = styled('input')``;
+const EditProfileTextContainer = styled('div')`
+  text-align: center;
+  width: 100%;
+`;
 
 const ProfilePage = () => {
   const [showEditProfile, setShowEditProfile] = useState(false);
 
-  const editClick = () => {
+  const openClick = () => {
     setShowEditProfile(true);
     console.log('hello');
+  };
+
+  const closeEdit = () => {
+    setShowEditProfile(false);
   };
 
   return (
     <ProfileBackground>
       {showEditProfile && (
         <EditPopUp>
-          <EditNameText>Name</EditNameText>
+          <CloseEditPopUp onClick={closeEdit}>X</CloseEditPopUp>
+          <EditProfileTextContainer>
+            <div>Edit Profile</div>
+          </EditProfileTextContainer>
+          <div>Name</div>
           <EditNameForm></EditNameForm>
-          <EditBioText>Bio</EditBioText>
+          <div>Bio</div>
           <EditBioForm></EditBioForm>
         </EditPopUp>
       )}
@@ -160,7 +190,7 @@ const ProfilePage = () => {
             <Bio>Bio Something Something</Bio>
           </NameBioContainer>
           <ButtonContainer>
-            <EditButton onClick={editClick}>Edit</EditButton>
+            <EditButton onClick={openClick}>Edit</EditButton>
             <SaveButton>Save</SaveButton>
           </ButtonContainer>
         </DescriptionButtonContainer>
