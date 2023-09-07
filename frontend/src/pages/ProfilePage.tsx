@@ -111,14 +111,23 @@ const FavoritesList = styled('div')`
 const EditPopUp = styled('div')`
   background-color: gray;
   position: fixed;
-  height: 80vh;
-  width: 60vh;
+  height: 100vh;
+  width: 80vh;
   display: flex;
+  flex-direction: column;
   top: 50%;
   left: 50%;
-  margin-top: -40vh;
-  margin-left: -30vh;
+  margin-top: -50vh;
+  margin-left: -40vh;
 `;
+
+const EditNameText = styled('div')``;
+
+const EditNameForm = styled('input')``;
+
+const EditBioText = styled('div')``;
+
+const EditBioForm = styled('input')``;
 
 const ProfilePage = () => {
   const [showEditProfile, setShowEditProfile] = useState(false);
@@ -130,7 +139,14 @@ const ProfilePage = () => {
 
   return (
     <ProfileBackground>
-      {showEditProfile && <EditPopUp></EditPopUp>}
+      {showEditProfile && (
+        <EditPopUp>
+          <EditNameText>Name</EditNameText>
+          <EditNameForm></EditNameForm>
+          <EditBioText>Bio</EditBioText>
+          <EditBioForm></EditBioForm>
+        </EditPopUp>
+      )}
       <Banner src={banner}></Banner>
       <ProfileContainer>
         <ProfilePictureContainer>
