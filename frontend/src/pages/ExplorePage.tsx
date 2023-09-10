@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import empty from '/src/assets/empty.jpg';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LanguageIcon from '@mui/icons-material/Language';
@@ -9,6 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import SortIcon from '@mui/icons-material/Sort';
 
 const BarContainer = styled.div`
   position: fixed;
@@ -38,20 +39,6 @@ const H1Style = styled.div`
   font-weight: 500;
 `;
 
-const CollectionSort = styled.div`
-  display: inline-block;
-  flex-grow: 1;
-  flex-direction: column;
-  padding-left:1vw;
-  padding-right: 2vw;
-  font-size: 0.8;
-  font-weight: 400;
-`;
-
-const StyledLabel = styled.label`
-  font-size: 1.4em;
-`;
-
 const ProfileBox = styled.button`
   display: flex;
   border-radius: 10px;
@@ -67,13 +54,14 @@ const FilterBar = styled.nav`
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   left: 0;
+  padding: 1vw;
   background-color: white;
 `;
 
 const ToiletsList = styled.section`
   margin-left: 3%;
   margin-right: 3%;
-  margin-top: 150px;
+  margin-top: 170px;
   display: flex;
   flex-wrap: wrap;
   row-gap: 20px;
@@ -125,8 +113,206 @@ const ToiletCardRating = styled.div`
   font-size: 18px;
 `;
 
+const DropDownProfile = styled.div`
+  position: absolute;
+  top: 4.5rem;
+  right: 1.5rem;
+  width: 120px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -0.7rem;
+    right: 1.1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+  }
+
+  & > div {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: #e9e9e9;
+      color: #000;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #f0f0f0;
+    }
+  }
+`
+
+const OverlayFilter = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const PopupFilter = styled.div`
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+  position: relative;
+`;
+
+const ButtonContainer = styled.div`
+  border-top: 1px solid #e0e0e0;
+  padding-top: 10px;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+`;
+
 const ExplorePage = () => {
   const [languageOpen, setLanguageOpen] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [gender, setGender] = useState<string>("");
+  const [locations, setLocations] = useState<{ [key: string]: boolean }>({});
+
+  const handleGenderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGender(event.target.value);
+  };
+
+  const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = event.target;
+    setLocations((prev) => ({ ...prev, [name]: checked }));
+  };
+
+  const clearAllFilters = () => {
+    setGender("");
+    setLocations({});
+  };
+
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  interface Props {
+    onClose: () => void;
+  }
+
+  const FilterPopup: React.FC<Props> = ({ onClose }) => {
+    return (
+      <OverlayFilter onClick={onClose}>
+        <PopupFilter onClick={(e) => e.stopPropagation()}>
+          <CloseButton onClick={onClose}>×</CloseButton>
+          <h3>Gender</h3>
+          <label>
+            <input 
+              type="radio" 
+              name="gender" 
+              value="male" 
+              checked={gender === "male"} 
+              onChange={handleGenderChange} 
+            />
+            Male
+          </label>
+          <label>
+            <input 
+              type="radio" 
+              name="gender" 
+              value="female" 
+              checked={gender === "female"} 
+              onChange={handleGenderChange} 
+            />
+            Female
+          </label>
+          <label>
+            <input 
+              type="radio" 
+              name="gender" 
+              value="other" 
+              checked={gender === "other"} 
+              onChange={handleGenderChange} 
+            />
+            Other
+          </label>
+
+          <h3>Locations</h3>
+          {["Main Library", "Red Centre", "Ainsworth", "Matthews", "Law Library"].map((location) => (
+            <label key={location}>
+              <input 
+                type="checkbox" 
+                name={location} 
+                checked={locations[location] || false} 
+                onChange={handleLocationChange} 
+              />
+              {location}
+            </label>
+          ))}
+          <ButtonContainer>
+            <button onClick={clearAllFilters}>Clear All Filters</button>
+        </ButtonContainer>
+        </PopupFilter>
+      </OverlayFilter>
+    );
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setOpenProfile(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  type Action = 'Profile' | 'Settings' | 'Logout';
+
+  const handleItemClick = (action: Action) => {
+    switch (action) {
+      case 'Profile':
+        console.log('Navigating to profile...');
+        break;
+      case 'Settings':
+        console.log('Navigating to settings...');
+        break;
+      case 'Logout':
+        console.log('Logging out...');
+        break;
+    }
+
+    setOpenProfile(false);
+  };
 
   const languageTrue = () => {
     setLanguageOpen(true);
@@ -135,9 +321,6 @@ const ExplorePage = () => {
   const languageFalse = () => {
     setLanguageOpen(false);
   }
-
-  const [filter, setFilter] = useState("/");
-  const [sort, setSort] = useState("/");
 
   const [toilets, setToilets] = useState(
     [
@@ -201,9 +384,9 @@ const ExplorePage = () => {
           </IconButton>
 
           <Dialog open={languageOpen} onClose={languageFalse}>
-          <DialogTitle>language</DialogTitle>
+          <DialogTitle>Select a language</DialogTitle>
           <DialogContent>
-            This is the content of the popup.
+            English (your only option lmao)
           </DialogContent>
           <DialogActions>
             <Button onClick={languageFalse} color="primary">
@@ -212,30 +395,23 @@ const ExplorePage = () => {
           </DialogActions>
         </Dialog>
 
-          <ProfileBox>
+          <ProfileBox onClick={() => setOpenProfile(!openProfile)}>
             <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
+            {openProfile && (
+              <DropDownProfile ref={dropdownRef}>
+                <div onClick={() => handleItemClick('Profile')}>Profile</div>
+                <div onClick={() => handleItemClick('Settings')}>Settings</div>
+                <div onClick={() => handleItemClick('Logout')}>Logout</div>
+            </DropDownProfile>
+            )}
           </ProfileBox>
         </MenuBar>
 
         <FilterBar>
           <div className="sort" style={{display: 'inline-block'}}>
 
-          <CollectionSort>
-            <StyledLabel>Filter by: </StyledLabel>
-            <select style={{ backgroundColor: '#f9f9f9', color: '#333', fontSize: '20px' }} value={filter} onChange={(e) => setFilter(e.target.value)}>
-              <option value="/">Ratings</option>
-              <option value="/">Location</option>
-            </select>
-          </CollectionSort>
-
-          <CollectionSort>
-            <StyledLabel>Sort by: </StyledLabel>
-            <select style={{ backgroundColor: '#f9f9f9', color: '#333', fontSize: '20px' }} value={sort} onChange={(e) => setSort(e.target.value)}>
-              <option value="/">Best Overall Rating</option>
-              <option value="/">Worst Overall Rating</option>
-            </select>
-          </CollectionSort>
-
+          <SortIcon style={{ cursor: 'pointer' }} onClick={() => setIsFilterOpen(true)}>Open Filters</SortIcon>
+            {isFilterOpen && <FilterPopup onClose={() => setIsFilterOpen(false)} />}
           </div>
         </FilterBar>
       </BarContainer>
