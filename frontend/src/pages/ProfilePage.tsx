@@ -2,7 +2,11 @@ import styled from 'styled-components';
 import pfp from '../images/poop-emoji.jpg';
 import banner from '../images/banner.jpg';
 import favorite from '../images/favorite.webp';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+
+type ProfileBannerContainerProps = {
+  isBlurred: boolean;
+};
 
 const ProfilePicture = styled('img')`
   background-color: black;
@@ -33,7 +37,7 @@ const ProfileContainer = styled('div')`
   margin-top: 12.5px;
 `;
 
-const ProfileBannerContainer = styled('div')`
+const ProfileBannerContainer = styled.div<ProfileBannerContainerProps>`
   opacity: ${({ isBlurred }) => (isBlurred ? '0.2' : '1')};
 `;
 
@@ -177,6 +181,15 @@ const ProfilePage = () => {
 
   const [editName, setEditName] = useState(name);
   const [editBio, setEditBio] = useState(bio);
+  const [profilePicture, setProfilePicture] = useState(pfp);
+
+  const fileIputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (fileIputRef.current) {
+      fileIputRef.current.click();
+    }
+  }, []);
 
   const openClick = () => {
     setShowEditProfile(true);
@@ -200,14 +213,38 @@ const ProfilePage = () => {
     setEditBio(event.target.value);
   };
 
+  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          if (typeof reader.result === 'string') {
+            setProfilePicture(reader.result);
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  };
+
   return (
     <ProfileBackground>
       <ProfileBannerContainer isBlurred={showEditProfile}>
         <Banner src={banner}></Banner>
         <ProfileContainer>
           <ProfilePictureContainer>
-            <ProfilePicture src={pfp}></ProfilePicture>
-            <UpdatePhotoButton>Update Photo</UpdatePhotoButton>
+            <ProfilePicture src={profilePicture}></ProfilePicture>
+            <input type="file" onChange={onFileChange} style={{ display: 'none' }} ref={fileIputRef}></input>
+            <UpdatePhotoButton
+              onClick={(e) => {
+                const buttonElement = e.target as HTMLElement;
+                const fileInputElement = buttonElement.previousSibling as HTMLInputElement;
+                fileInputElement.click();
+              }}
+            >
+              Update Photo
+            </UpdatePhotoButton>
             <ReviewButton>3 Reviews</ReviewButton>
           </ProfilePictureContainer>
           <DescriptionButtonContainer>
