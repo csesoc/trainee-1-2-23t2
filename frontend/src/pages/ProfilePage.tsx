@@ -209,7 +209,7 @@ const ProfilePage = () => {
     setEditName(event.target.value);
   };
 
-  const onChangeEditBio = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeEditBio = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setEditBio(event.target.value);
   };
 
