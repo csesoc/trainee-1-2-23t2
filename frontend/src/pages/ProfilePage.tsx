@@ -85,6 +85,11 @@ const UpdatePhotoButton = styled('button')`
 
 const ReviewButton = styled('button')`
   margin-top: 20px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
 `;
 
 const FavoritesSection = styled('div')``;
@@ -230,10 +235,7 @@ const ProfilePage = () => {
             <div>Edit Profile</div>
           </EditProfileTextContainer>
           <div>Name</div>
-          <EditNameForm
-            value={editName}
-            onChange={onChangeEditName}
-          ></EditNameForm>
+          <EditNameForm value={editName} onChange={onChangeEditName}></EditNameForm>
           <div>Bio</div>
           <EditBioForm value={editBio} onChange={onChangeEditBio}></EditBioForm>
           <EditSaveButton onClick={saveEdit}>Save</EditSaveButton>
