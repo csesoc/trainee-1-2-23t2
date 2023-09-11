@@ -16,6 +16,22 @@ const ProfilePicture = styled('img')`
   margin-top: -60px;
 `;
 
+const EditProfilePicture = styled('img')`
+  background-color: black;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+`;
+
+const EditProfilePictureContainer = styled('div')`
+  background-color; blue;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const ProfileBackground = styled('div')`
   height: 100vh;
   overflow: hidden;
@@ -271,6 +287,19 @@ const ProfilePage = () => {
           <EditProfileTextContainer>
             <div>Edit Profile</div>
           </EditProfileTextContainer>
+          <div>Profile</div>
+          <EditProfilePictureContainer>
+            <EditProfilePicture src={profilePicture}></EditProfilePicture>
+            <UpdatePhotoButton
+              onClick={(e) => {
+                const buttonElement = e.target as HTMLElement;
+                const fileInputElement = buttonElement.previousSibling as HTMLInputElement;
+                fileInputElement.click();
+              }}
+            >
+              Update Photo
+            </UpdatePhotoButton>
+          </EditProfilePictureContainer>
           <div>Name</div>
           <EditNameForm value={editName} onChange={onChangeEditName}></EditNameForm>
           <div>Bio</div>
