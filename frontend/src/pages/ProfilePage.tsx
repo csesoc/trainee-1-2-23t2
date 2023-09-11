@@ -197,10 +197,11 @@ const ProfilePage = () => {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [name, setName] = useState('Name');
   const [bio, setBio] = useState('Bio something something');
+  const [profilePicture, setProfilePicture] = useState(pfp);
 
   const [editName, setEditName] = useState(name);
   const [editBio, setEditBio] = useState(bio);
-  const [profilePicture, setProfilePicture] = useState(pfp);
+  const [editPfp, setEditPfp] = useState(profilePicture);
 
   const fileIputRef = useRef<HTMLInputElement | null>(null);
 
@@ -222,6 +223,7 @@ const ProfilePage = () => {
     closeEdit();
     setName(editName);
     setBio(editBio);
+    setProfilePicture(editPfp);
   };
 
   const onChangeEditName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -239,7 +241,7 @@ const ProfilePage = () => {
         const reader = new FileReader();
         reader.onloadend = () => {
           if (typeof reader.result === 'string') {
-            setProfilePicture(reader.result);
+            setEditPfp(reader.result);
           }
         };
         reader.readAsDataURL(file);
@@ -254,16 +256,6 @@ const ProfilePage = () => {
         <ProfileContainer>
           <ProfilePictureContainer>
             <ProfilePicture src={profilePicture}></ProfilePicture>
-            <input type="file" onChange={onFileChange} style={{ display: 'none' }} ref={fileIputRef}></input>
-            <UpdatePhotoButton
-              onClick={(e) => {
-                const buttonElement = e.target as HTMLElement;
-                const fileInputElement = buttonElement.previousSibling as HTMLInputElement;
-                fileInputElement.click();
-              }}
-            >
-              Update Photo
-            </UpdatePhotoButton>
             <ReviewButton>3 Reviews</ReviewButton>
           </ProfilePictureContainer>
           <DescriptionButtonContainer>
@@ -292,7 +284,7 @@ const ProfilePage = () => {
           </EditProfileTextContainer>
           <div>Profile</div>
           <EditProfilePictureContainer>
-            <EditProfilePicture src={profilePicture}></EditProfilePicture>
+            <EditProfilePicture src={editPfp}></EditProfilePicture>
             <input type="file" onChange={onFileChange} style={{ display: 'none' }}></input>
             <UpdatePhotoButton
               onClick={(e) => {
