@@ -290,6 +290,7 @@ const ProfilePage = () => {
           <div>Profile</div>
           <EditProfilePictureContainer>
             <EditProfilePicture src={profilePicture}></EditProfilePicture>
+            <input type="file" onChange={onFileChange} style={{ display: 'none' }}></input>
             <UpdatePhotoButton
               onClick={(e) => {
                 const buttonElement = e.target as HTMLElement;
