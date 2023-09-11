@@ -14,6 +14,7 @@ const ProfilePicture = styled('img')`
   width: 200px;
   height: 200px;
   margin-top: -60px;
+  border: 3px solid black;
 `;
 
 const EditProfilePicture = styled('img')`
@@ -21,6 +22,7 @@ const EditProfilePicture = styled('img')`
   border-radius: 50%;
   width: 200px;
   height: 200px;
+  border: 3px solid black;
 `;
 
 const EditProfilePictureContainer = styled('div')`
@@ -30,6 +32,7 @@ const EditProfilePictureContainer = styled('div')`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 15px;
 `;
 
 const ProfileBackground = styled('div')`
