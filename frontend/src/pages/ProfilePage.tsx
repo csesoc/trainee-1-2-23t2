@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import pfp from '../images/poop-emoji.jpg';
 import banner from '../images/banner.jpg';
+import favorite from '../images/favorite.webp';
 import { useState } from 'react';
 
 const ProfilePicture = styled('img')`
@@ -86,13 +87,19 @@ const ReviewButton = styled('button')`
   margin-top: 20px;
 `;
 
-const FavoritesContainer = styled('div')``;
+const FavoritesSection = styled('div')``;
 
+const FavoritesCard = styled('div')``;
+
+const FavoritesText = styled('div')`
+  height: 10px;
+  width: 10px;
+`;
 const FavoritesHeader = styled('h1')`
   margin: 0;
 `;
 
-const FavoritesList = styled('div')`
+const FavoritesImg = styled('img')`
   background-color: gray;
   height: 40vh;
   width: 40vh;
@@ -192,7 +199,7 @@ const ProfilePage = () => {
     <ProfileBackground>
       <ProfileBannerContainer isBlurred={showEditProfile}>
         <Banner src={banner}></Banner>
-        <ProfileContainer isBlurred={showEditProfile}>
+        <ProfileContainer>
           <ProfilePictureContainer>
             <ProfilePicture src={pfp}></ProfilePicture>
             <UpdatePhotoButton>Update Photo</UpdatePhotoButton>
@@ -208,10 +215,13 @@ const ProfilePage = () => {
             </ButtonContainer>
           </DescriptionButtonContainer>
         </ProfileContainer>
-        <FavoritesContainer isBlurred={showEditProfile}>
+        <FavoritesSection>
           <FavoritesHeader>Favorites</FavoritesHeader>
-          <FavoritesList></FavoritesList>
-        </FavoritesContainer>
+          <FavoritesCard>
+            <FavoritesImg src={favorite}></FavoritesImg>
+            <FavoritesText>Hello</FavoritesText>
+          </FavoritesCard>
+        </FavoritesSection>
       </ProfileBannerContainer>
       {showEditProfile && (
         <EditPopUp>
