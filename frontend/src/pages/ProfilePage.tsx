@@ -67,7 +67,6 @@ const EditProfilePictureContainer = styled('div')`
 
 const ProfileBackground = styled('div')`
   height: 100%;
-  overflow: hidden;
 `;
 
 const Banner = styled('img')`
@@ -303,6 +302,13 @@ const DropDownProfile = styled('div')`
   }
 `;
 
+const BarContainer = styled('div')`
+  position: sticky;
+  width: 100%;
+  top: 0;
+  left: 0;
+`;
+
 const ProfilePage = () => {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [name, setName] = useState('Name');
@@ -374,34 +380,37 @@ const ProfilePage = () => {
   return (
     <ProfileBackground>
       <GlobalStyle></GlobalStyle>
-      <NavBar>
-        <H1Style to="/explore">Good Shit</H1Style>
-        <div style={{ fontSize: '18px', fontWeight: 200 }}>Finding your Perfect Shit</div>
-        <IconButton style={{ padding: '20px' }} onClick={languageTrue}>
-          <LanguageIcon fontSize="large" style={{ cursor: 'pointer' }} />
-        </IconButton>
+      <BarContainer>
+        <NavBar>
+          <H1Style to="/explore">Good Shit</H1Style>
+          <div style={{ fontSize: '18px', fontWeight: 200 }}>Finding your Perfect Shit</div>
+          <IconButton style={{ padding: '20px' }} onClick={languageTrue}>
+            <LanguageIcon fontSize="large" style={{ cursor: 'pointer' }} />
+          </IconButton>
 
-        <Dialog open={languageOpen} onClose={languageFalse}>
-          <DialogTitle>Select a language</DialogTitle>
-          <DialogContent>English (your only option lmao)</DialogContent>
-          <DialogActions>
-            <Button onClick={languageFalse} color="primary">
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
+          <Dialog open={languageOpen} onClose={languageFalse}>
+            <DialogTitle>Select a language</DialogTitle>
+            <DialogContent>English (your only option lmao)</DialogContent>
+            <DialogActions>
+              <Button onClick={languageFalse} color="primary">
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
 
-        <ProfileBox onClick={() => setOpenProfile(!openProfile)}>
-          <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
-          {openProfile && (
-            <DropDownProfile ref={dropdownRef}>
-              <Link to="/profile">Profile</Link>
-              <div>Settings</div>
-              <div>Logout</div>
-            </DropDownProfile>
-          )}
-        </ProfileBox>
-      </NavBar>
+          <ProfileBox onClick={() => setOpenProfile(!openProfile)}>
+            <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
+            {openProfile && (
+              <DropDownProfile ref={dropdownRef}>
+                <Link to="/profile">Profile</Link>
+                <div>Settings</div>
+                <div>Logout</div>
+              </DropDownProfile>
+            )}
+          </ProfileBox>
+        </NavBar>
+      </BarContainer>
+
       <ProfileBannerContainer isBlurred={showEditProfile}>
         <Banner src={banner}></Banner>
         <ProfileContainer>
