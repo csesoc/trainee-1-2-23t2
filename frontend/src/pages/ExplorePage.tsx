@@ -33,11 +33,13 @@ const MenuBar = styled.nav`
   z-index: 1000;
 `;
 
-const H1Style = styled.div`
+const H1Style = styled(Link)`
   flex-grow: 1;
   display: inline-block;
   font-size: 2em;
   font-weight: 500;
+  text-decoration: none;
+  color: white;
 `;
 
 const ProfileBox = styled.button`
@@ -355,7 +357,7 @@ const ExplorePage = () => {
     <>
       <BarContainer>
         <MenuBar>
-          <H1Style>Good Shit</H1Style>
+          <H1Style to="/explore">Good Shit</H1Style>
 
           <div style={{ fontSize: '18px', fontWeight: 200 }}>Finding your Perfect Shit</div>
 
