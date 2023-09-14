@@ -3,6 +3,15 @@ import pfp from '../images/poop-emoji.jpg';
 import banner from '../images/banner.jpg';
 import favorite from '../images/favorite.webp';
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
+import LanguageIcon from '@mui/icons-material/Language';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 type ProfileBannerContainerProps = {
   isBlurred: boolean;
@@ -193,17 +202,96 @@ const EditSaveButton = styled('div')`
   position: absolute;
 `;
 
+const NavBar = styled('div')`
+  display: flex;
+  justify-content: space-between;
+  background-color: #9c8378;
+  padding-right: 10vw;
+  padding: 1vw;
+  color: white;
+  align-items: center;
+  top: 0;
+  left: 0;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+`;
+
+const H1Style = styled(Link)`
+  flex-grow: 1;
+  display: inline-block;
+  font-size: 2em;
+  font-weight: 500;
+`;
+
+const ProfileBox = styled.button`
+  display: flex;
+  border-radius: 10px;
+  background-color: #9c8379;
+  padding: 1vw;
+  cursor: pointer;
+`;
+
+const DropDownProfile = styled.div`
+  position: absolute;
+  top: 4.5rem;
+  right: 1.5rem;
+  width: 120px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -0.7rem;
+    right: 1.1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+  }
+
+  & > div,
+  a {
+    padding: 12px 15px;
+    display: block;
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: #e9e9e9;
+      color: #000;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #f0f0f0;
+    }
+  }
+`;
+
 const ProfilePage = () => {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [name, setName] = useState('Name');
   const [bio, setBio] = useState('Bio something something');
   const [profilePicture, setProfilePicture] = useState(pfp);
 
+  const [languageOpen, setLanguageOpen] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
+
   const [editName, setEditName] = useState(name);
   const [editBio, setEditBio] = useState(bio);
   const [editPfp, setEditPfp] = useState(profilePicture);
 
   const fileIputRef = useRef<HTMLInputElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (fileIputRef.current) {
@@ -249,8 +337,44 @@ const ProfilePage = () => {
     }
   };
 
+  const languageTrue = () => {
+    setLanguageOpen(true);
+  };
+
+  const languageFalse = () => {
+    setLanguageOpen(false);
+  };
+
   return (
     <ProfileBackground>
+      <NavBar>
+        <H1Style to="/explore">Good Shit</H1Style>
+        <div style={{ fontSize: '18px', fontWeight: 200 }}>Finding your Perfect Shit</div>
+        <IconButton style={{ padding: '20px' }} onClick={languageTrue}>
+          <LanguageIcon fontSize="large" style={{ cursor: 'pointer' }} />
+        </IconButton>
+
+        <Dialog open={languageOpen} onClose={languageFalse}>
+          <DialogTitle>Select a language</DialogTitle>
+          <DialogContent>English (your only option lmao)</DialogContent>
+          <DialogActions>
+            <Button onClick={languageFalse} color="primary">
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        <ProfileBox onClick={() => setOpenProfile(!openProfile)}>
+          <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
+          {openProfile && (
+            <DropDownProfile ref={dropdownRef}>
+              <Link to="/profile">Profile</Link>
+              <div>Settings</div>
+              <div>Logout</div>
+            </DropDownProfile>
+          )}
+        </ProfileBox>
+      </NavBar>
       <ProfileBannerContainer isBlurred={showEditProfile}>
         <Banner src={banner}></Banner>
         <ProfileContainer>
