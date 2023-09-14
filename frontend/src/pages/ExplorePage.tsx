@@ -381,7 +381,7 @@ const ExplorePage = () => {
               <DropDownProfile ref={dropdownRef}>
                 <Link to="/profile">Profile</Link>
                 <div onClick={() => handleItemClick('Settings')}>Settings</div>
-                <div onClick={() => handleItemClick('Logout')}>Logout</div>
+                <Link to="/">Logout</Link>
               </DropDownProfile>
             )}
           </ProfileBox>

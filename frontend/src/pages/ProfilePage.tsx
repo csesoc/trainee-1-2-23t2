@@ -404,7 +404,7 @@ const ProfilePage = () => {
               <DropDownProfile ref={dropdownRef}>
                 <Link to="/profile">Profile</Link>
                 <div>Settings</div>
-                <div>Logout</div>
+                <Link to="/">Logout</Link>
               </DropDownProfile>
             )}
           </ProfileBox>
