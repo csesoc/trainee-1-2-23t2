@@ -12,6 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import SortIcon from '@mui/icons-material/Sort';
 import TextField from "@mui/material/TextField";
+import toiletCollection from './toilets.json';
 
 const BarContainer = styled.div`
   position: fixed;
@@ -52,6 +53,12 @@ const SearchBar = styled.div`
   row-gap: 20px;
   width: 50%;
   border-radius: 5px;
+`
+
+const Saying = styled.div`
+  font-size: 20px;
+  font-weight: 200;
+  padding-left: 50 px;
 `
 
 const ProfileBox = styled.button`
@@ -221,53 +228,12 @@ const ExplorePage = () => {
   const [gender, setGender] = useState<string>("");
   const [searchInput, setSearchInput] = useState("");
 
-  const toiletCollection = [
-    {
-      "name": "Ainsworth", 
-      "imageURL": 'clown.jpg', 
-      "rating": "4.83", 
-      "gender": "Male", 
-      "floor": "Floor 2",
-      "favourited": "false",
-    },
-    {
-      "name": "Quadrangle", 
-      "imageURL": 'clown.jpg', 
-      "rating": "3.20", 
-      "gender": "Female", 
-      "floor": "Ground Floor",
-      "favourited": "true",
-    },
-    {
-      "name": "Main Library", 
-      "imageURL": 'clown.jpg', 
-      "rating": "1.34", 
-      "gender": "female", 
-      "floor": "Floor 4",
-      "favourited": "false",
-    },
-    {
-      "name": "Ainsworth", 
-      "imageURL": 'clown.jpg', 
-      "rating": "4.94", 
-      "gender": "Male", 
-      "floor": "Floor 3",
-      "favourited": "false",
-    },
-    {
-      "name": "Law Library", 
-      "imageURL": 'clown.jpg', 
-      "rating": "4.12", 
-      "gender": "Female", 
-      "floor": "Floor 1",
-      "favourited": "true",
-    },
-  ];
+  
 
   let toiletDisplay = [...toiletCollection];
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    var lowerCase = event.target.value.toLowerCase();
+    let lowerCase = event.target.value.toLowerCase();
     setSearchInput(lowerCase);
   }
 
@@ -414,9 +380,9 @@ const ExplorePage = () => {
             />
           </SearchBar>
 
-          <div style={{ fontSize: '20px', fontWeight:200, paddingLeft: '50px' }}>Finding your Perfect Shit</div>
+          <Saying>Finding your Perfect Shit</Saying>
 
-          <IconButton style={{ padding: 0 }} onClick={languageTrue}>
+          <IconButton onClick={languageTrue}>
             <LanguageIcon fontSize="large" style={{ cursor: 'pointer' }} />
           </IconButton>
 

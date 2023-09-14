@@ -1,0 +1,42 @@
+[
+    {
+      "name": "Ainsworth",
+      "imageURL": "clown.jpg",
+      "rating": "4.83",
+      "gender": "Male",
+      "floor": "Floor 2",
+      "favourited": "false"
+    },
+    {
+      "name": "Quadrangle",
+      "imageURL": "clown.jpg",
+      "rating": "3.20",
+      "gender": "Female",
+      "floor": "Ground Floor",
+      "favourited": "true"
+    },
+    {
+      "name": "Main Library",
+      "imageURL": "clown.jpg",
+      "rating": "1.34",
+      "gender": "female",
+      "floor": "Floor 4",
+      "favourited": "false"
+    },
+    {
+      "name": "Ainsworth",
+      "imageURL": "clown.jpg",
+      "rating": "4.94",
+      "gender": "Male",
+      "floor": "Floor 3",
+      "favourited": "false"
+    },
+    {
+      "name": "Law Library",
+      "imageURL": "clown.jpg",
+      "rating": "4.12",
+      "gender": "Female",
+      "floor": "Floor 1",
+      "favourited": "true"
+    }
+]
