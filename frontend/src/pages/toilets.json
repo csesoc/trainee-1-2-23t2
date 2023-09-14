@@ -1,5 +1,6 @@
 [
     {
+      "toiletId": "0",
       "name": "Ainsworth",
       "imageURL": "clown.jpg",
       "rating": "4.83",
@@ -8,6 +9,7 @@
       "favourited": "false"
     },
     {
+      "toiletId": "1",
       "name": "Quadrangle",
       "imageURL": "clown.jpg",
       "rating": "3.20",
@@ -16,14 +18,16 @@
       "favourited": "true"
     },
     {
+      "toiletId": "2",
       "name": "Main Library",
       "imageURL": "clown.jpg",
       "rating": "1.34",
-      "gender": "female",
+      "gender": "Female",
       "floor": "Floor 4",
       "favourited": "false"
     },
     {
+      "toiletId": "3",
       "name": "Ainsworth",
       "imageURL": "clown.jpg",
       "rating": "4.94",
@@ -32,6 +36,7 @@
       "favourited": "false"
     },
     {
+      "toiletId": "4",
       "name": "Law Library",
       "imageURL": "clown.jpg",
       "rating": "4.12",
