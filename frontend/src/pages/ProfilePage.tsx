@@ -125,6 +125,7 @@ const ProfilePictureContainer = styled('div')`
   display: flex;
   flex-direction: column;
   height: 35vh;
+  margin-left: 30px;
 `;
 
 const UpdatePhotoButton = styled('button')`
@@ -145,7 +146,9 @@ const ReviewButton = styled('button')`
   font-weight: bold;
 `;
 
-const FavoritesSection = styled('div')``;
+const FavoritesSection = styled('div')`
+  margin-left: 30px;
+`;
 
 const FavoritesCard = styled('div')``;
 
