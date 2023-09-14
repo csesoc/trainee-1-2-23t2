@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import pfp from '../images/poop-emoji.jpg';
 import banner from '../images/banner.jpg';
 import favorite from '../images/favorite.webp';
@@ -16,6 +16,27 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 type ProfileBannerContainerProps = {
   isBlurred: boolean;
 };
+
+const GlobalStyle = createGlobalStyle`
+  html, body {
+    height: auto;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  div, p, a {
+    margin: 0;
+    padding: 0;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+`;
 
 const ProfilePicture = styled('img')`
   background-color: black;
@@ -45,13 +66,13 @@ const EditProfilePictureContainer = styled('div')`
 `;
 
 const ProfileBackground = styled('div')`
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 `;
 
 const Banner = styled('img')`
   background-color: gray;
-  height: 20vh;
+  height: 180px;
   width: 100%;
 `;
 
@@ -138,8 +159,8 @@ const FavoritesHeader = styled('h1')`
 
 const FavoritesImg = styled('img')`
   background-color: gray;
-  height: 40vh;
-  width: 40vh;
+  height: 60vh;
+  width: 60vh;
 `;
 
 const EditPopUp = styled('div')`
@@ -221,9 +242,11 @@ const H1Style = styled(Link)`
   display: inline-block;
   font-size: 2em;
   font-weight: 500;
+  text-decoration: none;
+  color: white;
 `;
 
-const ProfileBox = styled.button`
+const ProfileBox = styled('button')`
   display: flex;
   border-radius: 10px;
   background-color: #9c8379;
@@ -231,7 +254,7 @@ const ProfileBox = styled.button`
   cursor: pointer;
 `;
 
-const DropDownProfile = styled.div`
+const DropDownProfile = styled('div')`
   position: absolute;
   top: 4.5rem;
   right: 1.5rem;
@@ -347,6 +370,7 @@ const ProfilePage = () => {
 
   return (
     <ProfileBackground>
+      <GlobalStyle></GlobalStyle>
       <NavBar>
         <H1Style to="/explore">Good Shit</H1Style>
         <div style={{ fontSize: '18px', fontWeight: 200 }}>Finding your Perfect Shit</div>
