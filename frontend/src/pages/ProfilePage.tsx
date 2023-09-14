@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import pfp from '../images/poop-emoji.jpg';
-import banner from '../images/banner.jpg';
+import banner from '../images/banner2.png';
 import favorite from '../images/favorite.webp';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -71,7 +71,7 @@ const ProfileBackground = styled('div')`
 
 const Banner = styled('img')`
   background-color: gray;
-  height: 180px;
+  height: 300px;
   width: 100%;
 `;
 
