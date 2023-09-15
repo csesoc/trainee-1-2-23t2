@@ -76,7 +76,7 @@ const LoginPage = () => {
           <img src={logo} />
           <Input type="text" name="Email" placeholder="Email"></Input>
           <Input type="text" name="Password" placeholder="Password"></Input>
-          < a href="/explore">
+          <a href="/explore">
             <FindBtn>Login</FindBtn>
           </a>
           <Spacing></Spacing>

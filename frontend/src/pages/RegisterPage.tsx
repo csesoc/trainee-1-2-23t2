@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import logo from '../../public/logo.png';
-import { useState, useEffect, useRef, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 
 const Center = styled.div`
@@ -73,7 +73,7 @@ const RegisterPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:6969/auth/register', userForm);
-      console.log('Success');
+      console.log('Success', response.data);
     } catch (err) {
       console.error('Error', err);
     }
