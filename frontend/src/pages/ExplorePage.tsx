@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { useState, useEffect, useRef } from 'react';
 import empty from '/src/assets/empty.jpg';
 import goodshitimg from '/src/assets/goodshitexplore.png';
@@ -11,7 +11,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import SortIcon from '@mui/icons-material/Sort';
-import TextField from "@mui/material/TextField";
+import { Link } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
 import toiletCollection from './toilets.json';
 
 const BarContainer = styled.div`
@@ -35,15 +36,18 @@ const MenuBar = styled.nav`
   z-index: 1000;
 `;
 
-const H1Style = styled.img`
+const H1Container = styled(Link)`
   flex-grow: 1;
-  display: inline-block;
-  font-size: 2em;
-  z-index: 10000;
-  max-width:20%;
-  height: auto;
+  text-decoration: none;
+  max-width: 20%;
 `;
 
+const H1Style = styled.img`
+  display: block;
+  z-index: 10000;
+  max-width: 100%;
+  height: auto;
+`;
 const SearchBar = styled.div`
   display: flex;
   height: 55px;
@@ -53,13 +57,13 @@ const SearchBar = styled.div`
   row-gap: 20px;
   width: 50%;
   border-radius: 5px;
-`
+`;
 
 const Saying = styled.div`
   font-size: 20px;
   font-weight: 200;
   padding-left: 50 px;
-`
+`;
 
 const ProfileBox = styled.button`
   display: flex;
@@ -89,7 +93,7 @@ export const ToiletsList = styled.section`
   row-gap: 20px;
   column-gap: 2%;
   padding: 1vw;
-`
+`;
 
 export const ToiletCard = styled.div`
   padding: 2%;
@@ -110,7 +114,7 @@ export const ToiletCardImage = styled.img`
   border-radius: 5%;
   z-index: -1;
   align-self: center;
-`
+`;
 
 export const ToiletCardNameRating = styled.div`
   display: flex;
@@ -127,7 +131,7 @@ export const ToiletCardName = styled.div`
   margin-top: auto;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
   font-size: 20px;
-`
+`;
 
 export const ToiletCardRating = styled.div`
   display: inline-block;
@@ -144,7 +148,7 @@ const DropDownProfile = styled.div`
   border-radius: 8px;
   background-color: white;
   border: 1px solid #e0e0e0;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 
   &::before {
@@ -160,8 +164,11 @@ const DropDownProfile = styled.div`
     border-top: 1px solid gray;
   }
 
-  & > div {
+  & > div,
+  a {
     padding: 12px 15px;
+    display: block;
+    text-decoration: none;
     font-size: 0.9rem;
     color: #333;
     cursor: pointer;
@@ -176,7 +183,7 @@ const DropDownProfile = styled.div`
       border-bottom: 1px solid #f0f0f0;
     }
   }
-`
+`;
 
 const OverlayFilter = styled.div`
   position: fixed;
@@ -224,18 +231,17 @@ const ExplorePage = () => {
   const [languageOpen, setLanguageOpen] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [favourite, setFavourite] = useState("");
-  const [gender, setGender] = useState<string>("");
-  const [searchInput, setSearchInput] = useState("");
+  const [locations, setLocations] = useState<{ [key: string]: boolean }>({});
+  const [favourite, setFavourite] = useState('');
+  const [gender, setGender] = useState<string>('');
+  const [searchInput, setSearchInput] = useState('');
 
-  
-
-  let toiletDisplay = [...toiletCollection];
+  const toiletDisplay = [...toiletCollection];
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let lowerCase = event.target.value.toLowerCase();
+    const lowerCase = event.target.value.toLowerCase();
     setSearchInput(lowerCase);
-  }
+  };
 
   const handleFavouriteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value);
@@ -247,7 +253,7 @@ const ExplorePage = () => {
   };
 
   const clearAllFilters = () => {
-    setGender("");
+    setGender('');
     setFavourite('');
   };
 
@@ -263,52 +269,34 @@ const ExplorePage = () => {
         <PopupFilter onClick={(e) => e.stopPropagation()}>
           <CloseButton onClick={onClose}>×</CloseButton>
           <h3>Favourite</h3>
-          {["Favourites"].map((favourite1) => (
+          {['Favourites'].map((favourite1) => (
             <label key={favourite1}>
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 name="favourited"
                 value="Favourite"
                 checked={favourite === 'Favourite'}
-                onChange={handleFavouriteChange} 
+                onChange={handleFavouriteChange}
               />
               {favourite1}
             </label>
           ))}
           <h3>Gender</h3>
           <label>
-            <input 
-              type="radio" 
-              name="gender" 
-              value="male" 
-              checked={gender === "male"} 
-              onChange={handleGenderChange} 
-            />
+            <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleGenderChange} />
             Male
           </label>
           <label>
-            <input 
-              type="radio" 
-              name="gender" 
-              value="female" 
-              checked={gender === "female"} 
-              onChange={handleGenderChange} 
-            />
+            <input type="radio" name="gender" value="female" checked={gender === 'female'} onChange={handleGenderChange} />
             Female
           </label>
           <label>
-            <input 
-              type="radio" 
-              name="gender" 
-              value="other" 
-              checked={gender === "other"} 
-              onChange={handleGenderChange} 
-            />
+            <input type="radio" name="gender" value="other" checked={gender === 'other'} onChange={handleGenderChange} />
             Other
           </label>
           <ButtonContainer>
             <button onClick={clearAllFilters}>Clear All Filters</button>
-        </ButtonContainer>
+          </ButtonContainer>
         </PopupFilter>
       </OverlayFilter>
     );
@@ -352,14 +340,14 @@ const ExplorePage = () => {
 
   const languageFalse = () => {
     setLanguageOpen(false);
-  }
+  };
 
   const [toilets, setToilets] = useState(toiletCollection);
   const remainder = 4 - (toilets.length % 4);
 
-  const arr = []
+  const arr = [];
   for (let i = 0; i < remainder; i++) {
-    const emptyToilet = {"name": "", "imageURL": empty};
+    const emptyToilet = { name: '', imageURL: empty };
     arr.push(emptyToilet);
   }
 
@@ -367,16 +355,18 @@ const ExplorePage = () => {
     <>
       <BarContainer>
         <MenuBar>
-          <H1Style src={goodshitimg}></H1Style>
+          <H1Container to="/explore">
+            <H1Style src={goodshitimg}></H1Style>
+          </H1Container>
 
           <SearchBar>
             <TextField
-            id="outlined-basic"
-            variant="outlined"
-            fullWidth
-            onChange={handleSearchChange}
-            label="Search"
-            style={{ backgroundColor: 'white', borderRadius: '5px' }}
+              id="outlined-basic"
+              variant="outlined"
+              fullWidth
+              onChange={handleSearchChange}
+              label="Search"
+              style={{ backgroundColor: 'white', borderRadius: '5px' }}
             />
           </SearchBar>
 
@@ -387,82 +377,80 @@ const ExplorePage = () => {
           </IconButton>
 
           <Dialog open={languageOpen} onClose={languageFalse}>
-          <DialogTitle>Select a language</DialogTitle>
-          <DialogContent>
-            English (your only option lmao)
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={languageFalse} color="primary">
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
+            <DialogTitle>Select a language</DialogTitle>
+            <DialogContent>English (your only option lmao)</DialogContent>
+            <DialogActions>
+              <Button onClick={languageFalse} color="primary">
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
 
           <ProfileBox onClick={() => setOpenProfile(!openProfile)}>
             <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
             {openProfile && (
               <DropDownProfile ref={dropdownRef}>
-                <div onClick={() => handleItemClick('Profile')}>Profile</div>
+                <Link to="/profile">Profile</Link>
                 <div onClick={() => handleItemClick('Settings')}>Settings</div>
-                <div onClick={() => handleItemClick('Logout')}>Logout</div>
-            </DropDownProfile>
+                <Link to="/">Logout</Link>
+              </DropDownProfile>
             )}
           </ProfileBox>
         </MenuBar>
 
         <FilterBar>
-          <div className="sort" style={{display: 'inline-block'}}>
-
-          <SortIcon style={{ cursor: 'pointer' }} onClick={() => setIsFilterOpen(true)}>Open Filters</SortIcon>
+          <div className="sort" style={{ display: 'inline-block' }}>
+            <SortIcon style={{ cursor: 'pointer' }} onClick={() => setIsFilterOpen(true)}>
+              Open Filters
+            </SortIcon>
             {isFilterOpen && <FilterPopup onClose={() => setIsFilterOpen(false)} />}
           </div>
         </FilterBar>
       </BarContainer>
 
       <ToiletsList>
-      {
-        toilets.filter(toilet => {
-          if (searchInput === '') {
-            return toilet;
-          } else if (toilet.name.toLowerCase().startsWith(searchInput.toLowerCase())) {
-            return toilet;
-          }
-        }).filter(toilet => {
-          if (gender === '') {
-            return toilet;
-          } else if (toilet.gender.toLowerCase() === gender) {
-            return toilet;
-          }
-        }).filter(toilet => {
-          if (favourite === '') {
-            return toilet;
-          } else if (favourite === 'Favourite' && toilet.favourited === 'true') {
-            return toilet;
-          }
-        }).map((toilet)=>( 
-          <ToiletCard>
-            <ToiletCardImage src={"/src/assets/" + toilet['imageURL']}></ToiletCardImage>
-            <ToiletCardNameRating>
-              <ToiletCardName>{toilet["name"]}</ToiletCardName>
-              <ToiletCardRating>💩 {toilet["rating"]}</ToiletCardRating>
-            </ToiletCardNameRating>
-            <ToiletCardInfo>{toilet["gender"]}</ToiletCardInfo>
-            <ToiletCardInfo>{toilet["floor"]}</ToiletCardInfo>
-          </ToiletCard>
-        ))
-      }
-      {
-        arr.map((toilet)=>(
+        {toilets
+          .filter((toilet) => {
+            if (searchInput === '') {
+              return toilet;
+            } else if (toilet.name.toLowerCase().startsWith(searchInput.toLowerCase())) {
+              return toilet;
+            }
+          })
+          .filter((toilet) => {
+            if (gender === '') {
+              return toilet;
+            } else if (toilet.gender.toLowerCase() === gender) {
+              return toilet;
+            }
+          })
+          .filter((toilet) => {
+            if (favourite === '') {
+              return toilet;
+            } else if (favourite === 'Favourite' && toilet.favourited === 'true') {
+              return toilet;
+            }
+          })
+          .map((toilet) => (
+            <ToiletCard>
+              <ToiletCardImage src={'/src/assets/' + toilet['imageURL']}></ToiletCardImage>
+              <ToiletCardNameRating>
+                <ToiletCardName>{toilet['name']}</ToiletCardName>
+                <ToiletCardRating>💩 {toilet['rating']}</ToiletCardRating>
+              </ToiletCardNameRating>
+              <ToiletCardInfo>{toilet['gender']}</ToiletCardInfo>
+              <ToiletCardInfo>{toilet['floor']}</ToiletCardInfo>
+            </ToiletCard>
+          ))}
+        {arr.map((toilet) => (
           <ToiletCard>
             <ToiletCardImage src={empty}></ToiletCardImage>
-            {toilet["name"]}
+            {toilet['name']}
           </ToiletCard>
-        ))
-      }
+        ))}
       </ToiletsList>
     </>
   );
-}
+};
 
 export default ExplorePage;
-
