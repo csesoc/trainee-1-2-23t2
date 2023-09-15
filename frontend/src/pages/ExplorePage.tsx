@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState, useEffect, useRef } from 'react';
 import empty from '/src/assets/empty.jpg';
+import goodshitimg from '/src/assets/goodshitexplore.png';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LanguageIcon from '@mui/icons-material/Language';
 import IconButton from '@mui/material/IconButton';
@@ -11,6 +12,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import SortIcon from '@mui/icons-material/Sort';
 import { Link } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import toiletCollection from './toilets.json';
 
 const BarContainer = styled.div`
   position: fixed;
@@ -33,13 +36,38 @@ const MenuBar = styled.nav`
   z-index: 1000;
 `;
 
-const H1Style = styled(Link)`
+// const H1Style = styled(Link)`
+//   flex-grow: 1;
+//   display: inline-block;
+//   font-size: 2em;
+//   font-weight: 500;
+//   text-decoration: none;
+//   color: white;
+// `
+const H1Style = styled.img`
   flex-grow: 1;
   display: inline-block;
   font-size: 2em;
-  font-weight: 500;
-  text-decoration: none;
-  color: white;
+  z-index: 10000;
+  max-width: 20%;
+  height: auto;
+`;
+
+const SearchBar = styled.div`
+  display: flex;
+  height: 55px;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 50%;
+  border-radius: 5px;
+`;
+
+const Saying = styled.div`
+  font-size: 20px;
+  font-weight: 200;
+  padding-left: 50 px;
 `;
 
 const ProfileBox = styled.button`
@@ -61,10 +89,10 @@ const FilterBar = styled.nav`
   background-color: white;
 `;
 
-const ToiletsList = styled.section`
+export const ToiletsList = styled.section`
   margin-left: 3%;
   margin-right: 3%;
-  margin-top: 170px;
+  margin-top: 23vh;
   display: flex;
   flex-wrap: wrap;
   row-gap: 20px;
@@ -72,7 +100,7 @@ const ToiletsList = styled.section`
   padding: 1vw;
 `;
 
-const ToiletCard = styled.div`
+export const ToiletCard = styled.div`
   padding: 2%;
   flex-grow: 1;
   flex-basis: 16%;
@@ -82,7 +110,7 @@ const ToiletCard = styled.div`
   flex-direction: column;
 `;
 
-const ToiletCardImage = styled.img`
+export const ToiletCardImage = styled.img`
   object-position: center;
   width: 300px;
   height: 300px;
@@ -93,24 +121,24 @@ const ToiletCardImage = styled.img`
   align-self: center;
 `;
 
-const ToiletCardNameRating = styled.div`
+export const ToiletCardNameRating = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const ToiletCardInfo = styled.div`
+export const ToiletCardInfo = styled.div`
   display: block;
   color: gray;
 `;
 
-const ToiletCardName = styled.div`
+export const ToiletCardName = styled.div`
   display: inline-block;
   margin-top: auto;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
   font-size: 20px;
 `;
 
-const ToiletCardRating = styled.div`
+export const ToiletCardRating = styled.div`
   display: inline-block;
   margin-top: auto;
   font-size: 18px;
@@ -208,21 +236,30 @@ const ExplorePage = () => {
   const [languageOpen, setLanguageOpen] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [gender, setGender] = useState<string>('');
   const [locations, setLocations] = useState<{ [key: string]: boolean }>({});
+  const [favourite, setFavourite] = useState('');
+  const [gender, setGender] = useState<string>('');
+  const [searchInput, setSearchInput] = useState('');
+
+  let toiletDisplay = [...toiletCollection];
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let lowerCase = event.target.value.toLowerCase();
+    setSearchInput(lowerCase);
+  };
+
+  const handleFavouriteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+    setFavourite(event.target.value);
+  };
 
   const handleGenderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGender(event.target.value);
   };
 
-  const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = event.target;
-    setLocations((prev) => ({ ...prev, [name]: checked }));
-  };
-
   const clearAllFilters = () => {
     setGender('');
-    setLocations({});
+    setFavourite('');
   };
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -236,6 +273,19 @@ const ExplorePage = () => {
       <OverlayFilter onClick={onClose}>
         <PopupFilter onClick={(e) => e.stopPropagation()}>
           <CloseButton onClick={onClose}>×</CloseButton>
+          <h3>Favourite</h3>
+          {['Favourites'].map((favourite1) => (
+            <label key={favourite1}>
+              <input
+                type="checkbox"
+                name="favourited"
+                value="Favourite"
+                checked={favourite === 'Favourite'}
+                onChange={handleFavouriteChange}
+              />
+              {favourite1}
+            </label>
+          ))}
           <h3>Gender</h3>
           <label>
             <input type="radio" name="gender" value="male" checked={gender === 'male'} onChange={handleGenderChange} />
@@ -249,14 +299,6 @@ const ExplorePage = () => {
             <input type="radio" name="gender" value="other" checked={gender === 'other'} onChange={handleGenderChange} />
             Other
           </label>
-
-          <h3>Locations</h3>
-          {['Main Library', 'Red Centre', 'Ainsworth', 'Matthews', 'Law Library'].map((location) => (
-            <label key={location}>
-              <input type="checkbox" name={location} checked={locations[location] || false} onChange={handleLocationChange} />
-              {location}
-            </label>
-          ))}
           <ButtonContainer>
             <button onClick={clearAllFilters}>Clear All Filters</button>
           </ButtonContainer>
@@ -305,47 +347,8 @@ const ExplorePage = () => {
     setLanguageOpen(false);
   };
 
-  const [toilets, setToilets] = useState([
-    {
-      name: 'Toilet 1',
-      imageURL: 'clown.jpg',
-      rating: '4.83',
-      building: 'Ainsworth',
-      floor: 'Floor 2',
-    },
-    {
-      name: 'Toilet 1',
-      imageURL: 'clown.jpg',
-      rating: '3.20',
-      building: 'Quadrangle',
-      floor: 'Ground Floor',
-    },
-    {
-      name: 'Toilet 1',
-      imageURL: 'clown.jpg',
-      rating: '1.34',
-      building: 'Main Library',
-      floor: 'Floor 4',
-    },
-    {
-      name: 'Toilet 1',
-      imageURL: 'clown.jpg',
-      rating: '4.94',
-      building: 'Ainsworth',
-      floor: 'Floor 3',
-    },
-    {
-      name: 'Toilet 1',
-      imageURL: 'clown.jpg',
-      rating: '4.12',
-      building: 'Law Library',
-      floor: 'Floor 1',
-    },
-  ]);
+  const [toilets, setToilets] = useState(toiletCollection);
   const remainder = 4 - (toilets.length % 4);
-
-  console.log(remainder);
-  console.log(toilets.length);
 
   const arr = [];
   for (let i = 0; i < remainder; i++) {
@@ -357,11 +360,22 @@ const ExplorePage = () => {
     <>
       <BarContainer>
         <MenuBar>
-          <H1Style to="/explore">Good Shit</H1Style>
+          <H1Style src={goodshitimg}></H1Style>
 
-          <div style={{ fontSize: '18px', fontWeight: 200 }}>Finding your Perfect Shit</div>
+          <SearchBar>
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              fullWidth
+              onChange={handleSearchChange}
+              label="Search"
+              style={{ backgroundColor: 'white', borderRadius: '5px' }}
+            />
+          </SearchBar>
 
-          <IconButton style={{ padding: '20px' }} onClick={languageTrue}>
+          <Saying>Finding your Perfect Shit</Saying>
+
+          <IconButton onClick={languageTrue}>
             <LanguageIcon fontSize="large" style={{ cursor: 'pointer' }} />
           </IconButton>
 
@@ -398,17 +412,39 @@ const ExplorePage = () => {
       </BarContainer>
 
       <ToiletsList>
-        {toilets.map((toilet) => (
-          <ToiletCard>
-            <ToiletCardImage src={'/src/assets/' + toilet['imageURL']}></ToiletCardImage>
-            <ToiletCardNameRating>
-              <ToiletCardName>{toilet['name']}</ToiletCardName>
-              <ToiletCardRating>💩 {toilet['rating']}</ToiletCardRating>
-            </ToiletCardNameRating>
-            <ToiletCardInfo>{toilet['building']}</ToiletCardInfo>
-            <ToiletCardInfo>{toilet['floor']}</ToiletCardInfo>
-          </ToiletCard>
-        ))}
+        {toilets
+          .filter((toilet) => {
+            if (searchInput === '') {
+              return toilet;
+            } else if (toilet.name.toLowerCase().startsWith(searchInput.toLowerCase())) {
+              return toilet;
+            }
+          })
+          .filter((toilet) => {
+            if (gender === '') {
+              return toilet;
+            } else if (toilet.gender.toLowerCase() === gender) {
+              return toilet;
+            }
+          })
+          .filter((toilet) => {
+            if (favourite === '') {
+              return toilet;
+            } else if (favourite === 'Favourite' && toilet.favourited === 'true') {
+              return toilet;
+            }
+          })
+          .map((toilet) => (
+            <ToiletCard>
+              <ToiletCardImage src={'/src/assets/' + toilet['imageURL']}></ToiletCardImage>
+              <ToiletCardNameRating>
+                <ToiletCardName>{toilet['name']}</ToiletCardName>
+                <ToiletCardRating>💩 {toilet['rating']}</ToiletCardRating>
+              </ToiletCardNameRating>
+              <ToiletCardInfo>{toilet['gender']}</ToiletCardInfo>
+              <ToiletCardInfo>{toilet['floor']}</ToiletCardInfo>
+            </ToiletCard>
+          ))}
         {arr.map((toilet) => (
           <ToiletCard>
             <ToiletCardImage src={empty}></ToiletCardImage>
