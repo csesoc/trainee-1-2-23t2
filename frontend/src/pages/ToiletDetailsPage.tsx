@@ -4,7 +4,6 @@ import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import toiletCollection from './toilets.json';
 import goodshit from '/src/assets/good_shit.png';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useAuth } from './AuthContext';
 import * as React from 'react';
 import Rating from '@mui/material/Rating';
 import InputLabel from '@mui/material/InputLabel';
@@ -341,7 +340,6 @@ const ToiletDetails = () => {
     const [reviewFilter, setReviewFilter] = React.useState<Arrangement>('Most Recent');
     const [textOnly, setTextOnly] = React.useState(false);
     const [addReviewOpen, setAddReviewOpen] = useState(false);
-    const { loggedIn, setLoggedIn } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -354,7 +352,7 @@ const ToiletDetails = () => {
 
     const logoutClick = () => {
         navigate("/");
-        setLoggedIn(false);
+        localStorage.clear();
     }
     
     useEffect(() => {
@@ -468,7 +466,7 @@ const ToiletDetails = () => {
                 <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
                 {openProfile && (
                 <DropDownProfile ref={dropdownRef}>
-                    {!loggedIn ? (
+                    {localStorage.getItem('0') === null ? (
                         <Link to="/login" state={{ from: location }}>Login</Link>
                     ) : (
                     <>

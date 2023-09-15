@@ -1,13 +1,11 @@
 import styled from 'styled-components'
 import React, { useState } from 'react';
-import { useAuth } from './AuthContext';
 import { useNavigate, useLocation } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { setLoggedIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,8 +13,7 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoggedIn(true);
-    localStorage.setItem('loggedInUser', username);
+    localStorage.setItem('0', 'loggedinuser');
     navigate(from);
   };
   return (

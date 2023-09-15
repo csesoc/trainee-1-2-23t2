@@ -15,7 +15,6 @@ import { Link, useLocation } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import toiletCollection from './toilets.json';
 import { useNavigate } from "react-router-dom";
-import { useAuth } from './AuthContext';
 import Happy from '/src/assets/happy.png';
 
 const BarContainer = styled.div`
@@ -248,7 +247,6 @@ const ExplorePage = () => {
   const [favourite, setFavourite] = useState('');
   const [gender, setGender] = useState<string>('');
   const [searchInput, setSearchInput] = useState('');
-  const { loggedIn, setLoggedIn } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -453,13 +451,13 @@ const ExplorePage = () => {
             <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
             {openProfile && (
               <DropDownProfile ref={dropdownRef}>
-                {!loggedIn ? (
+                {localStorage.getItem('0') === null ? (
                   <Link to="/login" state={{ from: location }}>Login</Link>
                 ) : (
                   <>
                     <Link to="/profile">Profile</Link>
                     <div onClick={() => handleItemClick('Settings')}>Settings</div>
-                    <Link to="/" onClick={() => setLoggedIn(false)}>Logout</Link>
+                    <Link to="/" onClick={() => localStorage.clear()}>Logout</Link>
                   </>
                 )}
               </DropDownProfile>
