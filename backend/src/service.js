@@ -24,6 +24,7 @@ const usersDb = mongoClient.db('db').collection('users');
 
 // TODO: Error checking
 const authRegister = async (email, password, name) => {
+  console.log(password);
   const passwordHash = bcrypt.hashSync(password, 10);
   const user = { email, password: passwordHash, name };
   await usersDb.insertOne(user);
