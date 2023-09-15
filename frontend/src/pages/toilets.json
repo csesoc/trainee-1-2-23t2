@@ -1,47 +1,217 @@
 [
     {
       "toiletId": "0",
-      "name": "Ainsworth",
+      "name": "Ainsworth J17",
       "imageURL": "clown.jpg",
-      "rating": "4.83",
       "gender": "Male",
       "floor": "Floor 2",
-      "favourited": "false"
+      "favourited": "false",
+      "toiletNumber": "5",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviewNumber": "32",
+      "reviews":[
+        {
+          "reviewName": "Decent Toilet",
+          "user": "Anonymous",
+          "TermTaken": "23T2",
+          "Date": "3/7/2023",
+          "reviewWords": "It's good, nothing special",
+          "Enjoyment": "4",
+          "Usefulness": "5",
+          "Manageability": "5"
+        },
+        {
+          "reviewName": "smells like shit",
+          "user": "Anonymous",
+          "TermTaken": "22T1",
+          "Date": "14/3/2022",
+          "reviewWords": "Cleaners forgot about this bathroom or something, smells so bad",
+          "Enjoyment": "1",
+          "Usefulness": "3",
+          "Manageability": "1"
+        },
+        {
+          "reviewName": "idk",
+          "user": "Anonymous",
+          "TermTaken": "23T1",
+          "Date": "3/4/2023",
+          "reviewWords": "",
+          "Enjoyment": "3",
+          "Usefulness": "3",
+          "Manageability": "3"
+        }
+      ]
     },
     {
       "toiletId": "1",
-      "name": "Quadrangle",
+      "name": "Quadrangle E15",
       "imageURL": "clown.jpg",
-      "rating": "3.20",
       "gender": "Female",
       "floor": "Ground Floor",
-      "favourited": "true"
+      "favourited": "true",
+      "toiletNumber": "5",
+      "availability": ["Term 1", "Term 2"],
+      "reviewNumber": "4",
+      "reviews":[
+        {
+          "reviewName": "Decent Toilet",
+          "user": "Anonymous",
+          "TermTaken": "23T2",
+          "Date": "3/7/2023",
+          "reviewWords": "It's good, nothing special",
+          "Enjoyment": "4",
+          "Usefulness": "5",
+          "Manageability": "5"
+        },
+        {
+          "reviewName": "smells like shit",
+          "user": "Anonymous",
+          "TermTaken": "22T1",
+          "Date": "14/3/2022",
+          "reviewWords": "Cleaners forgot about this bathroom or something, smells so bad",
+          "Enjoyment": "1",
+          "Usefulness": "3",
+          "Manageability": "1"
+        },
+        {
+          "reviewName": "idk",
+          "user": "Anonymous",
+          "TermTaken": "23T1",
+          "Date": "3/4/2023",
+          "reviewWords": "",
+          "Enjoyment": "3",
+          "Usefulness": "3",
+          "Manageability": "3"
+        }
+      ]
     },
     {
       "toiletId": "2",
-      "name": "Main Library",
+      "name": "UNSW Main Library",
       "imageURL": "clown.jpg",
-      "rating": "1.34",
       "gender": "Female",
       "floor": "Floor 4",
-      "favourited": "false"
+      "favourited": "false",
+      "toiletNumber": "5",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviewNumber": "108",
+      "reviews":[
+        {
+          "reviewName": "Decent Toilet",
+          "user": "Anonymous",
+          "TermTaken": "23T2",
+          "Date": "3/7/2023",
+          "reviewWords": "It's good, nothing special",
+          "Enjoyment": "4",
+          "Usefulness": "5",
+          "Manageability": "5"
+        },
+        {
+          "reviewName": "smells like shit",
+          "user": "Anonymous",
+          "TermTaken": "22T1",
+          "Date": "14/3/2022",
+          "reviewWords": "Cleaners forgot about this bathroom or something, smells so bad",
+          "Enjoyment": "1",
+          "Usefulness": "3",
+          "Manageability": "1"
+        },
+        {
+          "reviewName": "idk",
+          "user": "Anonymous",
+          "TermTaken": "23T1",
+          "Date": "3/4/2023",
+          "reviewWords": "",
+          "Enjoyment": "3",
+          "Usefulness": "3",
+          "Manageability": "3"
+        }
+      ]
     },
     {
       "toiletId": "3",
-      "name": "Ainsworth",
+      "name": "Ainsworth J17",
       "imageURL": "clown.jpg",
-      "rating": "4.94",
       "gender": "Male",
       "floor": "Floor 3",
-      "favourited": "false"
+      "favourited": "false",
+      "toiletNumber": "5",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviewNumber": "17",
+      "reviews":[
+        {
+          "reviewName": "Decent Toilet",
+          "user": "Anonymous",
+          "TermTaken": "23T2",
+          "Date": "3/7/2023",
+          "reviewWords": "It's good, nothing special",
+          "Enjoyment": "4",
+          "Usefulness": "5",
+          "Manageability": "5"
+        },
+        {
+          "reviewName": "smells like shit",
+          "user": "Anonymous",
+          "TermTaken": "22T1",
+          "Date": "14/3/2022",
+          "reviewWords": "Cleaners forgot about this bathroom or something, smells so bad",
+          "Enjoyment": "1",
+          "Usefulness": "3",
+          "Manageability": "1"
+        },
+        {
+          "reviewName": "idk",
+          "user": "Anonymous",
+          "TermTaken": "23T1",
+          "Date": "3/4/2023",
+          "reviewWords": "",
+          "Enjoyment": "3",
+          "Usefulness": "3",
+          "Manageability": "3"
+        }
+      ]
     },
     {
       "toiletId": "4",
-      "name": "Law Library",
+      "name": "UNSW Law Library",
       "imageURL": "clown.jpg",
-      "rating": "4.12",
       "gender": "Female",
       "floor": "Floor 1",
-      "favourited": "true"
+      "favourited": "true",
+      "toiletNumber": "5",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviewNumber": "69",
+      "reviews":[
+        {
+          "reviewName": "Decent Toilet",
+          "user": "Anonymous",
+          "TermTaken": "23T2",
+          "Date": "3/7/2023",
+          "reviewWords": "It's good, nothing special",
+          "Enjoyment": "4",
+          "Usefulness": "5",
+          "Manageability": "5"
+        },
+        {
+          "reviewName": "smells like shit",
+          "user": "Anonymous",
+          "TermTaken": "22T1",
+          "Date": "14/3/2022",
+          "reviewWords": "Cleaners forgot about this bathroom or something, smells so bad",
+          "Enjoyment": "1",
+          "Usefulness": "3",
+          "Manageability": "1"
+        },
+        {
+          "reviewName": "idk",
+          "user": "Anonymous",
+          "TermTaken": "23T1",
+          "Date": "3/4/2023",
+          "reviewWords": "",
+          "Enjoyment": "3",
+          "Usefulness": "3",
+          "Manageability": "3"
+        }
+      ]
     }
 ]
