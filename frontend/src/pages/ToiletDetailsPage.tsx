@@ -13,6 +13,13 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import CreateIcon from '@mui/icons-material/Create';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import TextField from '@mui/material/TextField';
+import StarIcon from '@mui/icons-material/Star';
+import { Box } from '@mui/material';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 type Review = {
     reviewName: string;
@@ -25,12 +32,89 @@ type Review = {
     Manageability: string;
 }
 
-const MenuContainer = styled.div`
+type MenuContainerProps = {
+    isAtTop: boolean;
+};
+  
+const enjoymentLabels: { [index: string]: string } = {
+    1: 'Non-existent',
+    2: 'Poor',
+    3: 'Ok',
+    4: 'Good',
+    5: 'Excellent',
+};
+
+function getEnjoymentLabelText(value: number) {
+    return `${value} Star${value !== 1 ? 's' : ''}, ${enjoymentLabels[value]}`;
+}
+
+const usefulnessLabels: { [index: string]: string } = {
+    1: 'Non-existent',
+    2: 'Poor',
+    3: 'Ok',
+    4: 'Good',
+    5: 'Excellent',
+};
+
+function getUsefulnessLabelText(value: number) {
+    return `${value} Star${value !== 1 ? 's' : ''}, ${usefulnessLabels[value]}`;
+}
+
+const manageabilityLabels: { [index: string]: string } = {
+    1: 'Non-existent',
+    2: 'Poor',
+    3: 'Ok',
+    4: 'Good',
+    5: 'Excellent',
+};
+
+function getManageabilityLabelText(value: number) {
+    return `${value} Star${value !== 1 ? 's' : ''}, ${manageabilityLabels[value]}`;
+}
+
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+}
+
+function a11yProps(index: number) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
+const MenuContainer = styled.div<MenuContainerProps>`
     display: flex;
-    width: 100%;
+    position: fixed;
     top: 0;
     left: 0;
     align-items: center;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: ${(props) => (props.isAtTop ? 'none' : '0px 8px 16px 0px rgba(0, 0, 0, 0.2)')};
+    transition: box-shadow 0.3s;
 `
 
 const Logo = styled.img`
@@ -39,8 +123,12 @@ const Logo = styled.img`
     max-width: 20%;
     height: auto;
     padding-left: 4vw;
-    padding-right: 70vw;
     cursor: pointer;
+`
+
+const FillerBox = styled.div`
+    min-width: 67vw;
+    max-width: 67vw;
 `
 
 const ProfileBox = styled.button`
@@ -53,14 +141,14 @@ const ProfileBox = styled.button`
 
 const DropDownProfile = styled.div`
   position: absolute;
-  top: 4.5rem;
-  right: 1.5rem;
+  top: 4.4rem;
+  right: 4.4rem;
   width: 120px;
   padding: 15px;
   border-radius: 8px;
   background-color: white;
   border: 1px solid #e0e0e0;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
   z-index: 1;
 
   &::before {
@@ -96,6 +184,10 @@ const DropDownProfile = styled.div`
     }
   }
 `;
+
+const MarginBox = styled.div`
+    margin-top: 14vh;
+`
 
 const ToiletContainer = styled.div`
     display: flex;
@@ -243,6 +335,18 @@ const UnderTitle = styled.div`
     color: gray;
 `
 
+const WriteTitle = styled.div`
+    padding-top: 3vh;
+    padding-bottom: 1vh;
+    font-weight: 600;
+`
+
+const WriteReview = styled.div`
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    font-weight: 600;
+`
+
 const CloseButton = styled.button`
   position: absolute;
   top: 10px;
@@ -336,10 +440,23 @@ const RatingMessage = styled.div`
     max-height: 3vh;
 `
 
+const FillerBox2 = styled.div`
+    color: white;
+    padding-top: 1vh;
+`
+
 const ToiletDetails = () => {
     type Arrangement = 'Most Liked' | 'Most Recent'
 
+    const [tabValue, setTabValue] = React.useState(0);
+    const [EnjoymentValue, setEnjoymentValue] = React.useState<number | null>(0);
+    const [UsefulnessValue, setUsefulnessValue] = React.useState<number | null>(0);
+    const [ManageabilityValue, setManageabilityValue] = React.useState<number | null>(0);
+    const [enjoymentHover, setEnjoymentHover] = React.useState(-1);
+    const [usefulnessHover, setUsefulnessHover] = React.useState(-1);
+    const [manageabilityHover, setManageabilityHover] = React.useState(-1);
     const [openProfile, setOpenProfile] = useState(false);
+    const [isAtTop, setIsAtTop] = useState(true);
     const [reviewFilter, setReviewFilter] = React.useState<Arrangement>('Most Recent');
     const [textOnly, setTextOnly] = React.useState(false);
     const [addReviewOpen, setAddReviewOpen] = useState(false);
@@ -347,6 +464,11 @@ const ToiletDetails = () => {
     const location = useLocation();
 
     const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+    const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+        setTabValue(newValue);
+    }
+
     const handleClickOutside = (event: MouseEvent) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
           setOpenProfile(false);
@@ -365,6 +487,24 @@ const ToiletDetails = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const position = window.pageYOffset;
+            if (position <= 0) {
+                setIsAtTop(true);
+            } else {
+                setIsAtTop(false);
+            }
+        };
+    
+        window.addEventListener("scroll", handleScroll);
+    
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+    
     
     type Action = 'Login' | 'Profile' | 'Settings' | 'Logout';
 
@@ -398,6 +538,118 @@ const ToiletDetails = () => {
                     <CloseButton onClick={onClose}>×</CloseButton>
                     <MakeAReviewTitle>Make a Review</MakeAReviewTitle>
                     <UnderTitle>We want to hear your opinions!</UnderTitle>
+                    <WriteTitle>Write your Review Title</WriteTitle>
+                        <TextField
+                            label="Title"
+                            id="review-title"
+                        />
+
+                    <Box sx={{ width: '100%', paddingTop: '2vh' }}>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <Tabs value={tabValue} onChange={handleTabChange} aria-label="basic tabs example">
+                            <Tab label="Enjoyment" {...a11yProps(0)} />
+                            <Tab label="Usefulness" {...a11yProps(1)} />
+                            <Tab label="Manageability" {...a11yProps(2)} />
+                            </Tabs>
+                        </Box>
+                        <CustomTabPanel value={tabValue} index={0}>
+                            Rate your Enjoyment
+                            <Box
+                                sx={{
+                                    width: 200,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    paddingTop: '2vh',
+                                }}
+                            >
+                                <Rating
+                                    name="Enjoyment"
+                                    value={EnjoymentValue}
+                                    precision={1}
+                                    getLabelText={getEnjoymentLabelText}
+                                    onChange={(event, newValue) => {
+                                        setEnjoymentValue(newValue);
+                                    }}
+                                    onChangeActive={(event, newHover) => {
+                                        setEnjoymentHover(newHover);
+                                    }}
+                                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                />
+                                {EnjoymentValue !== null && (
+                                    <Box sx={{ ml: 2 }}>{enjoymentLabels[enjoymentHover !== -1 ? enjoymentHover : EnjoymentValue]}</Box>
+                                )}
+                            </Box>
+                        </CustomTabPanel>
+                        <CustomTabPanel value={tabValue} index={1}>
+                            Rate the Usefulness
+                            <Box
+                                sx={{
+                                    width: 200,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    paddingTop: '2vh',
+                                }}
+                            >
+                                <Rating
+                                    name="Usefulness"
+                                    value={UsefulnessValue}
+                                    precision={1}
+                                    getLabelText={getUsefulnessLabelText}
+                                    onChange={(event, newValue) => {
+                                        setUsefulnessValue(newValue);
+                                    }}
+                                    onChangeActive={(event, newHover) => {
+                                        setUsefulnessHover(newHover);
+                                    }}
+                                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                />
+                                {UsefulnessValue !== null && (
+                                    <Box sx={{ ml: 2 }}>{usefulnessLabels[usefulnessHover !== -1 ? usefulnessHover : UsefulnessValue]}</Box>
+                                )}
+                            </Box>
+                        </CustomTabPanel>
+                        <CustomTabPanel value={tabValue} index={2}>
+                            Rate the Manageability
+                            <Box
+                                sx={{
+                                    width: 200,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    paddingTop: '2vh',
+                                }}
+                            >
+                                <Rating
+                                    name="Manageabilitty"
+                                    value={ManageabilityValue}
+                                    precision={1}
+                                    getLabelText={getManageabilityLabelText}
+                                    onChange={(event, newValue) => {
+                                        setManageabilityValue(newValue);
+                                    }}
+                                    onChangeActive={(event, newHover) => {
+                                        setManageabilityHover(newHover);
+                                    }}
+                                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                />
+                                {ManageabilityValue !== null && (
+                                    <Box sx={{ ml: 2 }}>{manageabilityLabels[manageabilityHover !== -1 ? manageabilityHover : ManageabilityValue]}</Box>
+                                )}
+                            </Box>
+                        </CustomTabPanel>
+                    </Box>
+                    
+                    <WriteReview>Write your Review</WriteReview>
+                    <TextField
+                        label="Review"
+                        id="review-bodys"
+                        multiline
+                        rows={10}
+                    />
+
+                    <FillerBox2>hi</FillerBox2>
+                    
+                    <Button variant="contained" onClick={onClose}>Submit Review</Button>
+                    
                 </PopupFilter>
             </OverlayFilter>
         );
@@ -435,10 +687,7 @@ const ToiletDetails = () => {
             case 'Most Recent':
                 return [...reviews].sort((a, b) => getDateFromString(b.Date).getTime() - getDateFromString(a.Date).getTime());
             case 'Most Liked':
-                return [...reviews].sort((a, b) => 
-                    (parseFloat(b.Enjoyment) + parseFloat(b.Usefulness) + parseFloat(b.Manageability)) -
-                    (parseFloat(a.Enjoyment) + parseFloat(a.Usefulness) + parseFloat(a.Manageability))
-                ); 
+                return [...reviews].sort((a, b) => (parseFloat(b.Enjoyment) + parseFloat(b.Usefulness) + parseFloat(b.Manageability)) - (parseFloat(a.Enjoyment) + parseFloat(a.Usefulness) + parseFloat(a.Manageability))); 
             default:
                 return reviews;
         }
@@ -462,9 +711,9 @@ const ToiletDetails = () => {
 
     return (
     <>
-        <MenuContainer>
+        <MenuContainer isAtTop={isAtTop}>
             <Logo src = {goodshit} onClick={() => navigate("/explore")}></Logo>
-
+            <FillerBox></FillerBox>
             <ProfileBox onClick={() => setOpenProfile(!openProfile)}>
                 <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
                 {openProfile && (
@@ -482,116 +731,117 @@ const ToiletDetails = () => {
                 )}
           </ProfileBox>
         </MenuContainer>
+        <MarginBox>
+            <ToiletContainer>
+                <ToiletDetail>
+                    <ToiletTitle>
+                        {toiletDetail['floor']} {toiletDetail['name']}
+                    </ToiletTitle>
 
-        <ToiletContainer>
-            <ToiletDetail>
-                <ToiletTitle>
-                    {toiletDetail['floor']} {toiletDetail['name']}
-                </ToiletTitle>
+                    <StallNumber>
+                        {toiletDetail['toiletNumber']} toilet stalls
+                    </StallNumber>
 
-                <StallNumber>
-                    {toiletDetail['toiletNumber']} toilet stalls
-                </StallNumber>
+                    <Availability>
+                        Availability
+                    </Availability>
 
-                <Availability>
-                    Availability
-                </Availability>
+                    <AvailabilityContainer>
+                        {toiletDetail.availability.map(time => (
+                            <AvailabilityTime>{time}</AvailabilityTime>
+                        ))}
+                    </AvailabilityContainer>
+                        
+                    <RatingContainer>
+                        <Rating name="Toilet Rating" defaultValue={overallAverageRating} size="large" precision={0.1} readOnly />
+                        <ReviewNumber>{toiletDetail.reviews.length} reviews</ReviewNumber>
+                    </RatingContainer>
 
-                <AvailabilityContainer>
-                    {toiletDetail.availability.map(time => (
-                        <AvailabilityTime>{time}</AvailabilityTime>
-                    ))}
-                </AvailabilityContainer>
-                    
-                <RatingContainer>
-                    <Rating name="Toilet Rating" defaultValue={overallAverageRating} size="large" precision={0.1} readOnly />
-                    <ReviewNumber>{toiletDetail.reviews.length} reviews</ReviewNumber>
-                </RatingContainer>
+                    <ToiletImage src={'/src/assets/' + toiletDetail['imageURL']}></ToiletImage>
 
-                <ToiletImage src={'/src/assets/' + toiletDetail['imageURL']}></ToiletImage>
+                </ToiletDetail>
 
-            </ToiletDetail>
+                <ReviewContainer>
+                    <ReviewMenuBar>
+                        <ReviewTitle>Reviews</ReviewTitle>
 
-            <ReviewContainer>
-                <ReviewMenuBar>
-                    <ReviewTitle>Reviews</ReviewTitle>
+                        <ReviewFilterBar>
+                            <FormControl sx={{ minWidth: 400 }} size="small">
+                            <InputLabel id="demo-select-small-label">Sort by</InputLabel>
+                            <Select
+                                labelId="demo-select-small-label"
+                                id="demo-select-small"
+                                value={reviewFilter}
+                                label="Sort by"
+                                onChange={reviewFilterChange}
+                            >
+                                <MenuItem value={"Most Recent"}>Most Recent</MenuItem>
+                                <MenuItem value={"Most Liked"}>Most Liked</MenuItem>
+                            </Select>
+                            </FormControl>
+                        </ReviewFilterBar>
 
-                    <ReviewFilterBar>
-                        <FormControl sx={{ minWidth: 400 }} size="small">
-                        <InputLabel id="demo-select-small-label">Sort by</InputLabel>
-                        <Select
-                            labelId="demo-select-small-label"
-                            id="demo-select-small"
-                            value={reviewFilter}
-                            label="Sort by"
-                            onChange={reviewFilterChange}
-                        >
-                            <MenuItem value={"Most Recent"}>Most Recent</MenuItem>
-                            <MenuItem value={"Most Liked"}>Most Liked</MenuItem>
-                        </Select>
-                        </FormControl>
-                    </ReviewFilterBar>
+                        <ReviewFilterButton onClick={() => setAddReviewOpen(true)}>
+                            <CreateIcon></CreateIcon>
+                            <ReviewFilterButtonWord>Add a Review</ReviewFilterButtonWord>
+                        </ReviewFilterButton>
+                        {addReviewOpen && <AddReviewPopUp onClose={() => setAddReviewOpen(false)} />}
+                    </ReviewMenuBar>
 
-                    <ReviewFilterButton onClick={() => setAddReviewOpen(true)}>
-                        <CreateIcon></CreateIcon>
-                        <ReviewFilterButtonWord>Add a Review</ReviewFilterButtonWord>
-                    </ReviewFilterButton>
-                    {addReviewOpen && <AddReviewPopUp onClose={() => setAddReviewOpen(false)} />}
-                </ReviewMenuBar>
+                    <TextOnlyReviews>
+                        <FormControlLabel control={<Switch checked={textOnly} onChange={handleTextOnly} inputProps={{ 'aria-label': 'controlled' }}/>} label="Text only reviews"/>
+                    </TextOnlyReviews>
 
-                <TextOnlyReviews>
-                    <FormControlLabel control={<Switch checked={textOnly} onChange={handleTextOnly} inputProps={{ 'aria-label': 'controlled' }}/>} label="Text only reviews"/>
-                </TextOnlyReviews>
+                    <ReviewCardContainer>
+                        {filteredReviews.map(review => (
+                            <ReviewCard>
+                                <ReviewCardDetails>
+                                    <ReviewCardDetailsFirstHalf>
+                                        <ReviewCardTitle>
+                                            {review.reviewName}
+                                        </ReviewCardTitle>
+                                        <ReviewCardRating>
+                                            Overall: <Rating name="Review Rating" defaultValue={(parseFloat(review.Enjoyment) + parseFloat(review.Manageability) + parseFloat(review.Usefulness))/3} precision={0.1} readOnly />
+                                        </ReviewCardRating>
+                                        <ReviewTermTaken>
+                                            Term Taken: {review.TermTaken}
+                                        </ReviewTermTaken>
+                                    </ReviewCardDetailsFirstHalf>
+                                    <ReviewCardDetailsSecondHalf>
+                                        <ReviewCardDate>
+                                            {review.Date}
+                                        </ReviewCardDate>
+                                        <ReviewCardUser>
+                                            {review.user}
+                                        </ReviewCardUser>
+                                    </ReviewCardDetailsSecondHalf>
+                                </ReviewCardDetails> 
 
-                <ReviewCardContainer>
-                    {filteredReviews.map(review => (
-                        <ReviewCard>
-                            <ReviewCardDetails>
-                                <ReviewCardDetailsFirstHalf>
-                                    <ReviewCardTitle>
-                                        {review.reviewName}
-                                    </ReviewCardTitle>
-                                    <ReviewCardRating>
-                                        Overall: <Rating name="Review Rating" defaultValue={(parseFloat(review.Enjoyment) + parseFloat(review.Manageability) + parseFloat(review.Usefulness))/3} precision={0.1} readOnly />
-                                    </ReviewCardRating>
-                                    <ReviewTermTaken>
-                                        Term Taken: {review.TermTaken}
-                                    </ReviewTermTaken>
-                                </ReviewCardDetailsFirstHalf>
-                                <ReviewCardDetailsSecondHalf>
-                                    <ReviewCardDate>
-                                        {review.Date}
-                                    </ReviewCardDate>
-                                    <ReviewCardUser>
-                                        {review.user}
-                                    </ReviewCardUser>
-                                </ReviewCardDetailsSecondHalf>
-                            </ReviewCardDetails> 
+                                <IndividualRatingContainer>
+                                    <IndividualRatingCard>
+                                        Enjoyment
+                                        <Rating name="Enjoyment Rating" defaultValue={parseFloat(review.Enjoyment)} precision={0.1} readOnly />
+                                    </IndividualRatingCard>
+                                    <IndividualRatingCard>
+                                        Usefulness
+                                        <Rating name="Usefulness Rating" defaultValue={parseFloat(review.Usefulness)} precision={0.1} readOnly />
+                                    </IndividualRatingCard>
+                                    <IndividualRatingCard>
+                                        Manageability
+                                        <Rating name="Manageability Rating" defaultValue={parseFloat(review.Manageability)} precision={0.1} readOnly />
+                                    </IndividualRatingCard>
+                                </IndividualRatingContainer>   
 
-                            <IndividualRatingContainer>
-                                <IndividualRatingCard>
-                                    Enjoyment
-                                    <Rating name="Enjoyment Rating" defaultValue={parseFloat(review.Enjoyment)} precision={0.1} readOnly />
-                                </IndividualRatingCard>
-                                <IndividualRatingCard>
-                                    Usefulness
-                                    <Rating name="Usefulness Rating" defaultValue={parseFloat(review.Usefulness)} precision={0.1} readOnly />
-                                </IndividualRatingCard>
-                                <IndividualRatingCard>
-                                    Manageability
-                                    <Rating name="Manageability Rating" defaultValue={parseFloat(review.Manageability)} precision={0.1} readOnly />
-                                </IndividualRatingCard>
-                            </IndividualRatingContainer>   
-
-                            <RatingMessage>
-                                {review.reviewWords}
-                            </RatingMessage>                    
-                        </ReviewCard>
-                    )
-                    )}
-                </ReviewCardContainer>
-            </ReviewContainer>
-        </ToiletContainer>
+                                <RatingMessage>
+                                    {review.reviewWords}
+                                </RatingMessage>                    
+                            </ReviewCard>
+                        )
+                        )}
+                    </ReviewCardContainer>
+                </ReviewContainer>
+            </ToiletContainer>
+        </MarginBox>
     </>
     )
 }
