@@ -27,6 +27,7 @@ const Input = styled.input`
   height: 50px;
   text-indent: 10px;
   font-size: 20px;
+  outline-color: #a18276;
 `;
 
 const FindBtn = styled.button`
@@ -75,7 +76,9 @@ const LoginPage = () => {
           <img src={logo} />
           <Input type="text" name="Email" placeholder="Email"></Input>
           <Input type="text" name="Password" placeholder="Password"></Input>
-          <FindBtn>Login</FindBtn>
+          < a href="/explore">
+            <FindBtn>Login</FindBtn>
+          </a>
           <Spacing></Spacing>
           <Register>
             Don't ahve <RegisterBtn href="/register">Register</RegisterBtn>
