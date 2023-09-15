@@ -1,12 +1,598 @@
 import styled from 'styled-components'
 import { useState, useEffect, useRef } from 'react';
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
+import toiletCollection from './toilets.json';
+import goodshit from '/src/assets/good_shit.png';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useAuth } from './AuthContext';
+import * as React from 'react';
+import Rating from '@mui/material/Rating';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import CreateIcon from '@mui/icons-material/Create';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
+type Review = {
+    reviewName: string;
+    user: string;
+    TermTaken: string;
+    Date: string;
+    reviewWords: string;
+    Enjoyment: string;
+    Usefulness: string;
+    Manageability: string;
+}
 
+const MenuContainer = styled.div`
+    display: flex;
+    width: 100%;
+    top: 0;
+    left: 0;
+    align-items: center;
+`
+
+const Logo = styled.img`
+    display: inline-block;
+    flex-grow: 1;
+    max-width: 20%;
+    height: auto;
+    padding-left: 4vw;
+    padding-right: 70vw;
+    cursor: pointer;
+`
+
+const ProfileBox = styled.button`
+  display: flex;
+  border-radius: 10px;
+  background-color: #9c8379;
+  padding: 1vw;
+  cursor: pointer;
+`;
+
+const DropDownProfile = styled.div`
+  position: absolute;
+  top: 4.5rem;
+  right: 1.5rem;
+  width: 120px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -0.7rem;
+    right: 1.1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background-color: white;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+  }
+
+  & > div,
+  a {
+    padding: 12px 15px;
+    display: block;
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: #e9e9e9;
+      color: #000;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #f0f0f0;
+    }
+  }
+`;
+
+const ToiletContainer = styled.div`
+    display: flex;
+    margin-top: 2vh;
+    padding: 1vw;
+    max-width: 40%;
+`
+
+const ToiletDetail = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 1vw;
+    padding-left: 3vw;
+`
+
+const ToiletTitle = styled.div`
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 750;
+`
+
+const StallNumber = styled.div`
+    font-size: 38px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 720;
+`
+
+const Availability = styled.div`
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 720;
+    padding-top: 2vh;
+`
+
+const AvailabilityContainer = styled.div`
+    display: flex;
+    gap: 1vw;
+    padding: 5px;
+    padding-left: 0px;
+`
+
+const AvailabilityTime = styled.div`
+    background-color: #efdbe1;
+    border-radius: 100px;
+    padding: 1vw;
+    padding: 1vh;
+    font-weight: 700;
+    color: gray;
+`
+
+const RatingContainer = styled.div`
+    display: flex;
+    padding-top: 4vh;
+    gap: 15px;
+`
+
+const ReviewNumber = styled.div`
+    font-size: 20px;
+`
+const ToiletImage = styled.img`
+    padding-top: 40px;
+`
+
+const ReviewContainer = styled.div`
+    display: flex;
+    max-width: 50%;
+    padding-left: 8vw;
+    flex-direction: column;
+`
+const ReviewMenuBar = styled.div`
+    display: inline-flex;
+    max-height: 4vh;
+    align-items: center;
+`
+
+const ReviewTitle = styled.div`
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 720;
+`
+
+const ReviewFilterBar = styled.div`
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top: 0.3vh;
+`
+
+const ReviewFilterButton = styled.div`
+    color: white;
+    background-color: #40404a;
+    width: 10vw;
+    height: 3.8vh;
+    gap: 20px;
+    cursor: pointer;
+    padding-top: 0.8vh;
+    padding-left: 0.5vw;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #6B6B7B;
+      transition: background-color 0.3s
+    }
+`
+
+const ReviewFilterButtonWord = styled.div`
+    font-weight: 700;
+    font-size: 15px;
+    padding-left: 0.7vw;
+`
+
+const OverlayFilter = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const PopupFilter = styled.div`
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 60vw;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  position: relative;
+`;
+
+const MakeAReviewTitle = styled.div`
+    font-size: 24px;
+    font-weight: 600;
+`
+
+const UnderTitle = styled.div`
+    color: gray;
+`
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+`;
+
+const TextOnlyReviews = styled.div`
+    padding-top: 3vh;
+`
+
+const ReviewCardContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    padding-top: 2vh;
+`
+
+const ReviewCard = styled.div`
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    min-width: 37.5vw;
+    border-radius: 5px;
+`
+
+const ReviewCardDetails = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+
+const ReviewCardDetailsFirstHalf = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+`
+
+const ReviewCardDetailsSecondHalf = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+`
+
+const ReviewCardTitle = styled.div`
+    font-weight: 650;
+    font-size: 20px;
+`
+
+const ReviewCardDate = styled.div`
+    font-size: 18px;
+    font-weight: 550;
+`
+
+const ReviewCardUser = styled.div`
+    color: gray;
+`
+
+const ReviewCardRating = styled.div`
+    display: flex;
+    color: gray;
+    padding-top: 1vh;
+    padding-left: 1vw;
+    align-items: center;
+`
+
+const ReviewTermTaken = styled.div`
+    color: gray;
+    padding-left: 1vw;
+`
+
+const IndividualRatingContainer = styled.div`
+    display: flex;
+    padding: 20px;
+    justify-content: space-evenly;
+`
+
+const IndividualRatingCard = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+const RatingMessage = styled.div`
+    padding-top: 1.5vh;
+    min-height: 3vh;
+    max-height: 3vh;
+`
 
 const ToiletDetails = () => {
-    return (
-    <></>
-    )
+    type Arrangement = 'Most Liked' | 'Most Recent'
+
+    const [openProfile, setOpenProfile] = useState(false);
+    const [reviewFilter, setReviewFilter] = React.useState<Arrangement>('Most Recent');
+    const [textOnly, setTextOnly] = React.useState(false);
+    const [addReviewOpen, setAddReviewOpen] = useState(false);
+    const { loggedIn, setLoggedIn } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const handleClickOutside = (event: MouseEvent) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+          setOpenProfile(false);
+        }
+    };
+
+    const logoutClick = () => {
+        navigate("/");
+        setLoggedIn(false);
     }
+    
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+    
+    type Action = 'Login' | 'Profile' | 'Settings' | 'Logout';
+
+    const handleItemClick = (action: Action) => {
+        switch (action) {
+            case 'Login':
+                console.log('Navigating to login....');
+                break;
+            case 'Profile':
+                console.log('Navigating to profile...');
+                break;
+            case 'Settings':
+                console.log('Navigating to settings...');
+                break;
+            case 'Logout':
+                console.log('Logging out...');
+                break;
+        }
+
+        setOpenProfile(false);
+    };
+
+    interface Props {
+        onClose: () => void;
+    }
+
+    const AddReviewPopUp: React.FC<Props> = ({ onClose }) => {
+        return (
+            <OverlayFilter onClick={onClose}>
+                <PopupFilter onClick={(e) => e.stopPropagation()}>
+                    <CloseButton onClick={onClose}>×</CloseButton>
+                    <MakeAReviewTitle>Make a Review</MakeAReviewTitle>
+                    <UnderTitle>We want to hear your opinions!</UnderTitle>
+                </PopupFilter>
+            </OverlayFilter>
+        );
+    }
+
+    const reviewFilterChange = (event: SelectChangeEvent) => {
+        setReviewFilter(event.target.value as Arrangement);
+    }
+
+    const { id } = useParams();
+    const toiletDetail = toiletCollection.find(toilet => toilet.toiletId.toString() === id);
+    if (!toiletDetail) {
+        return <div>Sorry, toilet not found!</div>;
+    }
+
+    const reviews: Review[] = toiletDetail.reviews;
+
+    let totalRating = 0;
+
+    for (let review of reviews) {
+    totalRating += parseFloat(review.Enjoyment);
+    totalRating += parseFloat(review.Usefulness);
+    totalRating += parseFloat(review.Manageability);
+    }
+
+    const overallAverageRating = totalRating / (reviews.length * 3);
+
+    const getDateFromString = (dateString: string): Date => {
+        const [day, month, year] = dateString.split("/").map(str => parseInt(str, 10));
+        return new Date(year, month - 1, day);
+    }
+
+    const RearrangedReviews = (arrange: Arrangement) => {
+        switch(arrange) {
+            case 'Most Recent':
+                return [...reviews].sort((a, b) => getDateFromString(b.Date).getTime() - getDateFromString(a.Date).getTime());
+            case 'Most Liked':
+                return [...reviews].sort((a, b) => 
+                    (parseFloat(b.Enjoyment) + parseFloat(b.Usefulness) + parseFloat(b.Manageability)) -
+                    (parseFloat(a.Enjoyment) + parseFloat(a.Usefulness) + parseFloat(a.Manageability))
+                ); 
+            default:
+                return reviews;
+        }
+    }
+
+    const sortedReviews = RearrangedReviews(reviewFilter);
+
+    const handleTextOnly = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTextOnly(event.target.checked);
+    };
+
+    const filteredReviews = sortedReviews.filter((review) => {
+        if (!textOnly) {
+            return review;
+        } else {
+            if (review.reviewWords.trim().length !== 0) {
+                return review;
+            }
+        }
+    });
+
+    return (
+    <>
+        <MenuContainer>
+            <Logo src = {goodshit} onClick={() => navigate("/explore")}></Logo>
+
+            <ProfileBox onClick={() => setOpenProfile(!openProfile)}>
+                <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
+                {openProfile && (
+                <DropDownProfile ref={dropdownRef}>
+                    {!loggedIn ? (
+                        <Link to="/login" state={{ from: location }}>Login</Link>
+                    ) : (
+                    <>
+                        <div onClick={() => navigate("/profile")}>Profile</div>
+                        <div onClick={() => handleItemClick('Settings')}>Settings</div>
+                        <div onClick={() => logoutClick()}>Logout</div>
+                    </>
+                    )}
+                </DropDownProfile>
+                )}
+          </ProfileBox>
+        </MenuContainer>
+
+        <ToiletContainer>
+            <ToiletDetail>
+                <ToiletTitle>
+                    {toiletDetail['floor']} {toiletDetail['name']}
+                </ToiletTitle>
+
+                <StallNumber>
+                    {toiletDetail['toiletNumber']} toilet stalls
+                </StallNumber>
+
+                <Availability>
+                    Availability
+                </Availability>
+
+                <AvailabilityContainer>
+                    {toiletDetail.availability.map(time => (
+                        <AvailabilityTime>{time}</AvailabilityTime>
+                    ))}
+                </AvailabilityContainer>
+                    
+                <RatingContainer>
+                    <Rating name="Toilet Rating" defaultValue={overallAverageRating} size="large" precision={0.1} readOnly />
+                    <ReviewNumber>{toiletDetail.reviewNumber} reviews</ReviewNumber>
+                </RatingContainer>
+
+                <ToiletImage src={'/src/assets/' + toiletDetail['imageURL']}></ToiletImage>
+
+            </ToiletDetail>
+
+            <ReviewContainer>
+                <ReviewMenuBar>
+                    <ReviewTitle>Reviews</ReviewTitle>
+
+                    <ReviewFilterBar>
+                        <FormControl sx={{ minWidth: 400 }} size="small">
+                        <InputLabel id="demo-select-small-label">Sort by</InputLabel>
+                        <Select
+                            labelId="demo-select-small-label"
+                            id="demo-select-small"
+                            value={reviewFilter}
+                            label="Sort by"
+                            onChange={reviewFilterChange}
+                        >
+                            <MenuItem value={"Most Recent"}>Most Recent</MenuItem>
+                            <MenuItem value={"Most Liked"}>Most Liked</MenuItem>
+                        </Select>
+                        </FormControl>
+                    </ReviewFilterBar>
+
+                    <ReviewFilterButton onClick={() => setAddReviewOpen(true)}>
+                        <CreateIcon></CreateIcon>
+                        <ReviewFilterButtonWord>Add a Review</ReviewFilterButtonWord>
+                    </ReviewFilterButton>
+                    {addReviewOpen && <AddReviewPopUp onClose={() => setAddReviewOpen(false)} />}
+                </ReviewMenuBar>
+
+                <TextOnlyReviews>
+                    <FormControlLabel control={<Switch checked={textOnly} onChange={handleTextOnly} inputProps={{ 'aria-label': 'controlled' }}/>} label="Text only reviews"/>
+                </TextOnlyReviews>
+
+                <ReviewCardContainer>
+                    {filteredReviews.map(review => (
+                        <ReviewCard>
+                            <ReviewCardDetails>
+                                <ReviewCardDetailsFirstHalf>
+                                    <ReviewCardTitle>
+                                        {review.reviewName}
+                                    </ReviewCardTitle>
+                                    <ReviewCardRating>
+                                        Overall: <Rating name="Review Rating" defaultValue={(parseFloat(review.Enjoyment) + parseFloat(review.Manageability) + parseFloat(review.Usefulness))/3} precision={0.1} readOnly />
+                                    </ReviewCardRating>
+                                    <ReviewTermTaken>
+                                        Term Taken: {review.TermTaken}
+                                    </ReviewTermTaken>
+                                </ReviewCardDetailsFirstHalf>
+                                <ReviewCardDetailsSecondHalf>
+                                    <ReviewCardDate>
+                                        {review.Date}
+                                    </ReviewCardDate>
+                                    <ReviewCardUser>
+                                        {review.user}
+                                    </ReviewCardUser>
+                                </ReviewCardDetailsSecondHalf>
+                            </ReviewCardDetails> 
+
+                            <IndividualRatingContainer>
+                                <IndividualRatingCard>
+                                    Enjoyment
+                                    <Rating name="Enjoyment Rating" defaultValue={parseFloat(review.Enjoyment)} precision={0.1} readOnly />
+                                </IndividualRatingCard>
+                                <IndividualRatingCard>
+                                    Usefulness
+                                    <Rating name="Usefulness Rating" defaultValue={parseFloat(review.Usefulness)} precision={0.1} readOnly />
+                                </IndividualRatingCard>
+                                <IndividualRatingCard>
+                                    Manageability
+                                    <Rating name="Manageability Rating" defaultValue={parseFloat(review.Manageability)} precision={0.1} readOnly />
+                                </IndividualRatingCard>
+                            </IndividualRatingContainer>   
+
+                            <RatingMessage>
+                                {review.reviewWords}
+                            </RatingMessage>                    
+                        </ReviewCard>
+                    )
+                    )}
+                </ReviewCardContainer>
+            </ReviewContainer>
+        </ToiletContainer>
+    </>
+    )
+}
 
 export default ToiletDetails;
