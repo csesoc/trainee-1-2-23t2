@@ -362,7 +362,7 @@ const ExplorePage = () => {
   const newFilteredToilets = toilets.filter((toilet) => {
     if (searchInput === '') {
       return toilet;
-    } else if (toilet.name.toLowerCase().startsWith(searchInput.toLowerCase())) {
+    } else if (toilet.name.toLowerCase().includes(searchInput.toLowerCase())) {
       return toilet;
     }
   }).filter((toilet) => {
@@ -382,6 +382,10 @@ const ExplorePage = () => {
   let remainder = 0;
   if (newFilteredToilets.length > 0) {
     remainder = 4 - (newFilteredToilets.length % 4);
+  }
+  
+  if (remainder === 4) {
+    remainder = 0;
   }
 
   const arr = [];
