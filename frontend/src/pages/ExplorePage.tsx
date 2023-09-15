@@ -36,23 +36,18 @@ const MenuBar = styled.nav`
   z-index: 1000;
 `;
 
-// const H1Style = styled(Link)`
-//   flex-grow: 1;
-//   display: inline-block;
-//   font-size: 2em;
-//   font-weight: 500;
-//   text-decoration: none;
-//   color: white;
-// `
-const H1Style = styled.img`
+const H1Container = styled(Link)`
   flex-grow: 1;
-  display: inline-block;
-  font-size: 2em;
-  z-index: 10000;
+  text-decoration: none;
   max-width: 20%;
-  height: auto;
 `;
 
+const H1Style = styled.img`
+  display: block;
+  z-index: 10000;
+  max-width: 100%;
+  height: auto;
+`;
 const SearchBar = styled.div`
   display: flex;
   height: 55px;
@@ -241,10 +236,10 @@ const ExplorePage = () => {
   const [gender, setGender] = useState<string>('');
   const [searchInput, setSearchInput] = useState('');
 
-  let toiletDisplay = [...toiletCollection];
+  const toiletDisplay = [...toiletCollection];
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let lowerCase = event.target.value.toLowerCase();
+    const lowerCase = event.target.value.toLowerCase();
     setSearchInput(lowerCase);
   };
 
@@ -360,7 +355,9 @@ const ExplorePage = () => {
     <>
       <BarContainer>
         <MenuBar>
-          <H1Style src={goodshitimg}></H1Style>
+          <H1Container to="/explore">
+            <H1Style src={goodshitimg}></H1Style>
+          </H1Container>
 
           <SearchBar>
             <TextField
