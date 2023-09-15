@@ -12,6 +12,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import goodshitimg from '/src/assets/goodshitexplore.png';
 
 type ProfileBannerContainerProps = {
   isBlurred: boolean;
@@ -239,13 +240,24 @@ const NavBar = styled('div')`
   z-index: 1000;
 `;
 
-const H1Style = styled(Link)`
+const H1Container = styled(Link)`
   flex-grow: 1;
   display: inline-block;
   font-size: 2em;
   font-weight: 500;
   text-decoration: none;
   color: white;
+  max-width: 75%;
+`;
+
+const H1Style = styled('img')`
+  flex-grow: 1;
+  display: inline-block;
+  font-size: 2em;
+  font-weight: 500;
+  text-decoration: none;
+  color: white;
+  max-width: 30%;
 `;
 
 const ProfileBox = styled('button')`
@@ -382,7 +394,9 @@ const ProfilePage = () => {
       <GlobalStyle></GlobalStyle>
       <BarContainer>
         <NavBar>
-          <H1Style to="/explore">Good Shit</H1Style>
+          <H1Container to="/explore">
+            <H1Style src={goodshitimg}></H1Style>
+          </H1Container>
           <div style={{ fontSize: '18px', fontWeight: 200 }}>Finding your Perfect Shit</div>
           <IconButton style={{ padding: '20px' }} onClick={languageTrue}>
             <LanguageIcon fontSize="large" style={{ cursor: 'pointer' }} />
