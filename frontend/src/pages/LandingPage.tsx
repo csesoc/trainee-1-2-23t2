@@ -32,7 +32,7 @@ const FindBtn = styled.a`
     background-color: #a18276;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 10px 60px 10px 60px;
     box-shadow: 0px 4px 13px grey;
     display: flex;
