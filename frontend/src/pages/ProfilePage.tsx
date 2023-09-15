@@ -57,7 +57,7 @@ const EditProfilePicture = styled('img')`
 `;
 
 const EditProfilePictureContainer = styled('div')`
-  background-color; blue;
+  background-color: blue;
   width: 100%;
   display: flex;
   justify-content: center;
