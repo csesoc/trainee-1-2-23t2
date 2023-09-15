@@ -102,6 +102,7 @@ const ToiletContainer = styled.div`
     margin-top: 2vh;
     padding: 1vw;
     max-width: 40%;
+    min-width: 40%;
 `
 
 const ToiletDetail = styled.div`
@@ -109,6 +110,8 @@ const ToiletDetail = styled.div`
     flex-direction: column;
     padding: 1vw;
     padding-left: 3vw;
+    min-width: 95%;
+    max-width: 95%;
 `
 
 const ToiletTitle = styled.div`
@@ -502,7 +505,7 @@ const ToiletDetails = () => {
                     
                 <RatingContainer>
                     <Rating name="Toilet Rating" defaultValue={overallAverageRating} size="large" precision={0.1} readOnly />
-                    <ReviewNumber>{toiletDetail.reviewNumber} reviews</ReviewNumber>
+                    <ReviewNumber>{toiletDetail.reviews.length} reviews</ReviewNumber>
                 </RatingContainer>
 
                 <ToiletImage src={'/src/assets/' + toiletDetail['imageURL']}></ToiletImage>
