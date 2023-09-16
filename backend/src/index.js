@@ -1,9 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import { InputError, AccessError } from './error.js';
-import { authRegister, authLogin, getToiletList, postReview } from './service.js';
+import { authRegister, authLogin, getToiletList, postReview, getUserDetails } from './service.js';
 import cookieParser from 'cookie-parser';
-import { ObjectId } from 'mongodb';
 
 const PORT = 6969;
 
@@ -65,7 +64,22 @@ app.post(
 );
 
 app.get(
-  '/toilets/list',
+  '/auth/details',
+  errorHandler(async (req, res) => {
+    let token;
+    try {
+      token = req.cookies.token;
+    } catch(error) {
+      console.log('no cookie');
+    }
+
+    const response = await getUserDetails(token);
+    res.json(response);
+  }),
+)
+
+app.get(
+  '/auth/toilets/list',
   errorHandler(async (req, res) => {
     const toiletList = await getToiletList();
     console.log('sent');
@@ -74,7 +88,7 @@ app.get(
 )
 
 app.post(
-  '/toilets/review/:id',
+  '/auth/toilets/review/:id',
   errorHandler(async (req, res) => {
     let token;
     try {

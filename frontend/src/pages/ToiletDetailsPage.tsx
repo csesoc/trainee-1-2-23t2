@@ -19,11 +19,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
-import { AddAPhoto } from '@mui/icons-material';
 
-  
 interface ToiletType {
     toiletId: string;
     name: string;
@@ -699,7 +696,7 @@ const ToiletDetails = () => {
         const stringUsefulness = JSON.stringify(UsefulnessValue);
         const stringManageability = JSON.stringify(ManageabilityValue);
         try {
-            const response = await axios.post(`http://localhost:6969/toilets/review/${id}`, {
+            const response = await axios.post(`http://localhost:6969/auth/toilets/review/${id}`, {
                 reviewTitle,
                 stringEnjoyment,
                 stringUsefulness,
@@ -723,7 +720,7 @@ const ToiletDetails = () => {
     const [toilets, setToilets] = useState<ToiletType[]>([]);
     const fetchToilets = async () => {
         try {
-            const response = await axios.get('http://localhost:6969/toilets/list', {withCredentials: true});
+            const response = await axios.get('http://localhost:6969/auth/toilets/list', {withCredentials: true});
             setToilets(response.data);
         } catch (error) {
             console.log('Error fetching data', error);
@@ -811,9 +808,9 @@ const ToiletDetails = () => {
                     <>
                         <div onClick={() => navigate("/profile")}>Profile</div>
                         <div onClick={() => handleItemClick('Settings')}>Settings</div>
-                        <Link to="/" onClick={handleLogout}>
+                        <div onClick={handleLogout}>
                             Logout
-                        </Link>
+                        </div>
                     </>
                     )}
                 </DropDownProfile>

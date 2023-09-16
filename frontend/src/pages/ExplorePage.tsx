@@ -40,6 +40,18 @@ interface ToiletType {
   reviews: Review[];
 }
 
+const StyledBackground = styled.div`
+  background-image: url('/src/assets/whiteness.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+`;
+
 const BarContainer = styled.div`
   position: fixed;
   width: 100%;
@@ -393,7 +405,7 @@ const ExplorePage = () => {
 
   const [toilets, setToilets] = useState<ToiletType[]>([]);
   useEffect(() => {
-    axios.get('http://localhost:6969/toilets/list')
+    axios.get('http://localhost:6969/auth/toilets/list')
       .then(response => {
         setToilets(response.data);
       })
@@ -477,6 +489,7 @@ const ExplorePage = () => {
 
   return (
     <>
+      <StyledBackground/>
       <BarContainer>
         <MenuBar>
           <H1Container to="/explore">
@@ -524,9 +537,9 @@ const ExplorePage = () => {
                   <>
                     <Link to="/profile">Profile</Link>
                     <div onClick={() => handleItemClick('Settings')}>Settings</div>
-                    <Link to="/" onClick={handleLogout}>
+                    <div onClick={handleLogout}>
                       Logout
-                    </Link>
+                    </div>
                   </>
                 )}
               </DropDownProfile>
