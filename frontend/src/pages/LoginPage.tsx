@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import logo from '../../public/logo.png';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import axios, { AxiosError } from 'axios';
 
 const Center = styled.div`
   position: absolute;
@@ -8,7 +10,7 @@ const Center = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Lines = styled.div`
+const Lines = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,24 +62,40 @@ const RegisterBtn = styled.a`
 `;
 
 const LoginPage = () => {
-  fetch('/auth/login')
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      if (data != null) {
-        console.log(data);
+  const [userForm, setUserForm] = useState({
+    password: '',
+    email: '',
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:6969/auth/login', userForm);
+      console.log('Success', response.data);
+    } catch (rawError) {
+      const err = rawError as AxiosError;
+      if (err.response && err.response.data) {
+        console.error('Server responded with:', err.response.data);
+      } else {
+        console.error('Error', err);
       }
-    });
+    }
+  };
+
   return (
     <>
       <Center>
-        <Lines>
+        <Lines onSubmit={handleSubmit}>
           <img src={logo} />
-          <Input type="text" name="Email" placeholder="Email"></Input>
-          <Input type="text" name="Password" placeholder="Password"></Input>
+          <Input type="text" name="email" placeholder="Email" onChange={handleChange}></Input>
+          <Input type="text" name="password" placeholder="Password" onChange={handleChange}></Input>
           <a href="/explore">
-            <FindBtn>Login</FindBtn>
+            <FindBtn type="submit">Login</FindBtn>
           </a>
           <Spacing></Spacing>
           <Register>
