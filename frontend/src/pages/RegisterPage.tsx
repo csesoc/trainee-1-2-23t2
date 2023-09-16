@@ -21,27 +21,31 @@ const Input = styled.input`
   background-color: rgb(161, 130, 118, 0.1);
   color: #a18276;
   border: none;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 10px;
   box-shadow: 0px 4px 13px grey;
   margin: 20px;
   width: 450px;
   height: 50px;
+  text-indent: 10px;
+  font-size: 20px;
+  outline-color: #a18276;
 `;
 
 const FindBtn = styled.button`
   background-color: #a18276;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 10px 60px 10px 60px;
   box-shadow: 0px 4px 13px grey;
-  display: flex;
   cursor: pointer;
   text-decoration: none;
   margin: 20px;
-  width: 450px;
-  height: 50px;
+  width: 472px;
+  height: 70px;
+  text-align: center;
+  font-size: 30px;
 `;
 
 const Spacing = styled.div`
@@ -64,6 +68,8 @@ const RegisterPage = () => {
     email: '',
   });
 
+  const [error, setError] = useState('');
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserForm((prev) => ({ ...prev, [name]: value }));
@@ -76,6 +82,7 @@ const RegisterPage = () => {
       console.log('Success', response.data);
     } catch (err) {
       console.error('Error', err);
+      setError('Incorrect registration data. Please try again.');
     }
   };
 
@@ -87,10 +94,11 @@ const RegisterPage = () => {
           <Input type="text" name="email" placeholder="Email" onChange={handleChange}></Input>
           <Input type="text" name="password" placeholder="Password" onChange={handleChange}></Input>
           <Input type="text" name="name" placeholder="Name" onChange={handleChange}></Input>
-          <FindBtn type="submit">Login</FindBtn>
+          {error && <div style={{ color: 'red' }}>{error}</div>}
+          <FindBtn type="submit">Register</FindBtn>
           <Spacing></Spacing>
           <Register>
-            Don't ahve <RegisterBtn href="/register">Register</RegisterBtn>
+            Already have an account? <RegisterBtn href="/login">Login</RegisterBtn>
           </Register>
         </Lines>
       </Center>
