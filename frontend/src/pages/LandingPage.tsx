@@ -1,6 +1,6 @@
 import { PrimaryBtn } from '../styles/GlobalStyles';
 import styled from 'styled-components'
-import logo from '../../public/logo.png'
+import logo from '/src/assets/good_shit.png';
 
 const TopHeader = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const Center = styled.div`
 const ToiletBtn = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 15%
+  padding-top: 15%;
 `
 
 const FindBtn = styled.a`
@@ -38,6 +38,11 @@ const FindBtn = styled.a`
     display: flex;
     cursor: pointer;
     text-decoration: none;
+
+    &:hover {
+      background-color: #C19D8F;
+      transition: background-color 0.3s
+    }
 `
 
 const BtnLogin = styled.div`
@@ -63,7 +68,7 @@ const LandingPage = () => {
       <Center>
         <Lines>
           <img  src={logo}/>
-          <h2>finding your perfect shit</h2>
+          <h2>Finding your Perfect Shit</h2>
         </Lines>
         <ToiletBtn>
         <FindBtn href = "/explore">
