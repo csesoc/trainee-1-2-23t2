@@ -56,7 +56,7 @@ const Input = styled.input`
   background-color: rgb(161, 130, 118, 0.1);
   color: #a18276;
   border: none;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 10px;
   box-shadow: 0px 4px 13px grey;
   margin: 20px;
@@ -73,6 +73,7 @@ const FindBtn = styled.button`
   background-color: #a18276;
   color: white;
   border: none;
+  border-radius: 15px;
   border-radius: 15px;
   padding: 10px 60px 10px 60px;
   box-shadow: 0px 4px 13px grey;
@@ -114,6 +115,8 @@ const RegisterPage = () => {
     password: '',
     email: '',
   });
+
+  const [error, setError] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

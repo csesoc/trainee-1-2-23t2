@@ -116,6 +116,8 @@ const LoginPage = () => {
     email: '',
   });
 
+  const [error, setError] = useState('');
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserForm((prev) => ({ ...prev, [name]: value }));
@@ -135,8 +137,10 @@ const LoginPage = () => {
       setErrorMessage(err.response.data.error)
       if (err.response && err.response.data) {
         console.error('Server responded with:', err.response.data);
+        setError('Incorrect login data. Please try again.');
       } else {
         console.error('Error', err);
+        setError('Incorrect login data. Please try again.');
       }
     }
 
@@ -152,6 +156,7 @@ const LoginPage = () => {
           <img src={logo} onClick={() => navigate("/explore")}/>
           <Input type="text" name="email" placeholder="Email" onChange={handleChange}></Input>
           <Input type="text" name="password" placeholder="Password" onChange={handleChange}></Input>
+          {error && <div style={{ color: 'red' }}>{error}</div>}
           <FindBtn type="submit">Login</FindBtn>
           {errorMessage !== '' &&<ErrorMessage>{errorMessage}</ErrorMessage>}
           <Spacing></Spacing>
