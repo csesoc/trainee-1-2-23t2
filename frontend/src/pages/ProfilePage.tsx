@@ -228,6 +228,7 @@ const EditSaveButton = styled('div')`
 
 const NavBar = styled('div')`
   display: flex;
+  max-height: 13vh;
   justify-content: space-between;
   background-color: #9c8378;
   padding-right: 10vw;
