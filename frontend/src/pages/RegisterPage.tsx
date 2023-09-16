@@ -78,6 +78,7 @@ const RegisterPage = () => {
       console.error('Error', err);
     }
   };
+
   return (
     <>
       <Center>
