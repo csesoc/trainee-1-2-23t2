@@ -1,6 +1,6 @@
 import { PrimaryBtn } from '../styles/GlobalStyles';
 import styled from 'styled-components'
-import logo from '/src/assets/good_shit.png';
+import logo from '../../public/logo.png';
 
 const TopHeader = styled.div`
   display: flex;
