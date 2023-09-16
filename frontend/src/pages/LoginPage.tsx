@@ -95,7 +95,7 @@ const LoginPage = () => {
     <>
       <Center>
         <Lines onSubmit={handleSubmit}>
-          <img src={logo} />
+          <img src={logo} onClick={() => navigate("/explore")}/>
           <Input type="text" name="email" placeholder="Email" onChange={handleChange}></Input>
           <Input type="text" name="password" placeholder="Password" onChange={handleChange}></Input>
           <FindBtn type="submit">Login</FindBtn>
