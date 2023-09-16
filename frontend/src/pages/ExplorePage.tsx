@@ -17,6 +17,7 @@ import toiletCollection from './toilets.json';
 import { useNavigate } from 'react-router-dom';
 import Happy from '/src/assets/happy.png';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 const BarContainer = styled.div`
   position: fixed;
@@ -422,6 +423,21 @@ const ExplorePage = () => {
     return averageRating.toFixed(2);
   }
 
+  interface LogoutResponse {
+    message: string;
+  }
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post<LogoutResponse>('/logout');
+      if (response.data.message === 'Logged out') {
+        navigate('/login');
+      }
+    } catch (err) {
+      console.error('Error during logout:', err);
+    }
+  };
+
   return (
     <>
       <BarContainer>
@@ -471,7 +487,7 @@ const ExplorePage = () => {
                   <>
                     <Link to="/profile">Profile</Link>
                     <div onClick={() => handleItemClick('Settings')}>Settings</div>
-                    <Link to="/" onClick={() => localStorage.clear()}>
+                    <Link to="/" onClick={handleLogout}>
                       Logout
                     </Link>
                   </>
