@@ -42,6 +42,7 @@ app.post(
   errorHandler(async (req, res) => {
     const { email, password } = req.body;
     const token = await authLogin(email, password);
+    res.cookie('token', token);
     res.json({ token });
   }),
 );
