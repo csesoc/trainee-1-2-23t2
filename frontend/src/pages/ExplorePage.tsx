@@ -14,8 +14,9 @@ import SortIcon from '@mui/icons-material/Sort';
 import { Link, useLocation } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import toiletCollection from './toilets.json';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import Happy from '/src/assets/happy.png';
+import Cookies from 'js-cookie';
 
 const BarContainer = styled.div`
   position: fixed;
@@ -233,12 +234,12 @@ const CloseButton = styled.button`
 const ToiletExist = styled.div`
   font-size: 1.5rem;
   font-family: Arial, Helvetica, sans-serif;
-`
+`;
 
 const HappyImage = styled.img`
   max-width: 30%;
   height: auto;
-`
+`;
 
 const ExplorePage = () => {
   const [languageOpen, setLanguageOpen] = useState(false);
@@ -274,6 +275,14 @@ const ExplorePage = () => {
   interface Props {
     onClose: () => void;
   }
+
+  const getCookie = (name: string): string | undefined => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift();
+  };
+
+  const userLoggedIn = getCookie('token');
 
   const FilterPopup: React.FC<Props> = ({ onClose }) => {
     return (
@@ -359,25 +368,28 @@ const ExplorePage = () => {
 
   const [toilets] = useState(toiletCollection);
 
-  const newFilteredToilets = toilets.filter((toilet) => {
-    if (searchInput === '') {
-      return toilet;
-    } else if (toilet.name.toLowerCase().startsWith(searchInput.toLowerCase())) {
-      return toilet;
-    }
-  }).filter((toilet) => {
-    if (gender === '') {
-      return toilet;
-    } else if (toilet.gender.toLowerCase() === gender) {
-      return toilet;
-    }
-  }).filter((toilet) => {
-    if (favourite === '') {
-      return toilet;
-    } else if (favourite === 'Favourite' && toilet.favourited === 'true') {
-      return toilet;
-    }
-  })
+  const newFilteredToilets = toilets
+    .filter((toilet) => {
+      if (searchInput === '') {
+        return toilet;
+      } else if (toilet.name.toLowerCase().startsWith(searchInput.toLowerCase())) {
+        return toilet;
+      }
+    })
+    .filter((toilet) => {
+      if (gender === '') {
+        return toilet;
+      } else if (toilet.gender.toLowerCase() === gender) {
+        return toilet;
+      }
+    })
+    .filter((toilet) => {
+      if (favourite === '') {
+        return toilet;
+      } else if (favourite === 'Favourite' && toilet.favourited === 'true') {
+        return toilet;
+      }
+    });
 
   let remainder = 0;
   if (newFilteredToilets.length > 0) {
@@ -391,7 +403,7 @@ const ExplorePage = () => {
   }
 
   function calculateAverageToiletRating(id: number) {
-    const toiletToAverage = toilets.find(toilet => parseInt(toilet.toiletId) === id);
+    const toiletToAverage = toilets.find((toilet) => parseInt(toilet.toiletId) === id);
     let totalRating = 0;
     let numOfRatings = 0;
 
@@ -399,7 +411,7 @@ const ExplorePage = () => {
       return 0;
     }
 
-    toiletToAverage.reviews.forEach(review => {
+    toiletToAverage.reviews.forEach((review) => {
       totalRating += parseFloat(review.Enjoyment);
       totalRating += parseFloat(review.Usefulness);
       totalRating += parseFloat(review.Manageability);
@@ -451,19 +463,22 @@ const ExplorePage = () => {
             <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
             {openProfile && (
               <DropDownProfile ref={dropdownRef}>
-                {localStorage.getItem('0') === null ? (
-                  <Link to="/login" state={{ from: location }}>Login</Link>
+                {userLoggedIn === 'true' ? (
+                  <Link to="/login" state={{ from: location }}>
+                    Login
+                  </Link>
                 ) : (
                   <>
                     <Link to="/profile">Profile</Link>
                     <div onClick={() => handleItemClick('Settings')}>Settings</div>
-                    <Link to="/" onClick={() => localStorage.clear()}>Logout</Link>
+                    <Link to="/" onClick={() => localStorage.clear()}>
+                      Logout
+                    </Link>
                   </>
                 )}
               </DropDownProfile>
             )}
           </ProfileBox>
-
         </MenuBar>
 
         <FilterBar>
@@ -480,31 +495,27 @@ const ExplorePage = () => {
         {newFilteredToilets.length === 0 ? (
           <>
             <ToiletExist>
-              Not gonna be active on Discord tonight. I'm meeting a girl (a real one) in half an hour
-              (wouldn't expect a lot of you to understand anyway) 
-              so please don't DM me asking me where I am (im with the girl, ok) 
-              you'll most likely get aired because ill be with the girl 
-              (again I don't expect you to understand) 
-              shes actually really interested in me and 
-              its not a situation i can pass up for some meaningless Discord degenerates 
-              (because ill be meeting a girl, not that you really are going to understand) 
-              this is my life now. Meeting women and not wasting my precious time online, 
+              Not gonna be active on Discord tonight. I'm meeting a girl (a real one) in half an hour (wouldn't expect a lot of
+              you to understand anyway) so please don't DM me asking me where I am (im with the girl, ok) you'll most likely get
+              aired because ill be with the girl (again I don't expect you to understand) shes actually really interested in me
+              and its not a situation i can pass up for some meaningless Discord degenerates (because ill be meeting a girl, not
+              that you really are going to understand) this is my life now. Meeting women and not wasting my precious time online,
               I have to move on from such simp things and branch out (you wouldnt understand)
             </ToiletExist>
             <HappyImage src={Happy}></HappyImage>
           </>
         ) : (
-          newFilteredToilets.map(toilet => (
+          newFilteredToilets.map((toilet) => (
             <ToiletCard onClick={() => navigate(`/toiletdeets/${toilet.toiletId}`)}>
               <ToiletCardImage src={'/src/assets/' + toilet['imageURL']}></ToiletCardImage>
               <ToiletCardNameRating>
-              <ToiletCardName>{toilet['name']}</ToiletCardName>
-              <ToiletCardRating>💩 {calculateAverageToiletRating(parseInt(toilet['toiletId']))}</ToiletCardRating>
+                <ToiletCardName>{toilet['name']}</ToiletCardName>
+                <ToiletCardRating>💩 {calculateAverageToiletRating(parseInt(toilet['toiletId']))}</ToiletCardRating>
               </ToiletCardNameRating>
               <ToiletCardInfo>{toilet['gender']}</ToiletCardInfo>
               <ToiletCardInfo>{toilet['floor']}</ToiletCardInfo>
             </ToiletCard>
-        ))
+          ))
         )}
         {arr.map((toilet) => (
           <ToiletCard>
