@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import logo from '../../public/logo.png';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import axios, { AxiosError } from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Center = styled.div`
   position: absolute;
@@ -57,7 +58,7 @@ const Register = styled.p`
   color: #a18276;
 `;
 
-const RegisterBtn = styled.a`
+const RegisterBtn = styled(Link)`
   color: #a18276;
 `;
 
@@ -72,11 +73,14 @@ const LoginPage = () => {
     setUserForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:6969/auth/login', userForm);
       console.log('Success', response.data);
+      navigate('/explore');
     } catch (rawError) {
       const err = rawError as AxiosError;
       if (err.response && err.response.data) {
@@ -94,12 +98,10 @@ const LoginPage = () => {
           <img src={logo} />
           <Input type="text" name="email" placeholder="Email" onChange={handleChange}></Input>
           <Input type="text" name="password" placeholder="Password" onChange={handleChange}></Input>
-          <a href="/explore">
-            <FindBtn type="submit">Login</FindBtn>
-          </a>
+          <FindBtn type="submit">Login</FindBtn>
           <Spacing></Spacing>
           <Register>
-            Don't ahve <RegisterBtn href="/register">Register</RegisterBtn>
+            Don't have an account? <RegisterBtn to="/register">Register</RegisterBtn>
           </Register>
         </Lines>
       </Center>
