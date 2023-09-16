@@ -47,6 +47,14 @@ app.post(
   }),
 );
 
+app.post(
+  '/auth/logout',
+  errorHandler(async (req, res) => {
+    res.clearCookie('token');
+    res.status(200).send({ message: 'Logged out' });
+  }),
+);
+
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
