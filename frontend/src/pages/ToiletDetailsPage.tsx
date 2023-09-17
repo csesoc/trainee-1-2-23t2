@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { useState, useEffect, useRef } from 'react';
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
-import toiletCollection from './toilets.json';
 import goodshit from '/src/assets/good_shit.png';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import * as React from 'react';
@@ -15,11 +14,24 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import StarIcon from '@mui/icons-material/Star';
-import { Box } from '@mui/material';
+import { Box, TableBody } from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import axios from 'axios';
+
+interface ToiletType {
+    toiletId: string;
+    name: string;
+    imageURL: string;
+    gender: string;
+    floor: string;
+    favourited: string;
+    toiletNumber: string;
+    availability: string[];
+    reviews: Review[];
+}
 
 type Review = {
     reviewName: string;
@@ -37,7 +49,7 @@ type MenuContainerProps = {
 };
   
 const enjoymentLabels: { [index: string]: string } = {
-    1: 'Non-existent',
+    1: 'Bruh',
     2: 'Poor',
     3: 'Ok',
     4: 'Good',
@@ -49,7 +61,7 @@ function getEnjoymentLabelText(value: number) {
 }
 
 const usefulnessLabels: { [index: string]: string } = {
-    1: 'Non-existent',
+    1: 'Bruh',
     2: 'Poor',
     3: 'Ok',
     4: 'Good',
@@ -61,7 +73,7 @@ function getUsefulnessLabelText(value: number) {
 }
 
 const manageabilityLabels: { [index: string]: string } = {
-    1: 'Non-existent',
+    1: 'Bruh',
     2: 'Poor',
     3: 'Ok',
     4: 'Good',
@@ -449,12 +461,15 @@ const ToiletDetails = () => {
     type Arrangement = 'Most Liked' | 'Most Recent'
 
     const [tabValue, setTabValue] = React.useState(0);
-    const [EnjoymentValue, setEnjoymentValue] = React.useState<number | null>(0);
-    const [UsefulnessValue, setUsefulnessValue] = React.useState<number | null>(0);
-    const [ManageabilityValue, setManageabilityValue] = React.useState<number | null>(0);
+    const [EnjoymentValue, setEnjoymentValue] = React.useState<number | null>(1);
+    const [UsefulnessValue, setUsefulnessValue] = React.useState<number | null>(1);
+    const [ManageabilityValue, setManageabilityValue] = React.useState<number | null>(1);
+    const [reviewText, setReviewText] = useState('');
+    const [reviewTitle, setReviewTitle] = useState('');
     const [enjoymentHover, setEnjoymentHover] = React.useState(-1);
     const [usefulnessHover, setUsefulnessHover] = React.useState(-1);
     const [manageabilityHover, setManageabilityHover] = React.useState(-1);
+    const [reloadCount, setReloadCount] = useState(0);
     const [openProfile, setOpenProfile] = useState(false);
     const [isAtTop, setIsAtTop] = useState(true);
     const [reviewFilter, setReviewFilter] = React.useState<Arrangement>('Most Recent');
@@ -475,10 +490,21 @@ const ToiletDetails = () => {
         }
     };
 
-    const logoutClick = () => {
-        navigate("/");
-        localStorage.clear();
-    }
+    interface LogoutResponse {
+        message: string;
+      }
+    
+      const handleLogout = async () => {
+        try {
+          const response = await axios.post<LogoutResponse>('http://localhost:6969/auth/logout');
+          if (response.data.message === 'Logged out') {
+            console.log(response.data.message);
+            navigate('/login');
+          }
+        } catch (err) {
+          console.error('Error during logout:', err);
+        }
+      };
     
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
@@ -527,21 +553,19 @@ const ToiletDetails = () => {
         setOpenProfile(false);
     };
 
-    interface Props {
-        onClose: () => void;
-    }
-
-    const AddReviewPopUp: React.FC<Props> = ({ onClose }) => {
+    const AddReviewPopUp = () => {
         return (
-            <OverlayFilter onClick={onClose}>
+            <OverlayFilter>
                 <PopupFilter onClick={(e) => e.stopPropagation()}>
-                    <CloseButton onClick={onClose}>×</CloseButton>
+                    <CloseButton onClick={() => setAddReviewOpen(false)}>×</CloseButton>
                     <MakeAReviewTitle>Make a Review</MakeAReviewTitle>
                     <UnderTitle>We want to hear your opinions!</UnderTitle>
                     <WriteTitle>Write your Review Title</WriteTitle>
                         <TextField
                             label="Title"
                             id="review-title"
+                            value = {reviewTitle}
+                            onChange={(e) => setReviewTitle(e.target.value)}
                         />
 
                     <Box sx={{ width: '100%', paddingTop: '2vh' }}>
@@ -639,28 +663,80 @@ const ToiletDetails = () => {
                     </Box>
                     
                     <WriteReview>Write your Review</WriteReview>
+                    
                     <TextField
                         label="Review"
                         id="review-bodys"
                         multiline
                         rows={10}
+                        value = {reviewText}
+                        onChange={(e) => setReviewText(e.target.value)}
                     />
 
                     <FillerBox2>hi</FillerBox2>
                     
-                    <Button variant="contained" onClick={onClose}>Submit Review</Button>
+                    <Button variant="contained" onClick={() => {
+                        submitReview();
+                        setAddReviewOpen(false)
+                        setReviewText('');
+                        setReviewTitle('');
+                        setEnjoymentValue(1);
+                        setUsefulnessValue(1);
+                        setManageabilityValue(1);
+                        setReloadCount(prev => prev + 1)
+                    }}>Submit Review</Button>
                     
                 </PopupFilter>
             </OverlayFilter>
         );
+    };
+    
+    const submitReview = async() => {
+        const stringEnjoyment = JSON.stringify(EnjoymentValue);
+        const stringUsefulness = JSON.stringify(UsefulnessValue);
+        const stringManageability = JSON.stringify(ManageabilityValue);
+        try {
+            const response = await axios.post(`http://localhost:6969/auth/toilets/review/${id}`, {
+                reviewTitle,
+                stringEnjoyment,
+                stringUsefulness,
+                stringManageability,
+                reviewText
+            });
+            return (
+                <div>successfully submitted</div>
+            );
+        } catch (error) {
+            <div>error submitting</div>
+        }
     }
 
     const reviewFilterChange = (event: SelectChangeEvent) => {
         setReviewFilter(event.target.value as Arrangement);
     }
 
-    const { id } = useParams();
-    const toiletDetail = toiletCollection.find(toilet => toilet.toiletId.toString() === id);
+    const { id } = useParams<{ id: string }>();
+
+    const [toilets, setToilets] = useState<ToiletType[]>([]);
+    const fetchToilets = async () => {
+        try {
+            const response = await axios.get('http://localhost:6969/auth/toilets/list', {withCredentials: true});
+            setToilets(response.data);
+        } catch (error) {
+            console.log('Error fetching data', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchToilets();
+    }, []);
+
+    useEffect(() => {
+        fetchToilets();
+    }, [reloadCount]);
+
+    const toiletDetail = toilets.find(toilet => toilet.toiletId === id);
+
     if (!toiletDetail) {
         return <div>Sorry, toilet not found!</div>;
     }
@@ -699,6 +775,14 @@ const ToiletDetails = () => {
         setTextOnly(event.target.checked);
     };
 
+    const getCookie = (name: string): string | undefined => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop()?.split(';').shift();
+      };
+    
+    const userLoggedIn = getCookie('token');
+
     const filteredReviews = sortedReviews.filter((review) => {
         if (!textOnly) {
             return review;
@@ -718,13 +802,15 @@ const ToiletDetails = () => {
                 <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
                 {openProfile && (
                 <DropDownProfile ref={dropdownRef}>
-                    {localStorage.getItem('0') === null ? (
+                    {!userLoggedIn ? (
                         <Link to="/login" state={{ from: location }}>Login</Link>
                     ) : (
                     <>
                         <div onClick={() => navigate("/profile")}>Profile</div>
                         <div onClick={() => handleItemClick('Settings')}>Settings</div>
-                        <div onClick={() => logoutClick()}>Logout</div>
+                        <div onClick={handleLogout}>
+                            Logout
+                        </div>
                     </>
                     )}
                 </DropDownProfile>
@@ -782,10 +868,10 @@ const ToiletDetails = () => {
                         </ReviewFilterBar>
 
                         <ReviewFilterButton onClick={() => setAddReviewOpen(true)}>
-                            <CreateIcon></CreateIcon>
+                            <CreateIcon/>
                             <ReviewFilterButtonWord>Add a Review</ReviewFilterButtonWord>
                         </ReviewFilterButton>
-                        {addReviewOpen && <AddReviewPopUp onClose={() => setAddReviewOpen(false)} />}
+                        {addReviewOpen ? AddReviewPopUp() : <></>}
                     </ReviewMenuBar>
 
                     <TextOnlyReviews>

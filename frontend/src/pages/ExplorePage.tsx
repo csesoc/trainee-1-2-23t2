@@ -13,11 +13,44 @@ import Button from '@mui/material/Button';
 import SortIcon from '@mui/icons-material/Sort';
 import { Link, useLocation } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import toiletCollection from './toilets.json';
 import { useNavigate } from 'react-router-dom';
 import Happy from '/src/assets/happy.png';
-import Cookies from 'js-cookie';
 import axios from 'axios';
+
+interface Review {
+  reviewName: string;
+  user: string;
+  TermTaken: string;
+  Date: string;
+  reviewWords: string;
+  Enjoyment: string;
+  Usefulness: string;
+  Manageability: string;
+}
+
+interface ToiletType {
+  toiletId: string;
+  name: string;
+  imageURL: string;
+  gender: string;
+  floor: string;
+  favourited: string;
+  toiletNumber: string;
+  availability: string[];
+  reviews: Review[];
+}
+
+const StyledBackground = styled.div`
+  background-image: url('/src/assets/whiteness.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+`;
 
 const BarContainer = styled.div`
   position: fixed;
@@ -252,6 +285,8 @@ const ExplorePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  axios.defaults.withCredentials = true;
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const lowerCase = event.target.value.toLowerCase();
     setSearchInput(lowerCase);
@@ -284,6 +319,7 @@ const ExplorePage = () => {
   };
 
   const userLoggedIn = getCookie('token');
+  console.log(userLoggedIn);
 
   const FilterPopup: React.FC<Props> = ({ onClose }) => {
     return (
@@ -367,8 +403,16 @@ const ExplorePage = () => {
     setLanguageOpen(false);
   };
 
-  const [toilets] = useState(toiletCollection);
-
+  const [toilets, setToilets] = useState<ToiletType[]>([]);
+  useEffect(() => {
+    axios.get('http://localhost:6969/auth/toilets/list')
+      .then(response => {
+        setToilets(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
   const newFilteredToilets = toilets
     .filter((toilet) => {
       if (searchInput === '') {
@@ -433,8 +477,9 @@ const ExplorePage = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post<LogoutResponse>('/logout');
+      const response = await axios.post<LogoutResponse>('http://localhost:6969/auth/logout');
       if (response.data.message === 'Logged out') {
+        console.log(response.data.message);
         navigate('/login');
       }
     } catch (err) {
@@ -444,6 +489,7 @@ const ExplorePage = () => {
 
   return (
     <>
+      <StyledBackground/>
       <BarContainer>
         <MenuBar>
           <H1Container to="/explore">
@@ -483,7 +529,7 @@ const ExplorePage = () => {
             <AccountCircleIcon fontSize="large" style={{ color: 'white' }} />
             {openProfile && (
               <DropDownProfile ref={dropdownRef}>
-                {userLoggedIn === 'true' ? (
+                {!userLoggedIn ? (
                   <Link to="/login" state={{ from: location }}>
                     Login
                   </Link>
@@ -491,9 +537,9 @@ const ExplorePage = () => {
                   <>
                     <Link to="/profile">Profile</Link>
                     <div onClick={() => handleItemClick('Settings')}>Settings</div>
-                    <Link to="/" onClick={handleLogout}>
+                    <div onClick={handleLogout}>
                       Logout
-                    </Link>
+                    </div>
                   </>
                 )}
               </DropDownProfile>

@@ -1,6 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import pfp from '../images/poop-emoji.jpg';
-import banner from '../images/banner2.png';
 import favorite from '../images/favorite.webp';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -13,10 +12,20 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import goodshitimg from '/src/assets/goodshitexplore.png';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 type ProfileBannerContainerProps = {
   isBlurred: boolean;
 };
+
+type User = {
+  email: string;
+  password: string;
+  name: string;
+  favourite: string[];
+  biography: string;
+}
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -71,7 +80,7 @@ const ProfileBackground = styled('div')`
 `;
 
 const Banner = styled('img')`
-  background-color: gray;
+  background-image: url('/src/assets/whiteness.gif');
   height: 300px;
   width: 100%;
 `;
@@ -338,6 +347,27 @@ const ProfilePage = () => {
   const fileIputRef = useRef<HTMLInputElement | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
+  const getCookie = (name: string): string | undefined => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift();
+  };
+
+  const cookie = getCookie('token');
+
+  const [user, setUser] = useState<User | undefined>();
+  useEffect(() => {
+    axios.get('http://localhost:6969/auth/details', { params: { cookie }})
+      .then(response => {
+        setUser(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(user);
+
   useEffect(() => {
     if (fileIputRef.current) {
       fileIputRef.current.click();
@@ -427,7 +457,7 @@ const ProfilePage = () => {
       </BarContainer>
 
       <ProfileBannerContainer isBlurred={showEditProfile}>
-        <Banner src={banner}></Banner>
+        <Banner></Banner>
         <ProfileContainer>
           <ProfilePictureContainer>
             <ProfilePicture src={profilePicture}></ProfilePicture>

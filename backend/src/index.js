@@ -1,13 +1,20 @@
 import express from 'express';
 import cors from 'cors';
 import { InputError, AccessError } from './error.js';
-import { authRegister, authLogin } from './service.js';
+import { authRegister, authLogin, getToiletList, postReview, getUserDetails } from './service.js';
+import cookieParser from 'cookie-parser';
 
 const PORT = 6969;
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: (origin, callback) => {
+    callback(null, true);
+  },
+  credentials: true
+}));
 app.use(express.json());
+app.use(cookieParser());
 
 const errorHandler = (fn) => async (req, res) => {
   try {
@@ -33,6 +40,7 @@ app.post(
   errorHandler(async (req, res) => {
     const { email, password, name } = req.body;
     const token = await authRegister(email, password, name);
+    res.cookie('token', token);
     res.json({ token });
   }),
 );
@@ -54,6 +62,48 @@ app.post(
     res.status(200).send({ message: 'Logged out' });
   }),
 );
+
+app.get(
+  '/auth/details',
+  errorHandler(async (req, res) => {
+    let token;
+    try {
+      token = req.cookies.token;
+    } catch(error) {
+      console.log('no cookie');
+    }
+
+    const response = await getUserDetails(token);
+    res.json(response);
+  }),
+)
+
+app.get(
+  '/auth/toilets/list',
+  errorHandler(async (req, res) => {
+    const toiletList = await getToiletList();
+    console.log('sent');
+    res.json(toiletList)
+  }),
+)
+
+app.post(
+  '/auth/toilets/review/:id',
+  errorHandler(async (req, res) => {
+    let token;
+    try {
+      token = req.cookies.token;
+    } catch(error) {
+      console.log('no cookie');
+    }
+
+    const toiletId = req.params.id;
+    const { reviewTitle, stringEnjoyment, stringUsefulness, stringManageability, reviewText } = req.body;
+    const response = await postReview(token, reviewTitle, stringEnjoyment, stringUsefulness, stringManageability, reviewText, toiletId);
+    res.json(response);
+  }),
+);
+
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);

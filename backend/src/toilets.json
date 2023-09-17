@@ -1,0 +1,1269 @@
+[
+    {
+      "toiletId": "0",
+      "name": "Ainsworth J17",
+      "imageURL": "bocchi3d.gif",
+      "gender": "Male",
+      "floor": "Floor 2",
+      "favourited": "false",
+      "toiletNumber": "5",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviews":[
+        {
+          "reviewName": "Decent Toilet",
+          "user": "Anonymous",
+          "TermTaken": "23T2",
+          "Date": "3/7/2023",
+          "reviewWords": "It's good, nothing special",
+          "Enjoyment": "4",
+          "Usefulness": "5",
+          "Manageability": "5"
+        },
+        {
+          "reviewName": "smells like shit",
+          "user": "Anonymous",
+          "TermTaken": "22T1",
+          "Date": "14/3/2022",
+          "reviewWords": "Cleaners forgot about this bathroom or something, smells so bad",
+          "Enjoyment": "1",
+          "Usefulness": "3",
+          "Manageability": "1"
+        },
+        {
+          "reviewName": "idk",
+          "user": "Anonymous",
+          "TermTaken": "23T1",
+          "Date": "3/4/2023",
+          "reviewWords": "",
+          "Enjoyment": "3",
+          "Usefulness": "3",
+          "Manageability": "3"
+        }
+      ]
+    },
+    {
+      "toiletId": "1",
+      "name": "Quadrangle E15",
+      "imageURL": "amogus.gif",
+      "gender": "Female",
+      "floor": "Ground Floor",
+      "favourited": "true",
+      "toiletNumber": "7",
+      "availability": ["Term 1", "Term 2"],
+      "reviews":[
+        {
+            "reviewName": "Clean and Crisp",
+            "user": "CleanFreak",
+            "TermTaken": "22T4",
+            "Date": "11/11/2022",
+            "reviewWords": "One of the cleanest toilets I've been to!",
+            "Enjoyment": "5",
+            "Usefulness": "4",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Too Busy",
+            "user": "TimidTom",
+            "TermTaken": "23T2",
+            "Date": "3/4/2023",
+            "reviewWords": "Always occupied, hard to find a free stall.",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "3"
+        },
+        {
+            "reviewName": "High-Tech Experience",
+            "user": "TechieTed",
+            "TermTaken": "23T1",
+            "Date": "15/1/2023",
+            "reviewWords": "I was amazed by the tech in this toilet.",
+            "Enjoyment": "4",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Needs Maintenance",
+            "user": "MaintenanceMike",
+            "TermTaken": "23T3",
+            "Date": "7/5/2023",
+            "reviewWords": "Seems like it hasn't been cleaned in days.",
+            "Enjoyment": "1",
+            "Usefulness": "2",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Bright and Airy",
+            "user": "BrightBeth",
+            "TermTaken": "23T2",
+            "Date": "12/3/2023",
+            "reviewWords": "Lovely ambience, felt fresh after using.",
+            "Enjoyment": "4",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Very Compact",
+            "user": "CompactCarl",
+            "TermTaken": "22T4",
+            "Date": "28/11/2022",
+            "reviewWords": "A bit too compact for my liking, but clean.",
+            "Enjoyment": "3",
+            "Usefulness": "3",
+            "Manageability": "3"
+        },
+        {
+            "reviewName": "Elegant Design",
+            "user": "DesignerDana",
+            "TermTaken": "23T1",
+            "Date": "20/2/2023",
+            "reviewWords": "Loved the aesthetics of this toilet!",
+            "Enjoyment": "4",
+            "Usefulness": "3",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Quick and Efficient",
+            "user": "EfficientEddie",
+            "TermTaken": "23T3",
+            "Date": "22/4/2023",
+            "reviewWords": "Good for a quick pit stop.",
+            "Enjoyment": "3",
+            "Usefulness": "5",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Too Noisy",
+            "user": "QuietQuinn",
+            "TermTaken": "23T2",
+            "Date": "29/3/2023",
+            "reviewWords": "Could hear everyone's business. Not a fan.",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "3"
+        },
+        {
+            "reviewName": "Child Friendly",
+            "user": "ParentPaula",
+            "TermTaken": "23T1",
+            "Date": "30/1/2023",
+            "reviewWords": "Great for families with kids.",
+            "Enjoyment": "4",
+            "Usefulness": "5",
+            "Manageability": "4"
+        }
+    ]    
+    },
+    {
+      "toiletId": "6",
+      "name": "UNSW Main Library",
+      "imageURL": "milkboom.gif",
+      "gender": "Male",
+      "floor": "Floor 2",
+      "favourited": "false",
+      "toiletNumber": "6",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviews": [
+        {
+            "reviewName": "Best in the Building",
+            "user": "PleasedPenny",
+            "TermTaken": "23T2",
+            "Date": "25/3/2023",
+            "reviewWords": "I make a point to use this one whenever I can. Spotless!",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Quiet Oasis",
+            "user": "RelaxedRoger",
+            "TermTaken": "23T1",
+            "Date": "15/2/2023",
+            "reviewWords": "Perfect place for some quiet time away from the bustle.",
+            "Enjoyment": "5",
+            "Usefulness": "4",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Well-Maintained",
+            "user": "HappyHilda",
+            "TermTaken": "23T2",
+            "Date": "10/3/2023",
+            "reviewWords": "The cleaning staff does an excellent job here.",
+            "Enjoyment": "4",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Modern and Clean",
+            "user": "SatisfiedSteve",
+            "TermTaken": "22T4",
+            "Date": "5/12/2022",
+            "reviewWords": "Looks like it was just renovated. Impressive facilities.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "A+ Experience",
+            "user": "ContentCarmen",
+            "TermTaken": "23T3",
+            "Date": "15/5/2023",
+            "reviewWords": "Well-stocked, clean, and always available.",
+            "Enjoyment": "5",
+            "Usefulness": "4",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Would Recommend",
+            "user": "ElatedEvan",
+            "TermTaken": "23T1",
+            "Date": "28/2/2023",
+            "reviewWords": "Better than most others I've tried.",
+            "Enjoyment": "4",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Pleasantly Surprised",
+            "user": "GratefulGrace",
+            "TermTaken": "23T2",
+            "Date": "2/3/2023",
+            "reviewWords": "Didn't expect much, but was pleasantly surprised. Clean and quiet.",
+            "Enjoyment": "4",
+            "Usefulness": "5",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Top-Notch",
+            "user": "ImpressedIvan",
+            "TermTaken": "23T3",
+            "Date": "10/5/2023",
+            "reviewWords": "Feels like a premium experience. Kudos to the maintenance team.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Exceeds Expectations",
+            "user": "CheerfulChloe",
+            "TermTaken": "22T3",
+            "Date": "11/10/2022",
+            "reviewWords": "Way better than I thought it would be. Great job!",
+            "Enjoyment": "5",
+            "Usefulness": "4",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Keep it Up!",
+            "user": "AdmirableAdam",
+            "TermTaken": "23T2",
+            "Date": "15/4/2023",
+            "reviewWords": "Top marks for cleanliness and facilities. Hope it stays this way.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "4"
+        }
+      ]
+    },
+    {
+      "toiletId": "7",
+      "name": "UNSW Main Library",
+      "imageURL": "rabbitbong.gif",
+      "gender": "Female",
+      "floor": "Floor 2",
+      "favourited": "false",
+      "toiletNumber": "6",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviews":[
+        {
+            "reviewName": "Unexpected Pleasure",
+            "user": "WaryWalter",
+            "TermTaken": "23T3",
+            "Date": "25/4/2023",
+            "reviewWords": "Not my usual choice, but was happily surprised by the cleanliness.",
+            "Enjoyment": "4",
+            "Usefulness": "5",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "It's Decent",
+            "user": "NeutralNina",
+            "TermTaken": "23T1",
+            "Date": "20/2/2023",
+            "reviewWords": "Not the best, not the worst. Gets the job done.",
+            "Enjoyment": "3",
+            "Usefulness": "3",
+            "Manageability": "3"
+        },
+        {
+            "reviewName": "Avoid During Peak Hours",
+            "user": "BusyBella",
+            "TermTaken": "23T2",
+            "Date": "8/3/2023",
+            "reviewWords": "It's okay, but can get quite busy during peak times.",
+            "Enjoyment": "3",
+            "Usefulness": "4",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Surprisingly Quiet",
+            "user": "IntrovertedIan",
+            "TermTaken": "23T3",
+            "Date": "30/4/2023",
+            "reviewWords": "A hidden gem. Not many people, and always clean.",
+            "Enjoyment": "4",
+            "Usefulness": "4",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Hit or Miss",
+            "user": "CasualCara",
+            "TermTaken": "23T1",
+            "Date": "12/2/2023",
+            "reviewWords": "Some days it's spotless, other days, not so much.",
+            "Enjoyment": "3",
+            "Usefulness": "3",
+            "Manageability": "3"
+        },
+        {
+            "reviewName": "Pleasant Ambiance",
+            "user": "CalmChris",
+            "TermTaken": "23T2",
+            "Date": "15/3/2023",
+            "reviewWords": "The lighting and atmosphere make it quite a relaxing place.",
+            "Enjoyment": "5",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Could be Better",
+            "user": "CandidColin",
+            "TermTaken": "23T3",
+            "Date": "5/5/2023",
+            "reviewWords": "It's decent, but there's room for improvement, especially with the supplies.",
+            "Enjoyment": "3",
+            "Usefulness": "4",
+            "Manageability": "3"
+        },
+        {
+            "reviewName": "Consistently Good",
+            "user": "RegularRina",
+            "TermTaken": "23T1",
+            "Date": "28/2/2023",
+            "reviewWords": "No matter when I go, it's always in a good condition.",
+            "Enjoyment": "4",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Maintenance Needed",
+            "user": "ObservantOllie",
+            "TermTaken": "23T2",
+            "Date": "22/3/2023",
+            "reviewWords": "Could be great, but needs some repairs and better maintenance.",
+            "Enjoyment": "2",
+            "Usefulness": "3",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Rarely Busy",
+            "user": "QuietQuincy",
+            "TermTaken": "23T3",
+            "Date": "10/5/2023",
+            "reviewWords": "If you value privacy and quietness, this is the one for you.",
+            "Enjoyment": "4",
+            "Usefulness": "5",
+            "Manageability": "4"
+        }
+    ]    
+    },
+    {
+      "toiletId": "8",
+      "name": "UNSW Main Library",
+      "imageURL": "truckchan.gif",
+      "gender": "Female",
+      "floor": "Floor 3",
+      "favourited": "false",
+      "toiletNumber": "6",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviews":[
+        {
+            "reviewName": "Spick and Span",
+            "user": "CleanCaleb",
+            "TermTaken": "23T3",
+            "Date": "15/5/2023",
+            "reviewWords": "Was expecting a mess, but was quite clean. A pleasant surprise.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "A Bit Overcrowded",
+            "user": "TimidTara",
+            "TermTaken": "23T1",
+            "Date": "5/2/2023",
+            "reviewWords": "Great facilities but tends to be crowded.",
+            "Enjoyment": "3",
+            "Usefulness": "4",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Hidden Treasure",
+            "user": "SecretiveSara",
+            "TermTaken": "23T2",
+            "Date": "2/3/2023",
+            "reviewWords": "Tucked away in a quiet corner, this one is a gem.",
+            "Enjoyment": "4",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Functional But Plain",
+            "user": "PracticalPaul",
+            "TermTaken": "23T3",
+            "Date": "9/4/2023",
+            "reviewWords": "Does the job, but lacks character.",
+            "Enjoyment": "3",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Needs More Upkeep",
+            "user": "HonestHank",
+            "TermTaken": "23T1",
+            "Date": "18/2/2023",
+            "reviewWords": "Has potential, but they need to maintain it better.",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Bright and Airy",
+            "user": "HappyHaley",
+            "TermTaken": "23T2",
+            "Date": "30/3/2023",
+            "reviewWords": "Love the natural light in here. Feels very refreshing.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "A Quick Stop",
+            "user": "RushedRyan",
+            "TermTaken": "23T3",
+            "Date": "29/4/2023",
+            "reviewWords": "Good for a quick stop but not the best for longer stays.",
+            "Enjoyment": "3",
+            "Usefulness": "4",
+            "Manageability": "3"
+        },
+        {
+            "reviewName": "Charming Decor",
+            "user": "ArtsyAnna",
+            "TermTaken": "23T1",
+            "Date": "25/2/2023",
+            "reviewWords": "The decor inside is quite charming and unique.",
+            "Enjoyment": "4",
+            "Usefulness": "3",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Bare Essentials",
+            "user": "MinimalistMike",
+            "TermTaken": "23T2",
+            "Date": "17/3/2023",
+            "reviewWords": "Has everything you need, but not much else.",
+            "Enjoyment": "3",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Family Friendly",
+            "user": "ParentPatty",
+            "TermTaken": "23T3",
+            "Date": "20/5/2023",
+            "reviewWords": "Appreciate the family facilities. Very considerate.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        }
+    ]    
+    },
+    {
+      "toiletId": "2",
+      "name": "UNSW Main Library",
+      "imageURL": "heshao.gif",
+      "gender": "Female",
+      "floor": "Floor 4",
+      "favourited": "false",
+      "toiletNumber": "6",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviews":[
+        {
+            "reviewName": "Standard Experience",
+            "user": "JohnDoe",
+            "TermTaken": "23T3",
+            "Date": "8/4/2023",
+            "reviewWords": "A usual toilet, gets the job done.",
+            "Enjoyment": "3",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Impressive Loo!",
+            "user": "JaneSmith",
+            "TermTaken": "23T1",
+            "Date": "5/2/2023",
+            "reviewWords": "I loved the automated features.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Old but Gold",
+            "user": "ToiletReviewer123",
+            "TermTaken": "22T4",
+            "Date": "12/10/2022",
+            "reviewWords": "Old design but still functional and clean.",
+            "Enjoyment": "3",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Not a fan",
+            "user": "Critic_456",
+            "TermTaken": "23T2",
+            "Date": "9/3/2023",
+            "reviewWords": "It's okay, but could be better maintained.",
+            "Enjoyment": "2",
+            "Usefulness": "3",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Modern and Clean",
+            "user": "Mandy_Loo",
+            "TermTaken": "23T3",
+            "Date": "10/4/2023",
+            "reviewWords": "Very modern and super clean! Loved it!",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Average Toilet",
+            "user": "RegularJoe",
+            "TermTaken": "23T2",
+            "Date": "3/6/2023",
+            "reviewWords": "Nothing to complain about, but nothing to rave about either.",
+            "Enjoyment": "3",
+            "Usefulness": "3",
+            "Manageability": "3"
+        }
+    ]
+    
+    },
+    {
+      "toiletId": "3",
+      "name": "Ainsworth J17",
+      "imageURL": "rage.gif",
+      "gender": "Male",
+      "floor": "Floor 3",
+      "favourited": "false",
+      "toiletNumber": "5",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviews":[
+        {
+            "reviewName": "Futuristic Toilet",
+            "user": "FutureFan",
+            "TermTaken": "21T1",
+            "Date": "8/5/2021",
+            "reviewWords": "",
+            "Enjoyment": "5",
+            "Usefulness": "4",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Crowded Always",
+            "user": "SolitarySam",
+            "TermTaken": "23T2",
+            "Date": "4/10/2023",
+            "reviewWords": "I never found a free stall. Too crowded.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Retro Vibes",
+            "user": "RetroRita",
+            "TermTaken": "22T3",
+            "Date": "15/9/2022",
+            "reviewWords": "Loved the old-school feel of this restroom.",
+            "Enjoyment": "4",
+            "Usefulness": "4",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Inconvenient Location",
+            "user": "LostLiam",
+            "TermTaken": "23T3",
+            "Date": "6/2/2023",
+            "reviewWords": "",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "3"
+        },
+        {
+            "reviewName": "Pleasant Ambiance",
+            "user": "PleasantPam",
+            "TermTaken": "23T1",
+            "Date": "2/11/2023",
+            "reviewWords": "The gentle lighting made the experience very calming.",
+            "Enjoyment": "4",
+            "Usefulness": "4",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Squeaky Clean",
+            "user": "SanitarySue",
+            "TermTaken": "23T1",
+            "Date": "22/1/2023",
+            "reviewWords": "",
+            "Enjoyment": "5",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Surprisingly Spacious",
+            "user": "SpaciousSteve",
+            "TermTaken": "22T4",
+            "Date": "12/9/2022",
+            "reviewWords": "Didn't expect it to be so roomy inside!",
+            "Enjoyment": "5",
+            "Usefulness": "4",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Dim Lighting",
+            "user": "BrightBobby",
+            "TermTaken": "23T2",
+            "Date": "19/3/2023",
+            "reviewWords": "Wish they had brighter lights in there.",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "3"
+        },
+        {
+            "reviewName": "Very Hygienic",
+            "user": "HygienicHelen",
+            "TermTaken": "23T1",
+            "Date": "3/2/2023",
+            "reviewWords": "",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Noisy Neighbors",
+            "user": "QuietQuincy",
+            "TermTaken": "23T2",
+            "Date": "25/4/2023",
+            "reviewWords": "The walls are thin. Could hear conversations next door.",
+            "Enjoyment": "2",
+            "Usefulness": "3",
+            "Manageability": "3"
+        }
+      ]
+    },
+    {
+      "toiletId": "4",
+      "name": "UNSW Law Library",
+      "imageURL": "valhop.gif",
+      "gender": "Female",
+      "floor": "Floor 1",
+      "favourited": "true",
+      "toiletNumber": "8",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviews":[
+        {
+            "reviewName": "High-Tech Haven",
+            "user": "TechieTom",
+            "TermTaken": "22T1",
+            "Date": "7/9/2022",
+            "reviewWords": "State-of-the-art tech features. Very impressed.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Not For the Claustrophobic",
+            "user": "Claire",
+            "TermTaken": "23T2",
+            "Date": "13/3/2023",
+            "reviewWords": "Way too small for comfort.",
+            "Enjoyment": "1",
+            "Usefulness": "2",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Clean and Green",
+            "user": "EcoElla",
+            "TermTaken": "22T2",
+            "Date": "10/12/2022",
+            "reviewWords": "Love the eco-friendly approach here.",
+            "Enjoyment": "4",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Lacking Privacy",
+            "user": "PrivatePete",
+            "TermTaken": "23T3",
+            "Date": "20/5/2023",
+            "reviewWords": "",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Minimalist Magic",
+            "user": "MinimalMia",
+            "TermTaken": "23T1",
+            "Date": "28/2/2023",
+            "reviewWords": "Simple and efficient design. Very modern.",
+            "Enjoyment": "4",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Vintage Charm",
+            "user": "VintageVera",
+            "TermTaken": "23T1",
+            "Date": "18/1/2023",
+            "reviewWords": "",
+            "Enjoyment": "5",
+            "Usefulness": "3",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Family-Friendly",
+            "user": "ParentPaul",
+            "TermTaken": "22T4",
+            "Date": "5/12/2022",
+            "reviewWords": "Great facilities for kids.",
+            "Enjoyment": "4",
+            "Usefulness": "4",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Needs Maintenance",
+            "user": "HandyHank",
+            "TermTaken": "23T2",
+            "Date": "30/3/2023",
+            "reviewWords": "A few things were broken when I visited.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Spick and Span",
+            "user": "CleanCassy",
+            "TermTaken": "23T1",
+            "Date": "14/2/2023",
+            "reviewWords": "",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Artistic Ambience",
+            "user": "ArtyArt",
+            "TermTaken": "23T2",
+            "Date": "6/4/2023",
+            "reviewWords": "The graffiti art was a nice touch.",
+            "Enjoyment": "4",
+            "Usefulness": "3",
+            "Manageability": "4"
+        }
+    ]    
+    },
+    {
+      "toiletId": "5",
+      "name": "UNSW Law Library",
+      "imageURL": "cheese-dance.gif",
+      "gender": "Male",
+      "floor": "Floor 2",
+      "favourited": "true",
+      "toiletNumber": "3",
+      "availability": ["Term 1"],
+      "reviews": [
+        {
+            "reviewName": "Barely Usable",
+            "user": "DisappointedDave",
+            "TermTaken": "22T3",
+            "Date": "15/11/2022",
+            "reviewWords": "Stalls were always occupied. Had to wait a long time.",
+            "Enjoyment": "1",
+            "Usefulness": "2",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Not As Expected",
+            "user": "CriticalCarl",
+            "TermTaken": "23T1",
+            "Date": "2/10/2023",
+            "reviewWords": "Dirty and unhygienic. Avoid if you can.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Avoid This One",
+            "user": "HonestHannah",
+            "TermTaken": "22T4",
+            "Date": "20/12/2022",
+            "reviewWords": "",
+            "Enjoyment": "1",
+            "Usefulness": "2",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Needs Major Renovations",
+            "user": "FrankFinn",
+            "TermTaken": "23T3",
+            "Date": "5/5/2023",
+            "reviewWords": "This facility feels decades old.",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Where's the Maintenance?",
+            "user": "WonderingWendy",
+            "TermTaken": "23T2",
+            "Date": "25/3/2023",
+            "reviewWords": "Lights flickering, taps leaking. Needs attention.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Worst in the Building",
+            "user": "SadSam",
+            "TermTaken": "22T2",
+            "Date": "5/9/2022",
+            "reviewWords": "Other floors have better toilets. Use those instead.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Too Noisy",
+            "user": "QuietQuinn",
+            "TermTaken": "23T2",
+            "Date": "18/3/2023",
+            "reviewWords": "Constant noise from the hallway. Not at all peaceful.",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Unpleasant Smells",
+            "user": "SniffySue",
+            "TermTaken": "22T4",
+            "Date": "12/8/2022",
+            "reviewWords": "A constant, unpleasant odor. Maybe it's the cleaning products?",
+            "Enjoyment": "1",
+            "Usefulness": "2",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Cold and Unwelcoming",
+            "user": "ChilledChad",
+            "TermTaken": "23T1",
+            "Date": "27/1/2023",
+            "reviewWords": "Feels like a freezer in there.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Never Again",
+            "user": "NeverNina",
+            "TermTaken": "23T2",
+            "Date": "4/2/2023",
+            "reviewWords": "Had a bad experience. Won't be going back.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        }
+    ]    
+    },
+    {
+      "toiletId": "9",
+      "name": "UNSW Law Library",
+      "imageURL": "hogrider.gif",
+      "gender": "Female",
+      "floor": "Floor 2",
+      "favourited": "false",
+      "toiletNumber": "9",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviews":[
+        {
+            "reviewName": "Quite Disappointing",
+            "user": "CriticalChris",
+            "TermTaken": "23T3",
+            "Date": "27/5/2023",
+            "reviewWords": "Expected more from the reviews. Wasn't up to par.",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Avoid If Possible",
+            "user": "HonestHeather",
+            "TermTaken": "23T1",
+            "Date": "2/11/2023",
+            "reviewWords": "Quite dirty, seems rarely cleaned. Try to avoid.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Not The Best",
+            "user": "FrankFelix",
+            "TermTaken": "23T2",
+            "Date": "3/5/2023",
+            "reviewWords": "Does the job, but have seen much better.",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Quite Basic",
+            "user": "SimpleSimon",
+            "TermTaken": "23T3",
+            "Date": "4/12/2023",
+            "reviewWords": "Doesn't offer much. Quite plain and basic.",
+            "Enjoyment": "2",
+            "Usefulness": "3",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Needs Renovation",
+            "user": "RealisticRita",
+            "TermTaken": "23T1",
+            "Date": "28/2/2023",
+            "reviewWords": "Old facilities, desperately needs an upgrade.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Awkward Layout",
+            "user": "UnsureUma",
+            "TermTaken": "23T2",
+            "Date": "29/3/2023",
+            "reviewWords": "The layout is very awkward. Hard to navigate.",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Not Worth The Hype",
+            "user": "BalancedBen",
+            "TermTaken": "23T3",
+            "Date": "19/4/2023",
+            "reviewWords": "Heard a lot about this place, but it's quite overrated.",
+            "Enjoyment": "2",
+            "Usefulness": "2",
+            "Manageability": "2"
+        },
+        {
+            "reviewName": "Could Be Cleaner",
+            "user": "NeatNina",
+            "TermTaken": "23T1",
+            "Date": "15/2/2023",
+            "reviewWords": "It's alright but they need to clean it more frequently.",
+            "Enjoyment": "2",
+            "Usefulness": "3",
+            "Manageability": "2"
+        }
+    ]    
+    },
+    {
+      "toiletId": "10",
+      "name": "UNSW Business Building",
+      "imageURL": "monkey-dance.gif",
+      "gender": "Male",
+      "floor": "Ground Floor",
+      "favourited": "false",
+      "toiletNumber": "7",
+      "availability": ["Term 1", "Term 2", "Term 3"],
+      "reviews":[
+        {
+            "reviewName": "Worst Experience Ever",
+            "user": "DisappointedDana",
+            "TermTaken": "23T3",
+            "Date": "30/5/2023",
+            "reviewWords": "I couldn't believe how bad it was.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Simply Unacceptable",
+            "user": "AnnoyedAlan",
+            "TermTaken": "23T1",
+            "Date": "14/2/2023",
+            "reviewWords": "This needs serious improvements or a shutdown.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Never Again",
+            "user": "FrustratedFay",
+            "TermTaken": "23T2",
+            "Date": "3/8/2023",
+            "reviewWords": "One visit was more than enough for me.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Dirty and Broken",
+            "user": "UnhappyUlysses",
+            "TermTaken": "23T3",
+            "Date": "4/10/2023",
+            "reviewWords": "Everything was either filthy, broken, or both.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Avoid At All Costs",
+            "user": "PeevedPam",
+            "TermTaken": "23T1",
+            "Date": "20/2/2023",
+            "reviewWords": "It's a health hazard. Just don't.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "A Nightmare",
+            "user": "TerrifiedTara",
+            "TermTaken": "23T2",
+            "Date": "12/3/2023",
+            "reviewWords": "I wish I could give it zero stars.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Unbelievably Bad",
+            "user": "ShockedSam",
+            "TermTaken": "23T3",
+            "Date": "4/5/2023",
+            "reviewWords": "I've never seen anything like it. Unbelievable.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        },
+        {
+            "reviewName": "Please Close Down",
+            "user": "ConcernedCara",
+            "TermTaken": "23T1",
+            "Date": "2/1/2023",
+            "reviewWords": "It's a safety hazard at this point.",
+            "Enjoyment": "1",
+            "Usefulness": "1",
+            "Manageability": "1"
+        }
+    ]    
+    },
+    {
+      "toiletId": "11",
+      "name": "UNSW Business Building",
+      "imageURL": "bocchirock.gif",
+      "gender": "Female",
+      "floor": "Ground Floor",
+      "favourited": "false",
+      "toiletNumber": "10",
+      "availability": ["Term 1", "Term 3"],
+      "reviews":[
+        {
+            "reviewName": "Top Notch Toilet!",
+            "user": "PleasedPaula",
+            "TermTaken": "23T3",
+            "Date": "15/5/2023",
+            "reviewWords": "Sparkling clean and always available. Love it!",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Excellent Facility",
+            "user": "HappyHank",
+            "TermTaken": "23T1",
+            "Date": "2/5/2023",
+            "reviewWords": "Always a pleasant experience. Well-maintained.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "The Best Around",
+            "user": "SatisfiedSue",
+            "TermTaken": "23T2",
+            "Date": "20/3/2023",
+            "reviewWords": "Never had any issues. Always in top condition.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Clean and Fresh",
+            "user": "ContentedChris",
+            "TermTaken": "23T3",
+            "Date": "28/4/2023",
+            "reviewWords": "Feels like a premium restroom. Always smells good.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Top-Class Experience",
+            "user": "DelightedDana",
+            "TermTaken": "23T1",
+            "Date": "2/12/2023",
+            "reviewWords": "Feels luxurious. Easily the best on the campus.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Simply Splendid",
+            "user": "GratefulGary",
+            "TermTaken": "23T2",
+            "Date": "25/3/2023",
+            "reviewWords": "I'm always impressed by its cleanliness.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Wish All Were Like This",
+            "user": "ThankfulTina",
+            "TermTaken": "23T3",
+            "Date": "18/4/2023",
+            "reviewWords": "It's a benchmark for how restrooms should be.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Exceptional Quality",
+            "user": "JoyfulJoe",
+            "TermTaken": "23T1",
+            "Date": "28/2/2023",
+            "reviewWords": "From cleanliness to supplies, everything is perfect.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        }
+    ]    
+    },
+    {
+      "toiletId": "12",
+      "name": "UNSW Business Building",
+      "imageURL": "poggers-pog.gif",
+      "gender": "Male",
+      "floor": "First Floor",
+      "favourited": "false",
+      "toiletNumber": "5",
+      "availability": ["Term 1","Term 2", "Term 3"],
+      "reviews": [
+        {
+            "reviewName": "Remarkable Cleanliness",
+            "user": "ElatedEmma",
+            "TermTaken": "23T4",
+            "Date": "6/7/2023",
+            "reviewWords": "It feels like they clean this every hour. Always a pleasant visit.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Comfort at its Best",
+            "user": "HappyHarry",
+            "TermTaken": "23T4",
+            "Date": "20/6/2023",
+            "reviewWords": "Spacious and comfortable. I appreciate the attention to details.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Luxurious Experience",
+            "user": "PleasedPam",
+            "TermTaken": "23T4",
+            "Date": "10/6/2023",
+            "reviewWords": "Feels like a restroom in a five-star hotel.",
+            "Enjoyment": "5",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Fresh as a Daisy",
+            "user": "CheerfulCharlie",
+            "TermTaken": "23T4",
+            "Date": "15/6/2023",
+            "reviewWords": "Smells great every time I visit. Kudos to the maintenance team!",
+            "Enjoyment": "3",
+            "Usefulness": "3",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "Prime Standard",
+            "user": "JoyousJess",
+            "TermTaken": "23T4",
+            "Date": "6/3/2023",
+            "reviewWords": "The gold standard for toilets. Other restrooms should take notes.",
+            "Enjoyment": "5",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "A+ Experience",
+            "user": "ElatedElla",
+            "TermTaken": "23T4",
+            "Date": "6/12/2023",
+            "reviewWords": "A+ for cleanliness, comfort, and overall experience.",
+            "Enjoyment": "4",
+            "Usefulness": "5",
+            "Manageability": "5"
+        },
+        {
+            "reviewName": "So Satisfying",
+            "user": "ContentedCarter",
+            "TermTaken": "23T4",
+            "Date": "6/9/2023",
+            "reviewWords": "Never thought I'd say this, but I love this toilet!",
+            "Enjoyment": "5",
+            "Usefulness": "4",
+            "Manageability": "4"
+        },
+        {
+            "reviewName": "Quality and Cleanliness",
+            "user": "SatisfiedSam",
+            "TermTaken": "23T4",
+            "Date": "22/6/2023",
+            "reviewWords": "Both quality and cleanliness are top-notch. Highly recommend.",
+            "Enjoyment": "2",
+            "Usefulness": "5",
+            "Manageability": "3"
+        }
+    ]    
+    }
+]
