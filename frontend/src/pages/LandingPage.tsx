@@ -63,6 +63,11 @@ const BtnLogin = styled.div`
   z-index: 1000;
 `
 
+const ImageBox = styled.img`
+  width: 600px;
+  height: auto;
+`
+
 const BtnText = styled.div`
   font-size: 2em;
 `
@@ -98,7 +103,7 @@ const LandingPage = () => {
       </TopHeader>
       <Center>
         <Lines>
-          <img src={logo}/>
+          <ImageBox src={logo}/>
           <h2>Finding your Perfect Shit</h2>
         </Lines>
         <ToiletBtn>

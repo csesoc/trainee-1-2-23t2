@@ -91,6 +91,11 @@ const FindBtn = styled.button`
   }
 `;
 
+const ImageBox = styled.img`
+  width: 600px;
+  height: auto;
+`
+
 const ErrorMessage = styled.div`
   color: red;
 `
@@ -148,12 +153,12 @@ const RegisterPage = () => {
       <BackBtn onClick={() => navigate("/")}><HomeIcon></HomeIcon></BackBtn>
       <Center>
         <Lines onSubmit={handleSubmit}>
-          <img src={logo} />
+          <ImageBox src={logo} onClick={() => window.history.back()}/>
           <Input type="text" name="email" placeholder="Email" onChange={handleChange}></Input>
-          <Input type="text" name="password" placeholder="Password" onChange={handleChange}></Input>
+          <Input type="password" name="password" placeholder="Password" onChange={handleChange}></Input>
           <Input type="text" name="name" placeholder="Name" onChange={handleChange}></Input>
-          <FindBtn type="submit">Register</FindBtn>
           {errorMessage !== '' &&<ErrorMessage>{errorMessage}</ErrorMessage>}
+          <FindBtn type="submit">Register</FindBtn>
           <Spacing></Spacing>
           <Register>
             Already got an account? <RegisterBtn href="/login">Login</RegisterBtn>

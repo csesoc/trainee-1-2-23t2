@@ -145,8 +145,8 @@ export const ToiletCard = styled.div`
 
 export const ToiletCardImage = styled.img`
   object-position: center;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   overflow: hidden;
   position: relative;
   border-radius: 5%;
@@ -413,6 +413,7 @@ const ExplorePage = () => {
         console.log(error);
       });
   }, []);
+
   const newFilteredToilets = toilets
     .filter((toilet) => {
       if (searchInput === '') {
@@ -434,7 +435,7 @@ const ExplorePage = () => {
       } else if (favourite === 'Favourite' && toilet.favourited === 'true') {
         return toilet;
       }
-    });
+  });
 
   let remainder = 0;
   if (newFilteredToilets.length > 0) {
@@ -536,7 +537,7 @@ const ExplorePage = () => {
                 ) : (
                   <>
                     <Link to="/profile">Profile</Link>
-                    <div onClick={() => handleItemClick('Settings')}>Settings</div>
+                    <Link to="/settings">Settings</Link>
                     <div onClick={handleLogout}>
                       Logout
                     </div>

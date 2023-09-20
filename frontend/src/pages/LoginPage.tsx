@@ -93,6 +93,11 @@ const FindBtn = styled.button`
   }
 `;
 
+const ImageBox = styled.img`
+  width: 600px;
+  height: auto;
+`
+
 const Spacing = styled.div`
   height: 100px;
   width: 100%;
@@ -153,12 +158,11 @@ const LoginPage = () => {
       <BackBtn onClick={() => window.history.back()}><ArrowBackIcon></ArrowBackIcon></BackBtn>
       <Center>
         <Lines onSubmit={handleSubmit}>
-          <img src={logo} onClick={() => navigate("/explore")}/>
+          <ImageBox src={logo} onClick={() => navigate("/explore")}/>
           <Input type="text" name="email" placeholder="Email" onChange={handleChange}></Input>
-          <Input type="text" name="password" placeholder="Password" onChange={handleChange}></Input>
-          {error && <div style={{ color: 'red' }}>{error}</div>}
-          <FindBtn type="submit">Login</FindBtn>
+          <Input type="password" name="password" placeholder="Password" onChange={handleChange}></Input>
           {errorMessage !== '' &&<ErrorMessage>{errorMessage}</ErrorMessage>}
+          <FindBtn type="submit">Login</FindBtn>
           <Spacing></Spacing>
           <Register>
             Don't have an account? <RegisterBtn to="/register">Register</RegisterBtn>

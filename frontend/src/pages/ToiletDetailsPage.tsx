@@ -457,6 +457,13 @@ const FillerBox2 = styled.div`
     padding-top: 1vh;
 `
 
+const LoadingImage = styled.img`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`
+
 const ToiletDetails = () => {
     type Arrangement = 'Most Liked' | 'Most Recent'
 
@@ -695,6 +702,8 @@ const ToiletDetails = () => {
         const stringEnjoyment = JSON.stringify(EnjoymentValue);
         const stringUsefulness = JSON.stringify(UsefulnessValue);
         const stringManageability = JSON.stringify(ManageabilityValue);
+
+        console.log(stringEnjoyment + stringUsefulness + stringManageability);
         try {
             const response = await axios.post(`http://localhost:6969/auth/toilets/review/${id}`, {
                 reviewTitle,
@@ -726,11 +735,7 @@ const ToiletDetails = () => {
             console.log('Error fetching data', error);
         }
     };
-
-    useEffect(() => {
-        fetchToilets();
-    }, []);
-
+    
     useEffect(() => {
         fetchToilets();
     }, [reloadCount]);
@@ -738,7 +743,7 @@ const ToiletDetails = () => {
     const toiletDetail = toilets.find(toilet => toilet.toiletId === id);
 
     if (!toiletDetail) {
-        return <div>Sorry, toilet not found!</div>;
+        return <LoadingImage src={'/src/assets/loading.gif'}/>;
     }
 
     const reviews: Review[] = toiletDetail.reviews;
